@@ -43,8 +43,6 @@ K-Law의 가상 판결은 1심·2심 실제 판결보다 대법원 최종 판결
 
 ### 구간별 3-이동평균 일치도 비교
 
-[![구간별 3-MA 일치도 비교](research/charts/chart_3ma.png)](research/charts/chart_3ma.png)
-
 | 구간 | K-Law vs 대법원 | K-Law vs 1심 | K-Law vs 2심 |
 |------|:--------------:|:------------:|:------------:|
 | 1~10 | 3.5 | 5.6 | 5.1 |
@@ -56,9 +54,7 @@ K-Law의 가상 판결은 1심·2심 실제 판결보다 대법원 최종 판결
 
 ---
 
-### 심급별 일치도 분포 (박스플롯, 80건 전체)
-
-[![심급별 일치도 분포 박스플롯](research/charts/chart_boxplot.png)](research/charts/chart_boxplot.png)
+### 심급별 일치도 분포 및 빈도
 
 | 비교 대상 | 평균 일치도 |
 |----------|:----------:|
@@ -66,29 +62,47 @@ K-Law의 가상 판결은 1심·2심 실제 판결보다 대법원 최종 판결
 | K-Law vs 1심 | 5.3 |
 | K-Law vs 2심 | 4.2 |
 
-> K-Law가 1심·2심보다 대법원 판결에 구조적으로 더 가깝습니다.
-
----
-
-### 심급별 일치도 점수 빈도 분포
-
-[![심급별 일치도 점수 빈도 분포](research/charts/chart_histogram.png)](research/charts/chart_histogram.png)
+<table>
+<tr>
+<td align="center" width="50%">
+<a href="research/charts/chart_boxplot.png">
+<img src="research/charts/chart_boxplot.png" width="100%" alt="심급별 일치도 분포 박스플롯"/>
+</a>
+<sub>심급별 일치도 분포 박스플롯 (80건 전체)</sub>
+</td>
+<td align="center" width="50%">
+<a href="research/charts/chart_histogram.png">
+<img src="research/charts/chart_histogram.png" width="100%" alt="심급별 일치도 점수 빈도 분포"/>
+</a>
+<sub>심급별 일치도 점수 빈도 분포</sub>
+</td>
+</tr>
+</table>
 
 > K-Law vs 대법원(파랑)은 8~10점 구간에 집중. 1심·2심은 0~5점 구간에 편중.
 
 ---
 
-### 학습 곡선 — 로지스틱 성장 모델
+### 학습 곡선 및 버전 진화
 
-[![K-Law 학습 곡선](research/charts/chart_learning.png)](research/charts/chart_learning.png)
+<table>
+<tr>
+<td align="center" width="50%">
+<a href="research/charts/chart_learning.png">
+<img src="research/charts/chart_learning.png" width="100%" alt="K-Law 학습 곡선 — 로지스틱 성장 모델"/>
+</a>
+<sub>학습 곡선 — 로지스틱 성장 모델</sub>
+</td>
+<td align="center" width="50%">
+<a href="research/charts/chart_timeline.png">
+<img src="research/charts/chart_timeline.png" width="100%" alt="K-Law 버전 진화 타임라인"/>
+</a>
+<sub>버전 진화 타임라인 (v2.11 → v6.3)</sub>
+</td>
+</tr>
+</table>
 
-> 로지스틱 성장 모델(k=0.048)에 따르면 90% 일치도(9점) 달성은 약 75건 시점으로 예측됩니다. 실증 사업을 통한 데이터 축적으로 정확도의 가속 수렴이 기대됩니다.
-
----
-
-### 방법론 버전 진화 타임라인
-
-[![K-Law 버전 진화 타임라인](research/charts/chart_timeline.png)](research/charts/chart_timeline.png)
+> 로지스틱 성장 모델(k=0.048)에 따르면 90% 일치도(9점) 달성은 약 75건 시점으로 예측됩니다.
 
 | 버전 | 시기 | 주요 변경 |
 |------|------|-----------|
