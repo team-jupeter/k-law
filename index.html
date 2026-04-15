@@ -6,11 +6,14 @@
 <title>K-Law AI 가상 법원 - 사건 입력</title>
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; background: #EEF2F7; color: #1A1D21; padding: 24px; }
+  body { font-family: 'Malgun Gothic', '맑은 고딕', 'Noto Sans KR', sans-serif; background: #EEF2F7; color: #1A1D21; padding: 24px; }
   .container { max-width: 1000px; margin: 0 auto; }
   .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
   h1, h2, h3 { color: #003E8A; margin-bottom: 16px; }
-  textarea, input, select { width: 100%; margin: 8px 0 16px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
+  textarea, input, select { width: 100%; margin: 8px 0 16px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; font-family: inherit; }
+  /* 원고 주장, 피고 주장, 다툼 없는 사실 높이 증가 */
+  #plaintiffClaim, #defendantClaim { min-height: 180px; }  /* 기존 rows=6과 함께 약 4배 높이 */
+  #undisputedFacts { min-height: 120px; }
   button { background: #003E8A; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; font-size: 14px; font-weight: 600; transition: background 0.2s; }
   button:hover { background: #00286A; }
   button:disabled { background: #aaa; cursor: not-allowed; }
@@ -18,9 +21,6 @@
   .flex-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
   hr { margin: 20px 0; border: none; border-top: 1px solid #e2e8f0; }
   footer { text-align: center; margin-top: 32px; font-size: 12px; color: #5A6169; }
-  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #F8FAFC; padding: 16px; border-radius: 12px; margin-top: 8px; }
-  .summary-item { font-size: 14px; }
-  .summary-label { font-weight: 600; color: #003E8A; }
 </style>
 </head>
 <body>
@@ -54,27 +54,15 @@
     <input id="plaintiff" placeholder="원고 성명 또는 법인명">
     <label>피고 (상대방):</label>
     <input id="defendant" placeholder="피고 성명 또는 법인명">
+    
     <label>원고의 주장:</label>
-    <textarea id="plaintiffClaim" rows="2" placeholder="원고가 주장하는 사실과 법적 근거"></textarea>
+    <textarea id="plaintiffClaim" rows="6" placeholder="원고가 주장하는 사실과 법적 근거"></textarea>
+    
     <label>피고의 주장:</label>
-    <textarea id="defendantClaim" rows="2" placeholder="피고가 주장하는 사실과 법적 근거"></textarea>
+    <textarea id="defendantClaim" rows="6" placeholder="피고가 주장하는 사실과 법적 근거"></textarea>
+    
     <label>다툼 없는 사실 (선택):</label>
-    <textarea id="undisputedFacts" rows="2" placeholder="양측이 동의하는 핵심 사실"></textarea>
-  </div>
-
-  <!-- 추가된 사건 요약 섹션 (하단) -->
-  <div class="card">
-    <h3>📑 현재 사건 요약 (판결 생성 시 전달됨)</h3>
-    <div id="liveSummary" class="summary-grid">
-      <div class="summary-item"><span class="summary-label">원고:</span> <span id="summaryPlaintiff">-</span></div>
-      <div class="summary-item"><span class="summary-label">피고:</span> <span id="summaryDefendant">-</span></div>
-      <div class="summary-item"><span class="summary-label">사건 분류:</span> <span id="summaryCaseType">-</span></div>
-      <div class="summary-item"><span class="summary-label">청구 금액:</span> <span id="summaryClaimAmount">-</span></div>
-      <div class="summary-item full-width"><span class="summary-label">사건 개요:</span> <span id="summaryFacts">-</span></div>
-      <div class="summary-item full-width"><span class="summary-label">원고 주장:</span> <span id="summaryPlaintiffClaim">-</span></div>
-      <div class="summary-item full-width"><span class="summary-label">피고 주장:</span> <span id="summaryDefendantClaim">-</span></div>
-      <div class="summary-item full-width"><span class="summary-label">다툼 없는 사실:</span> <span id="summaryUndisputed">-</span></div>
-    </div>
+    <textarea id="undisputedFacts" rows="4" placeholder="양측이 동의하는 핵심 사실"></textarea>
   </div>
 
   <div class="flex-buttons">
@@ -89,36 +77,6 @@
 const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
 
 function getEl(id) { return document.getElementById(id); }
-
-// 실시간 요약 업데이트
-function updateSummary() {
-  const plaintiff = getEl('plaintiff')?.value || '-';
-  const defendant = getEl('defendant')?.value || '-';
-  const caseType = getEl('caseType')?.options[getEl('caseType').selectedIndex]?.text || '-';
-  const claimAmount = getEl('claimAmount')?.value || '-';
-  const facts = getEl('facts')?.value || '-';
-  const plaintiffClaim = getEl('plaintiffClaim')?.value || '-';
-  const defendantClaim = getEl('defendantClaim')?.value || '-';
-  const undisputed = getEl('undisputedFacts')?.value || '-';
-
-  if (getEl('summaryPlaintiff')) getEl('summaryPlaintiff').innerText = plaintiff;
-  if (getEl('summaryDefendant')) getEl('summaryDefendant').innerText = defendant;
-  if (getEl('summaryCaseType')) getEl('summaryCaseType').innerText = caseType;
-  if (getEl('summaryClaimAmount')) getEl('summaryClaimAmount').innerText = claimAmount;
-  if (getEl('summaryFacts')) getEl('summaryFacts').innerText = facts;
-  if (getEl('summaryPlaintiffClaim')) getEl('summaryPlaintiffClaim').innerText = plaintiffClaim;
-  if (getEl('summaryDefendantClaim')) getEl('summaryDefendantClaim').innerText = defendantClaim;
-  if (getEl('summaryUndisputed')) getEl('summaryUndisputed').innerText = undisputed;
-}
-
-// 입력 필드 변경 시 요약 업데이트
-function bindEvents() {
-  const fields = ['facts', 'caseType', 'claimAmount', 'plaintiff', 'defendant', 'plaintiffClaim', 'defendantClaim', 'undisputedFacts'];
-  fields.forEach(id => {
-    const el = getEl(id);
-    if (el) el.addEventListener('input', updateSummary);
-  });
-}
 
 // AI 자동 추출
 async function extractFromFacts() {
@@ -164,7 +122,6 @@ caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, cr
     if (ex.plaintiffClaim) getEl('plaintiffClaim').value = ex.plaintiffClaim;
     if (ex.defendantClaim) getEl('defendantClaim').value = ex.defendantClaim;
     if (ex.undisputedFacts) getEl('undisputedFacts').value = ex.undisputedFacts;
-    updateSummary();
     if (statusDiv) { statusDiv.textContent = '✅ 추출 완료! 필요 시 직접 수정 가능합니다.'; statusDiv.style.background = '#F0FDF4'; statusDiv.style.color = '#166534'; }
   } catch (err) {
     console.error(err);
@@ -197,8 +154,6 @@ document.addEventListener('DOMContentLoaded', () => {
   if (extractBtn) extractBtn.onclick = extractFromFacts;
   const verdictBtn = getEl('btnVerdict');
   if (verdictBtn) verdictBtn.onclick = goToVerdict;
-  bindEvents();
-  updateSummary();
 });
 </script>
 </body>
