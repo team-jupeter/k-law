@@ -1,460 +1,24 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-Law AI 媛??踰뺤썝 ??耳?대줈二쇱떇?뚯궗</title>
+<title>K-Law AI 가상 법원 — 케이로주식회사</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
-<style>
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-
-:root {
-  --primary: #003E8A;
-  --primary-dark: #00286A;
-  --primary-mid: #1255A8;
-  --primary-light: #E8F0FA;
-  --primary-lighter: #F2F6FC;
-  --surface: #FFFFFF;
-  --surface-variant: #F4F6F8;
-  --on-surface: #1A1D21;
-  --on-surface-variant: #5A6169;
-  --outline: #D0D5DB;
-  --outline-strong: #B0B7C0;
-  --error: #B91C1C;
-  --error-light: #FEF2F2;
-  --success: #166534;
-  --success-light: #F0FDF4;
-  --warning: #92400E;
-  --warning-light: #FFFBEB;
-  --accent: #C8A951;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.06), 0 1px 3px rgba(0,0,0,.1);
-  --shadow-md: 0 2px 6px rgba(0,0,0,.08), 0 4px 12px rgba(0,0,0,.08);
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-}
-
-body {
-  font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-  background: #EEF2F7;
-  color: var(--on-surface);
-  line-height: 1.6;
-  font-size: 14px;
-}
-
-/* ?? ?뺣? 諛곕꼫 ?? */
-.gov-banner {
-  background: var(--primary-dark);
-  color: rgba(255,255,255,0.85);
-  font-size: 11.5px;
-  padding: 6px 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  letter-spacing: 0.01em;
-}
-.gov-banner svg { flex-shrink: 0; }
-.gov-banner strong { color: #fff; }
-
-/* ?? ?ㅻ뜑 ?? */
-header {
-  background: var(--surface);
-  border-bottom: 3px solid var(--primary);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  padding: 0 24px;
-  height: 64px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: var(--shadow-sm);
-}
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  text-decoration: none;
-}
-.brand-emblem {
-  width: 44px;
-  height: 44px;
-  background: var(--primary);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.brand-name { font-size: 17px; font-weight: 700; color: var(--primary); letter-spacing: -0.02em; }
-.brand-sub { font-size: 11px; color: var(--on-surface-variant); margin-top: 1px; }
-.header-right { display: flex; align-items: center; gap: 10px; }
-.status-badge {
-  background: var(--success-light);
-  color: var(--success);
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  border: 1px solid #BBF7D0;
-}
-.status-dot { width: 7px; height: 7px; background: #22C55E; border-radius: 50%; }
-.case-id-chip {
-  background: var(--primary-light);
-  color: var(--primary);
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 600;
-  display: none;
-  border: 1px solid #BFCFE8;
-}
-
-/* ?? 硫붿씤 ?덉씠?꾩썐 ?? */
-main {
-  max-width: 980px;
-  margin: 0 auto;
-  padding: 32px 24px 80px;
-}
-
-/* ?? ?덉뼱濡??? */
-.page-hero {
-  text-align: center;
-  background: var(--surface);
-  border-radius: var(--radius-xl);
-  padding: 52px 32px 44px;
-  margin-bottom: 20px;
-  box-shadow: var(--shadow-sm);
-  border-top: 4px solid var(--primary);
-  position: relative;
-  overflow: hidden;
-}
-.page-hero::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 120px;
-  background: linear-gradient(180deg, var(--primary-lighter) 0%, transparent 100%);
-  pointer-events: none;
-}
-.service-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  background: var(--primary-light);
-  color: var(--primary);
-  padding: 5px 16px;
-  border-radius: 100px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 18px;
-  border: 1px solid #C5D9F0;
-  letter-spacing: 0.02em;
-  position: relative;
-}
-.page-hero h1 {
-  font-size: 30px;
-  font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: -0.03em;
-  position: relative;
-}
-.page-hero h1 em { color: var(--primary); font-style: normal; }
-.page-hero p {
-  font-size: 14px;
-  color: var(--on-surface-variant);
-  margin-top: 12px;
-  max-width: 480px;
-  margin-inline: auto;
-  position: relative;
-}
-
-/* ?? ?④퀎 ?쒖떆 ?? */
-.step-indicator {
-  background: var(--surface);
-  border-radius: var(--radius-lg);
-  padding: 18px 24px;
-  margin-bottom: 20px;
-  display: none;
-  overflow-x: auto;
-  box-shadow: var(--shadow-sm);
-}
-.step-list { display: flex; justify-content: center; align-items: flex-start; }
-.step-node { display: flex; flex-direction: column; align-items: center; width: 80px; }
-.step-circle {
-  width: 30px; height: 30px;
-  border-radius: 50%;
-  background: var(--surface-variant);
-  border: 2px solid var(--outline);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 12px; font-weight: 700; color: var(--on-surface-variant);
-  transition: all 0.2s;
-}
-.step-node.active .step-circle { background: var(--primary); color: #fff; border-color: var(--primary); }
-.step-node.done .step-circle { background: var(--success); color: #fff; border-color: var(--success); }
-.step-label { font-size: 11px; margin-top: 6px; color: var(--on-surface-variant); text-align: center; white-space: nowrap; }
-.step-node.active .step-label { color: var(--primary); font-weight: 600; }
-.step-node.done .step-label { color: var(--success); }
-.step-connector { height: 2px; width: 36px; background: var(--outline); margin-top: 14px; flex-shrink: 0; transition: background 0.2s; }
-.step-connector.done { background: var(--success); }
-
-/* ?? 移대뱶 ?? */
-.card {
-  background: var(--surface);
-  border-radius: var(--radius-xl);
-  padding: 32px;
-  margin-bottom: 20px;
-  display: none;
-  box-shadow: var(--shadow-sm);
-}
-.card.visible { display: block; }
-.card-header {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  margin-bottom: 28px;
-  padding-bottom: 20px;
-  border-bottom: 1px solid var(--outline);
-}
-.card-icon {
-  width: 48px; height: 48px;
-  background: var(--primary-light);
-  border-radius: var(--radius-md);
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-}
-.card-header-text { flex: 1; }
-.card-header-text h2 { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
-.card-header-text p { font-size: 13px; color: var(--on-surface-variant); margin-top: 3px; }
-.step-badge {
-  margin-left: auto;
-  background: var(--primary-light);
-  color: var(--primary);
-  padding: 4px 12px;
-  border-radius: 100px;
-  font-size: 11px;
-  font-weight: 700;
-  white-space: nowrap;
-  flex-shrink: 0;
-  border: 1px solid #C5D9F0;
-}
-
-/* ?? 紐⑤뱶 ?좏깮 ?? */
-.mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
-.mode-option {
-  border: 2px solid var(--outline);
-  border-radius: var(--radius-lg);
-  padding: 22px 20px;
-  cursor: pointer;
-  position: relative;
-  transition: border-color 0.15s, background 0.15s;
-}
-.mode-option:hover { border-color: #A0BBDD; background: var(--primary-lighter); }
-.mode-option.selected { border-color: var(--primary); background: var(--primary-light); }
-.mode-option.disabled { opacity: 0.45; cursor: not-allowed; pointer-events: none; }
-.mode-chip { display: inline-flex; align-items: center; gap: 4px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-bottom: 10px; letter-spacing: 0.04em; }
-.mode-option h3 { font-size: 15px; font-weight: 700; margin-top: 10px; }
-.mode-option p { font-size: 12px; color: var(--on-surface-variant); margin-top: 4px; }
-.mode-radio { position: absolute; top: 16px; right: 16px; width: 18px; height: 18px; border-radius: 50%; border: 2px solid var(--outline); background: #fff; transition: all 0.15s; }
-.mode-option.selected .mode-radio { border-color: var(--primary); background: var(--primary); box-shadow: inset 0 0 0 3px #fff; }
-
-/* ?? LLM 洹몃━???? */
-.llm-section-header { font-size: 13px; font-weight: 700; color: var(--on-surface-variant); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; letter-spacing: 0.02em; }
-.llm-grid { display: grid; grid-template-columns: repeat(6, 1fr); background: var(--outline); gap: 1px; border-radius: var(--radius-md); overflow: hidden; margin-bottom: 16px; border: 1px solid var(--outline); }
-.llm-tile { background: var(--surface); padding: 14px 8px; text-align: center; cursor: pointer; position: relative; transition: background 0.15s; }
-.llm-tile:hover { background: var(--primary-lighter); }
-.llm-tile.selected { background: var(--primary-light); }
-.llm-tile.selected::after { content: ''; position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: var(--primary); }
-.llm-logo { width: 36px; height: 36px; border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; margin: 0 auto 8px; font-weight: 700; font-size: 15px; }
-.lc-deepseek { background: #E0F4F9; color: #0092B3; }
-.lc-gpt { background: #F0FFF4; color: #1A7340; }
-.llm-tile-name { font-size: 11px; font-weight: 600; color: var(--on-surface); }
-.llm-tile-maker { font-size: 10px; color: var(--on-surface-variant); margin-top: 2px; }
-
-/* ?? API Key ?뱀뀡 ?? */
-.api-key-section {
-  border: 1px solid #D97706;
-  background: var(--warning-light);
-  border-radius: var(--radius-md);
-  padding: 16px;
-  display: none;
-  margin-bottom: 16px;
-}
-.api-key-label { font-size: 13px; font-weight: 600; color: var(--warning); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
-
-/* ?? ???? */
-.form-group { margin-bottom: 22px; }
-.form-label {
-  font-weight: 600;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 8px;
-  color: var(--on-surface);
-}
-.required-mark { color: var(--error); }
-.field {
-  width: 100%;
-  padding: 11px 14px;
-  border: 1.5px solid var(--outline);
-  border-radius: var(--radius-md);
-  font-family: inherit;
-  font-size: 14px;
-  color: var(--on-surface);
-  background: var(--surface);
-  transition: border-color 0.15s, box-shadow 0.15s;
-  outline: none;
-}
-.field:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0,62,138,.12); }
-textarea.field { resize: vertical; min-height: 100px; line-height: 1.6; }
-select.field { cursor: pointer; }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.char-count { font-size: 12px; color: var(--on-surface-variant); }
-
-/* ?? 踰꾪듉 ?? */
-.btn-row { display: flex; gap: 10px; justify-content: flex-end; margin-top: 28px; }
-.btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 0 22px;
-  height: 44px;
-  border-radius: var(--radius-md);
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-  border: none;
-  font-family: inherit;
-  transition: background 0.15s, box-shadow 0.15s, opacity 0.15s;
-  letter-spacing: -0.01em;
-}
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
-.btn-filled { background: var(--primary); color: #fff; box-shadow: 0 1px 2px rgba(0,62,138,.2); }
-.btn-filled:hover:not(:disabled) { background: var(--primary-dark); box-shadow: 0 2px 8px rgba(0,62,138,.3); }
-.btn-outlined { background: transparent; border: 1.5px solid var(--primary); color: var(--primary); }
-.btn-outlined:hover:not(:disabled) { background: var(--primary-light); }
-.btn-text { background: transparent; color: var(--primary); }
-.btn-text:hover { background: var(--primary-light); }
-
-/* ?? ?뺣낫 諛곕꼫 ?? */
-.info-banner {
-  background: var(--primary-light);
-  border-left: 3px solid var(--primary);
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  margin-bottom: 20px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.info-banner-icon { flex-shrink: 0; margin-top: 1px; }
-.info-banner h4 { font-size: 13px; font-weight: 700; margin-bottom: 2px; }
-.info-banner p { font-size: 13px; color: var(--on-surface-variant); }
-
-/* ?? ?듦퀎 洹몃━???? */
-.stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 20px; }
-.stat-card { background: var(--surface-variant); border-radius: var(--radius-md); padding: 16px; text-align: center; border: 1px solid var(--outline); }
-.stat-num { font-size: 26px; font-weight: 700; color: var(--primary); }
-.stat-label { font-size: 12px; color: var(--on-surface-variant); margin-top: 2px; }
-
-/* ?? 吏덈Ц ?⑤꼸 ?? */
-.question-panel { border: 1px solid var(--outline); border-radius: var(--radius-lg); overflow: hidden; }
-.question-item { padding: 20px; border-bottom: 1px solid var(--outline); }
-.question-item:last-child { border-bottom: none; }
-.q-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-.q-index { width: 22px; height: 22px; border-radius: 50%; background: var(--primary); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
-.priority-chip { font-size: 10px; padding: 2px 8px; border-radius: 100px; font-weight: 700; letter-spacing: 0.02em; }
-.priority-chip.req { background: #FEE2E2; color: var(--error); border: 1px solid #FCA5A5; }
-.priority-chip.imp { background: var(--warning-light); color: var(--warning); border: 1px solid #FCD34D; }
-.priority-chip.opt { background: var(--surface-variant); color: var(--on-surface-variant); border: 1px solid var(--outline); }
-.q-text { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
-.q-hint { font-size: 12px; color: var(--on-surface-variant); margin-bottom: 10px; display: flex; align-items: center; gap: 5px; }
-.ans-status { font-size: 12px; margin-top: 6px; color: var(--on-surface-variant); }
-
-/* ?? 遺꾩꽍 移대뱶 ?? */
-.analysis-card { max-width: 560px; margin: 0 auto; padding: 32px; border: 1px solid var(--outline); border-radius: var(--radius-xl); text-align: center; }
-.analysis-logo { width: 56px; height: 56px; border-radius: 14px; background: var(--primary); color: #fff; font-size: 22px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-.analysis-title { font-size: 15px; font-weight: 700; color: var(--on-surface); }
-.analysis-status { font-size: 13px; color: var(--on-surface-variant); margin: 8px 0 16px; }
-.progress-track { height: 5px; background: var(--outline); border-radius: 100px; overflow: hidden; }
-.progress-fill { width: 0%; height: 100%; background: var(--primary); transition: width 0.3s; border-radius: 100px; }
-.thinking-box { background: #FAFAFA; border: 1px solid var(--outline); border-radius: var(--radius-md); padding: 14px; margin-top: 16px; font-size: 12px; color: var(--on-surface-variant); max-height: 200px; overflow-y: auto; text-align: left; white-space: pre-wrap; line-height: 1.5; display: none; }
-.result-summary { background: var(--success-light); border: 1px solid #BBF7D0; border-radius: var(--radius-md); padding: 14px; margin-top: 16px; text-align: left; font-size: 13px; display: none; }
-.error-banner { background: var(--error-light); border: 1px solid #FCA5A5; border-radius: var(--radius-md); padding: 16px; margin-top: 16px; display: none; }
-.error-banner h4 { color: var(--error); font-size: 13px; margin-bottom: 4px; }
-.error-banner p { font-size: 12px; color: #991B1B; }
-
-/* ?? ?먭껐 臾몄꽌 ?? */
-.verdict-doc { border: 2px solid var(--primary); border-radius: var(--radius-xl); overflow: hidden; }
-.verdict-doc-header { background: var(--primary); color: #fff; padding: 32px; text-align: center; }
-.verdict-doc-header h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-.verdict-doc-header div { font-size: 13px; opacity: 0.85; margin-top: 4px; }
-.verdict-doc-body { padding: 32px; }
-.verdict-section-title { font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: 0.08em; text-transform: uppercase; margin-top: 24px; margin-bottom: 8px; padding-bottom: 6px; border-bottom: 1px solid var(--primary-light); }
-.verdict-section-title:first-child { margin-top: 0; }
-.verdict-doc-body p { font-size: 14px; line-height: 1.7; }
-.verdict-ruling-box { background: var(--primary-light); padding: 20px; border-radius: var(--radius-md); margin-top: 24px; border-left: 3px solid var(--primary); }
-.verdict-ruling-box h3 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 8px; }
-.ruling-chip { display: inline-flex; align-items: center; background: var(--primary); color: #fff; font-size: 14px; font-weight: 700; padding: 6px 18px; border-radius: 100px; margin-bottom: 20px; }
-.verdict-chips { margin-top: 16px; display: flex; gap: 8px; flex-wrap: wrap; }
-.verdict-chips span { font-size: 11px; background: var(--surface-variant); padding: 3px 10px; border-radius: 100px; border: 1px solid var(--outline); color: var(--on-surface-variant); }
-.disclaimer-box { font-size: 12px; color: var(--on-surface-variant); text-align: center; padding: 16px; border-top: 1px solid var(--outline); margin-top: 24px; }
-
-/* ?? ?뱀뀡 4 肄섑뀗痢??? */
-#sec4Content > div { margin-bottom: 16px; }
-#sec4Content strong { font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: 0.05em; text-transform: uppercase; display: block; margin-bottom: 4px; }
-#sec4Content p { font-size: 14px; line-height: 1.7; color: var(--on-surface); }
-
-/* ?? pre ?? */
-pre.code-doc { background: #F8FAFC; padding: 20px; border-radius: var(--radius-md); overflow: auto; white-space: pre-wrap; font-family: 'D2Coding', 'Consolas', monospace; font-size: 13px; border: 1px solid var(--outline); line-height: 1.6; }
-
-/* ?? AI 諭껋? ?? */
-.ai-badge { display: none; background: var(--primary); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 100px; margin-left: 6px; letter-spacing: 0.04em; }
-
-/* ?? ?ㅼ젙 諛??? */
-.config-bar { background: var(--surface); padding: 12px 20px; border-radius: var(--radius-lg); margin-bottom: 20px; display: flex; gap: 16px; align-items: center; box-shadow: var(--shadow-sm); flex-wrap: wrap; }
-.config-item { font-size: 12px; color: var(--on-surface-variant); display: flex; align-items: center; gap: 6px; }
-.config-item strong { color: var(--primary); font-weight: 600; }
-
-/* ?? ?ㅻ궢諛??? */
-#snackbar { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #1A1D21; color: #fff; padding: 9px 24px; border-radius: 100px; opacity: 0; transition: opacity 0.25s; pointer-events: none; font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: var(--shadow-md); }
-
-/* ?? ?명꽣 ?? */
-footer { text-align: center; padding: 24px; font-size: 12px; color: var(--on-surface-variant); }
-footer a { color: var(--primary); text-decoration: none; }
-footer a:hover { text-decoration: underline; }
-
-/* ?? 異붿텧 ?곹깭 ?? */
-#extractStatus { padding: 10px 14px; border-radius: var(--radius-md); font-size: 13px; display: none; }
-
-/* ?? 諛섏쓳???? */
-@media (max-width: 768px) {
-  .form-row { grid-template-columns: 1fr; }
-  .llm-grid { grid-template-columns: repeat(3, 1fr); }
-  .mode-grid { grid-template-columns: 1fr; }
-  main { padding: 20px 16px 60px; }
-  .card { padding: 24px 20px; }
-  .stat-grid { grid-template-columns: repeat(3, 1fr); }
-}
-</style>
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-<!-- ?뺣? 諛곕꼫 -->
+<!-- 정부 배너 -->
 <div class="gov-banner">
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-  <span>???쒕퉬?ㅻ뒗 <strong>耳?대줈二쇱떇?뚯궗(K-Law Inc.)</strong>媛 ?댁쁺?섎뒗 AI 踰뺣쪧 以묒옱 蹂댁“ ?쒕퉬?ㅼ엯?덈떎. 踰뺤쟻 援ъ냽?μ씠 ?놁쑝硫??ㅼ젣 踰뺣쪧 ?곷떞???泥댄븯吏 ?딆뒿?덈떎.</span>
+  <span>이 서비스는 <strong>케이로주식회사(K-Law Inc.)</strong>가 운영하는 AI 법률 중재 보조 서비스입니다. 법적 구속력이 없으며 실제 법률 상담을 대체하지 않습니다.</span>
 </div>
 
-<!-- ?ㅻ뜑 -->
+<!-- 헤더 -->
 <header>
   <a href="#" class="brand">
     <div class="brand-emblem">
-      <!-- 踰뺤썝 ????꾩씠肄?-->
       <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M12 3v18M5 3h14M5 21h14"/>
         <path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/>
@@ -462,70 +26,70 @@ footer a:hover { text-decoration: underline; }
       </svg>
     </div>
     <div>
-      <div class="brand-name">K-Law AI 媛??踰뺤썝</div>
-      <div class="brand-sub">耳?대줈二쇱떇?뚯궗 쨌 K-Law v6.4</div>
+      <div class="brand-name">K-Law AI 가상 법원</div>
+      <div class="brand-sub">케이로주식회사 · K-Law v6.4</div>
     </div>
   </a>
   <div class="header-right">
     <div class="status-badge">
       <div class="status-dot"></div>
-      ?쒖뒪???뺤긽
+      시스템 정상
     </div>
     <div class="case-id-chip" id="caseChip"></div>
   </div>
 </header>
 
 <main>
-  <!-- ?덉뼱濡?-->
+  <!-- 히어로 -->
   <div class="page-hero">
     <div class="service-tag">
       <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 3h14M5 21h14"/><path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/><line x1="5" y1="13" x2="19" y2="13"/></svg>
-      AI 踰뺣쪧 以묒옱 蹂댁“
+      AI 법률 중재 보조
     </div>
-    <h1>AI媛 遺꾩꽍?섎뒗<br><em>怨듭젙??踰뺣━ ?먮떒</em></h1>
-    <p>?ш굔 ?뺣낫瑜??낅젰?섎㈃ K-Law 諛⑸쾿濡?v6.4???곕씪 AI媛 踰뺣━瑜?遺꾩꽍?⑸땲??</p>
+    <h1>AI가 분석하는<br><em>공정한 법리 판단</em></h1>
+    <p>사건 정보를 입력하면 K-Law 방법론 v6.4에 따라 AI가 법리를 분석합니다.</p>
   </div>
 
-  <!-- ?④퀎 ?쒖떆 -->
+  <!-- 단계 표시 -->
   <nav class="step-indicator" id="stepIndicator">
     <div class="step-list" id="stepList"></div>
   </nav>
 
-  <!-- ?ㅼ젙 諛?-->
+  <!-- 설정 바 -->
   <div class="config-bar" id="configBar" style="display:none;"></div>
 
-  <!-- ?? SECTION 0: 紐⑤뱶 ?좏깮 ?? -->
+  <!-- SECTION 0: 모드 선택 -->
   <section id="sec0" class="card visible">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
       </div>
       <div class="card-header-text">
-        <h2>遺꾩꽍 紐⑤뱶 ?좏깮</h2>
-        <p>AI 紐⑤뜽怨?遺꾩꽍 諛⑹떇???좏깮?섏떗?쒖삤.</p>
+        <h2>분석 모드 선택</h2>
+        <p>AI 모델과 분석 방식을 선택하십시오.</p>
       </div>
     </div>
 
     <div class="mode-grid">
       <div class="mode-option selected" id="card-single" onclick="selectMode('single')">
         <div class="mode-radio"></div>
-        <div class="mode-chip">??湲곕낯媛?/div>
+        <div class="mode-chip">★ 기본값</div>
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
-        <h3>?⑥씪 LLM 紐⑤뱶</h3>
-        <p>?섎굹??AI媛 K-Law 諛⑸쾿濡좎쑝濡?遺꾩꽍</p>
+        <h3>단일 LLM 모드</h3>
+        <p>하나의 AI가 K-Law 방법론으로 분석</p>
       </div>
       <div class="mode-option disabled" id="card-multi">
         <div class="mode-radio"></div>
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="7" rx="1"/><rect x="13" y="3" width="9" height="7" rx="1"/><rect x="7" y="14" width="10" height="7" rx="1"/><path d="M6.5 10v2h11v-2"/><path d="M12 12v2"/></svg>
-        <h3>蹂듭닔 LLM ?⑹쓽 紐⑤뱶</h3>
-        <p>以鍮?以?/p>
+        <h3>복수 LLM 합의 모드</h3>
+        <p>준비 중</p>
       </div>
     </div>
 
     <div class="llm-section">
       <div class="llm-section-header">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        AI 紐⑤뜽 ?좏깮
+        AI 모델 선택
       </div>
       <div class="llm-grid" id="llmGrid"></div>
     </div>
@@ -533,31 +97,31 @@ footer a:hover { text-decoration: underline; }
     <div class="api-key-section" id="apiKeySection">
       <div class="api-key-label">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-        <span id="apiKeyLlmName"></span>? API Key ?꾩슂
+        <span id="apiKeyLlmName"></span>은 API Key 필요
       </div>
-      <input type="password" id="userApiKey" class="field" placeholder="API Key瑜??낅젰?섏떗?쒖삤" style="margin-top:4px;">
+      <input type="password" id="userApiKey" class="field" placeholder="API Key를 입력하십시오" style="margin-top:4px;">
       <div id="keyStatus" style="font-size:12px; margin-top:6px;"></div>
     </div>
 
     <div class="btn-row">
       <button class="btn btn-filled" onclick="confirmMode()">
-        ?좏깮 ?꾨즺 ???ш굔 ?묒닔 ?쒖옉
+        선택 완료 — 사건 접수 시작
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </section>
 
-  <!-- ?? SECTION 1: ?ш굔 ?뺣낫 ?낅젰 ?? -->
+  <!-- SECTION 1: 사건 정보 입력 -->
   <section id="sec1" class="card">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
       </div>
       <div class="card-header-text">
-        <h2>?ш굔 ?뺣낫 ?낅젰</h2>
-        <p>?먭껐???붿떆?섏? ?딄퀬 ?ъ떎愿怨꾩? ?묒륫 二쇱옣??湲곗닠?섏떗?쒖삤.</p>
+        <h2>사건 정보 입력</h2>
+        <p>판결을 암시하지 않고 사실관계와 양측 주장을 기술하십시오.</p>
       </div>
-      <span class="step-badge">1?④퀎 / 6</span>
+      <span class="step-badge">1단계 / 6</span>
     </div>
 
     <div class="info-banner">
@@ -565,19 +129,19 @@ footer a:hover { text-decoration: underline; }
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="2.5"/></svg>
       </div>
       <div>
-        <h4>AI ?먮룞 ?낅젰 吏??/h4>
-        <p>?ш굔 媛쒖슂 ?낅젰 ???똀I ?먮룞 異붿텧??踰꾪듉???꾨Ⅴ硫??ш굔 遺꾨쪟쨌泥?뎄 湲덉븸쨌?먭퀬쨌?쇨퀬쨌二쇱옣쨌?ㅽ댘 ?녿뒗 ?ъ떎???먮룞 異붿텧?⑸땲??</p>
+        <h4>AI 자동 입력 지원</h4>
+        <p>사건 개요 입력 후 「AI 자동 추출」 버튼을 누르면 사건 분류·청구 금액·원고·피고·주장·다툼 없는 사실을 자동 추출합니다.</p>
       </div>
     </div>
 
     <div class="form-group">
-      <label class="form-label">?ш굔 媛쒖슂 <span class="required-mark">*</span></label>
-      <textarea class="field" id="facts" rows="6" placeholder="遺꾩웳??諛곌꼍, 寃쎌쐞, ?ъ떎愿怨꾨? 援ъ껜?곸쑝濡?湲곗옱?섏꽭?? ?먭퀬? ?쇨퀬???대쫫, 泥?뎄 湲덉븸???ы븿?섎㈃ ???뺥솗?섍쾶 異붿텧?⑸땲??"></textarea>
+      <label class="form-label">사건 개요 <span class="required-mark">*</span></label>
+      <textarea class="field" id="facts" rows="6" placeholder="분쟁의 배경, 경위, 사실관계를 구체적으로 기재하세요. 원고와 피고의 이름, 청구 금액을 포함하면 더 정확하게 추출됩니다."></textarea>
       <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-        <span class="char-count"><span id="factsCount">0</span>/2000??/span>
+        <span class="char-count"><span id="factsCount">0</span>/2000자</span>
         <button class="btn btn-filled" id="btnExtract" onclick="extractFromFacts()" style="height:36px; padding:0 14px; font-size:13px;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          AI ?먮룞 異붿텧
+          AI 자동 추출
         </button>
       </div>
       <div id="extractStatus"></div>
@@ -585,114 +149,114 @@ footer a:hover { text-decoration: underline; }
 
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">?ш굔 遺꾨쪟 <span class="required-mark">*</span><span id="caseTypeAiBadge" class="ai-badge">AI 異붿텧</span></label>
+        <label class="form-label">사건 분류 <span class="required-mark">*</span><span id="caseTypeAiBadge" class="ai-badge">AI 추출</span></label>
         <select class="field" id="caseType" required>
-          <option value="">?좏깮</option>
-          <optgroup label="誘쇱궗">
-            <option value="civil_damage">?먰빐諛곗긽(遺덈쾿?됱쐞)</option>
-            <option value="civil_traffic">?먰빐諛곗긽(援먰넻?ш퀬)</option>
-            <option value="civil_medical">?먰빐諛곗긽(?섎즺)</option>
-            <option value="civil_contract">怨꾩빟?꾨컲</option>
-            <option value="civil_lease">?꾨?李?/option>
-            <option value="civil_insurance">蹂댄뿕</option>
+          <option value="">선택</option>
+          <optgroup label="민사">
+            <option value="civil_damage">손해배상(불법행위)</option>
+            <option value="civil_traffic">손해배상(교통사고)</option>
+            <option value="civil_medical">손해배상(의료)</option>
+            <option value="civil_contract">계약위반</option>
+            <option value="civil_lease">임대차</option>
+            <option value="civil_insurance">보험</option>
           </optgroup>
-          <optgroup label="媛??>
-            <option value="family_divorce">?댄샎쨌?꾩옄猷?/option>
-            <option value="family_custody">移쒓텒쨌?묒쑁沅?/option>
-            <option value="family_inherit">?곸냽</option>
+          <optgroup label="가사">
+            <option value="family_divorce">이혼·위자료</option>
+            <option value="family_custody">친권·양육권</option>
+            <option value="family_inherit">상속</option>
           </optgroup>
-          <optgroup label="?뺤궗">
-            <option value="criminal_fraud">?ш린</option>
-            <option value="criminal_embezzle">?〓졊쨌諛곗엫</option>
-            <option value="criminal_assault">??뻾쨌?곹빐</option>
+          <optgroup label="형사">
+            <option value="criminal_fraud">사기</option>
+            <option value="criminal_embezzle">횡령·배임</option>
+            <option value="criminal_assault">폭행·상해</option>
           </optgroup>
-          <optgroup label="?됱젙">
-            <option value="admin_cancel">?됱젙泥섎텇 痍⑥냼</option>
-            <option value="admin_compensation">援??諛곗긽</option>
+          <optgroup label="행정">
+            <option value="admin_cancel">행정처분 취소</option>
+            <option value="admin_compensation">국가배상</option>
           </optgroup>
         </select>
       </div>
       <div class="form-group">
-        <label class="form-label">泥?뎄 湲덉븸<span id="claimAmountAiBadge" class="ai-badge">AI 異붿텧</span></label>
-        <input class="field" id="claimAmount" placeholder="?? 50,000,000??>
+        <label class="form-label">청구 금액<span id="claimAmountAiBadge" class="ai-badge">AI 추출</span></label>
+        <input class="field" id="claimAmount" placeholder="예: 50,000,000원">
       </div>
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">?먭퀬 <span class="required-mark">*</span><span id="plaintiffAiBadge" class="ai-badge">AI 異붿텧</span></label>
-        <input class="field" id="plaintiff" required placeholder="?먭퀬 ?깅챸 ?먮뒗 踰뺤씤紐?>
+        <label class="form-label">원고 <span class="required-mark">*</span><span id="plaintiffAiBadge" class="ai-badge">AI 추출</span></label>
+        <input class="field" id="plaintiff" required placeholder="원고 성명 또는 법인명">
       </div>
       <div class="form-group">
-        <label class="form-label">?쇨퀬 <span class="required-mark">*</span><span id="defendantAiBadge" class="ai-badge">AI 異붿텧</span></label>
-        <input class="field" id="defendant" required placeholder="?쇨퀬 ?깅챸 ?먮뒗 踰뺤씤紐?>
+        <label class="form-label">피고 <span class="required-mark">*</span><span id="defendantAiBadge" class="ai-badge">AI 추출</span></label>
+        <input class="field" id="defendant" required placeholder="피고 성명 또는 법인명">
       </div>
     </div>
 
     <div class="form-group">
-      <label class="form-label">?ㅽ댘 ?녿뒗 ?ъ떎<span id="undisputedAiBadge" class="ai-badge">AI 異붿텧</span></label>
-      <textarea class="field" id="undisputedFacts" rows="3" placeholder="?묒륫???숈쓽?섎뒗 ?듭떖 ?ъ떎??湲곗옱?섏꽭?? (AI ?먮룞 異붿텧 媛??"></textarea>
+      <label class="form-label">다툼 없는 사실<span id="undisputedAiBadge" class="ai-badge">AI 추출</span></label>
+      <textarea class="field" id="undisputedFacts" rows="3" placeholder="양측이 동의하는 핵심 사실을 기재하세요. (AI 자동 추출 가능)"></textarea>
     </div>
 
     <div class="form-row">
       <div class="form-group">
-        <label class="form-label">?먭퀬??二쇱옣 <span class="required-mark">*</span><span id="plaintiffClaimAiBadge" class="ai-badge">AI 異붿텧</span></label>
-        <textarea class="field" id="plaintiffClaim" required rows="4" placeholder="?먭퀬媛 二쇱옣?섎뒗 ?ъ떎愿怨꾩? 踰뺤쟻 洹쇨굅"></textarea>
+        <label class="form-label">원고의 주장 <span class="required-mark">*</span><span id="plaintiffClaimAiBadge" class="ai-badge">AI 추출</span></label>
+        <textarea class="field" id="plaintiffClaim" required rows="4" placeholder="원고가 주장하는 사실관계와 법적 근거"></textarea>
       </div>
       <div class="form-group">
-        <label class="form-label">?쇨퀬??二쇱옣 <span class="required-mark">*</span><span id="defendantClaimAiBadge" class="ai-badge">AI 異붿텧</span></label>
-        <textarea class="field" id="defendantClaim" required rows="4" placeholder="?쇨퀬媛 二쇱옣?섎뒗 ?ъ떎愿怨꾩? 踰뺤쟻 洹쇨굅"></textarea>
+        <label class="form-label">피고의 주장 <span class="required-mark">*</span><span id="defendantClaimAiBadge" class="ai-badge">AI 추출</span></label>
+        <textarea class="field" id="defendantClaim" required rows="4" placeholder="피고가 주장하는 사실관계와 법적 근거"></textarea>
       </div>
     </div>
 
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="goSec(0)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        ?댁쟾
+        이전
       </button>
       <button class="btn btn-filled" onclick="toSec2()">
-        ?ㅼ쓬: 臾몄꽌 ?앹꽦
+        다음: 문서 생성
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </section>
 
-  <!-- ?? SECTION 2: Mandatory Execute 臾몄꽌 ?? -->
+  <!-- SECTION 2: Mandatory Execute 문서 -->
   <section id="sec2" class="card">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       </div>
       <div class="card-header-text">
-        <h2>Mandatory Execute 臾몄꽌</h2>
-        <p>?ш굔 ?뺣낫瑜?K-Law ?ㅽ뻾 臾몄꽌濡?蹂?섑빀?덈떎.</p>
+        <h2>Mandatory Execute 문서</h2>
+        <p>사건 정보를 K-Law 실행 문서로 변환합니다.</p>
       </div>
-      <span class="step-badge">2?④퀎 / 6</span>
+      <span class="step-badge">2단계 / 6</span>
     </div>
     <pre class="code-doc" id="mandatoryDoc"></pre>
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="goSec(1)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        ?댁쟾
+        이전
       </button>
       <button class="btn btn-filled" id="btnToSec25" onclick="toSec25()">
-        AI 異붽? ?뺣낫 ?붿껌
+        AI 추가 정보 요청
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </section>
 
-  <!-- ?? SECTION 2.5: 異붽? ?뺣낫 ?? -->
+  <!-- SECTION 2.5: 추가 정보 -->
   <section id="sec25" class="card">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
       </div>
       <div class="card-header-text">
-        <h2>AI 異붽? ?뺣낫 ?붿껌</h2>
-        <p id="sec25Sub">AI媛 ?뺥솗???먭껐???꾪빐 異붽? ?뺣낫瑜??붿껌?⑸땲??</p>
+        <h2>AI 추가 정보 요청</h2>
+        <p id="sec25Sub">AI가 정확한 판결을 위해 추가 정보를 요청합니다.</p>
       </div>
-      <span class="step-badge">3?④퀎 / 6</span>
+      <span class="step-badge">3단계 / 6</span>
     </div>
 
     <div class="info-banner" id="dynamicInfoBanner" style="display:none;">
@@ -700,15 +264,15 @@ footer a:hover { text-decoration: underline; }
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
       <div>
-        <h4>異붽? ?뺣낫 ?꾩슂</h4>
-        <p>?뺥솗??踰뺣━ 遺꾩꽍???꾪빐 <strong id="qTotal">-</strong>媛???ぉ??????듬????붿껌?⑸땲??</p>
+        <h4>추가 정보 필요</h4>
+        <p>정확한 법리 분석을 위해 <strong id="qTotal">-</strong>개 항목에 대한 답변을 요청합니다.</p>
       </div>
     </div>
 
     <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div class="stat-label">?꾩닔</div></div>
-      <div class="stat-card"><div class="stat-num" id="impCnt">-</div><div class="stat-label">以묒슂</div></div>
-      <div class="stat-card"><div class="stat-num" id="optCnt">-</div><div class="stat-label">?좏깮</div></div>
+      <div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div class="stat-label">필수</div></div>
+      <div class="stat-card"><div class="stat-num" id="impCnt">-</div><div class="stat-label">중요</div></div>
+      <div class="stat-card"><div class="stat-num" id="optCnt">-</div><div class="stat-label">선택</div></div>
     </div>
 
     <div class="question-panel" id="questionList"></div>
@@ -716,27 +280,27 @@ footer a:hover { text-decoration: underline; }
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="goSec(2)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        ?댁쟾
+        이전
       </button>
-      <button class="btn btn-text" onclick="skipQ()">?앸왂</button>
+      <button class="btn btn-text" onclick="skipQ()">생략</button>
       <button class="btn btn-filled" onclick="submitQ()">
-        ?듬? ?쒖텧 ??AI 遺꾩꽍
+        답변 제출 후 AI 분석
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </section>
 
-  <!-- ?? SECTION 3: AI 遺꾩꽍 ?? -->
+  <!-- SECTION 3: AI 분석 -->
   <section id="sec3" class="card">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
       </div>
       <div class="card-header-text">
-        <h2 id="sec3-title">AI 踰뺣━ 遺꾩꽍</h2>
-        <p>K-Law 諛⑸쾿濡?v6.4 ?곸슜</p>
+        <h2 id="sec3-title">AI 법리 분석</h2>
+        <p>K-Law 방법론 v6.4 적용</p>
       </div>
-      <span class="step-badge">4?④퀎 / 6</span>
+      <span class="step-badge">4단계 / 6</span>
     </div>
 
     <div class="analysis-card">
@@ -744,511 +308,83 @@ footer a:hover { text-decoration: underline; }
       <div class="analysis-title" id="aTitle">DeepSeek R1</div>
       <div class="analysis-status" id="aStatus">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        以鍮?以?      </div>
+        준비 중
+      </div>
       <div class="progress-track"><div class="progress-fill" id="aProg"></div></div>
       <div class="thinking-box" id="aThinking"></div>
       <div class="result-summary" id="aResult"></div>
     </div>
 
     <div class="error-banner" id="errBanner">
-      <h4>?ㅻ쪟媛 諛쒖깮?덉뒿?덈떎</h4>
+      <h4>오류가 발생했습니다</h4>
       <p id="errMsg"></p>
     </div>
 
     <div class="btn-row" id="sec3Btn" style="display:none;">
       <button class="btn btn-filled" onclick="goSec(4)">
-        ?먭껐 ?댁슜 ?뺤씤
+        판결 내용 확인
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </section>
 
-  <!-- ?? SECTION 4: ?먭껐 ?뺤씤 ?? -->
+  <!-- SECTION 4: 판결 확인 -->
   <section id="sec4" class="card">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
       </div>
       <div class="card-header-text">
-        <h2>?먭껐 ?댁슜 ?뺤씤</h2>
-        <p>AI媛 ?꾩텧??媛???먭껐??寃?좏븯??떆??</p>
+        <h2>판결 내용 확인</h2>
+        <p>AI가 도출한 가상 판결을 검토하십시오.</p>
       </div>
-      <span class="step-badge">5?④퀎 / 6</span>
+      <span class="step-badge">5단계 / 6</span>
     </div>
     <div id="sec4Content"></div>
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="goSec(3)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        ?щ텇??      </button>
+        재분석
+      </button>
       <button class="btn btn-filled" onclick="goSec(5)">
-        理쒖쥌 ?먭껐 ?쒖텧
+        최종 판결 제출
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </button>
     </div>
   </section>
 
-  <!-- ?? SECTION 5: 理쒖쥌 ?먭껐 ?? -->
+  <!-- SECTION 5: 최종 판결 -->
   <section id="sec5" class="card">
     <div class="card-header">
       <div class="card-icon">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>
       </div>
       <div class="card-header-text">
-        <h2>K-Law AI 媛???먭껐</h2>
-        <p>?곌뎄 紐⑹쟻, 踰뺤쟻 援ъ냽???놁쓬</p>
+        <h2>K-Law AI 가상 판결</h2>
+        <p>연구 목적, 법적 구속력 없음</p>
       </div>
-      <span class="step-badge">6?④퀎 / 6</span>
+      <span class="step-badge">6단계 / 6</span>
     </div>
     <div id="verdictDoc"></div>
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="resetAll()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.87"/></svg>
-        ???ш굔 ?묒닔
+        새 사건 접수
       </button>
       <button class="btn btn-filled" onclick="dlVerdict()">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        ?먭껐臾??대젮諛쏄린
+        판결문 내려받기
       </button>
     </div>
   </section>
 </main>
 
 <footer>
-  <p>耳?대줈二쇱떇?뚯궗 쨌 <a href="https://github.com/jejuro/k-law" target="_blank">GitHub</a> 쨌 GPL-3.0</p>
+  <p>케이로주식회사 · <a href="https://github.com/jejuro/k-law" target="_blank">GitHub</a> · GPL-3.0</p>
 </footer>
 
 <div id="snackbar"></div>
 
-<script>
-// ?? ?곸닔 諛??곹깭 ??
-const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
-const LLMS = {
-  deepseek: { name:'DeepSeek R1', maker:'DeepSeek AI', logo:'D', cls:'lc-deepseek', model:'deepseek-reasoner', ep:'https://api.deepseek.com/chat/completions', needKey:false },
-  gpt:      { name:'GPT-4o',      maker:'OpenAI',      logo:'G', cls:'lc-gpt',      model:'gpt-4o',          ep:'https://api.openai.com/v1/chat/completions',     needKey:true  },
-};
-let sel = 'deepseek', userKey = null;
-let caseId = '', caseData = {}, extraAnswers = {}, dynamicQuestions = [];
-let parsed = null;
-
-const $ = id => document.getElementById(id);
-function toast(msg) {
-  const s = $('#snackbar');
-  s.textContent = msg;
-  s.style.opacity = '1';
-  setTimeout(() => s.style.opacity = '0', 3000);
-}
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function genId() { return `KL-${new Date().getFullYear()}-${Math.floor(Math.random() * 90000 + 10000)}`; }
-
-// ?? ?④퀎 ?쒖떆 ??
-const STEPS = ['1', '2', '25', '3', '4', '5'];
-const STEP_LABELS = { '1':'?ш굔?낅젰', '2':'臾몄꽌?앹꽦', '25':'異붽??뺣낫', '3':'AI遺꾩꽍', '4':'?먭껐?뺤씤', '5':'理쒖쥌?먭껐' };
-
-function renderStepIndicator() {
-  const container = $('#stepList');
-  if (!container) return;
-  container.innerHTML = STEPS.map((s, i) => `
-    <div style="display:flex; align-items:center;">
-      <div class="step-node" id="sn-${s}">
-        <div class="step-circle">${i + 1}</div>
-        <div class="step-label">${STEP_LABELS[s]}</div>
-      </div>
-      ${i < STEPS.length - 1 ? `<div class="step-connector" id="sc-${s}"></div>` : ''}
-    </div>
-  `).join('');
-}
-renderStepIndicator();
-
-function updateSteps(cur) {
-  const idx = STEPS.indexOf(String(cur));
-  STEPS.forEach((s, i) => {
-    const node = $(`sn-${s}`);
-    if (node) {
-      node.classList.remove('active', 'done');
-      if (i < idx) node.classList.add('done');
-      else if (i === idx) node.classList.add('active');
-    }
-    const conn = $(`sc-${s}`);
-    if (conn) {
-      conn.classList.remove('done');
-      if (i < idx) conn.classList.add('done');
-    }
-  });
-}
-
-function goSec(n) {
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('visible'));
-  const el = $(`sec${n}`);
-  if (el) el.classList.add('visible');
-  if (n !== 0 && n !== '0') updateSteps(String(n));
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ?? 紐⑤뱶 諛?LLM ?좏깮 ??
-function selectMode(m) {
-  $('card-single').classList.toggle('selected', m === 'single');
-}
-function selectLLM(id) {
-  sel = id;
-  document.querySelectorAll('.llm-tile').forEach(t => t.classList.toggle('selected', t.id === `opt-${id}`));
-  const llm = LLMS[id];
-  const panel = $('#apiKeySection');
-  $('#apiKeyLlmName').innerText = llm.name;
-  panel.style.display = llm.needKey ? 'block' : 'none';
-  if (!llm.needKey) userKey = null;
-}
-function confirmMode() {
-  const llm = LLMS[sel];
-  if (llm.needKey) {
-    const v = $('#userApiKey').value.trim();
-    if (!v) { toast('API Key瑜??낅젰?섏꽭??); return; }
-    userKey = v;
-  }
-
-  // ?ㅼ젙 諛??낅뜲?댄듃
-  const configBar = $('#configBar');
-  configBar.style.display = 'flex';
-  configBar.innerHTML = `
-    <div class="config-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> 紐⑤뱶: <strong>?⑥씪 LLM</strong></div>
-    <div class="config-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> 紐⑤뜽: <strong>${llm.name}</strong></div>
-    <div class="config-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 諛⑸쾿濡? <strong>K-Law v6.4</strong></div>
-  `;
-
-  $('#stepIndicator').style.display = 'block';
-  $('#aLogo').innerText = llm.logo;
-  $('#aTitle').innerText = llm.name;
-  $('#sec3-title').innerText = `${llm.name} 踰뺣━ 遺꾩꽍 (K-Law v6.4)`;
-  goSec(1);
-}
-
-// ?? LLM 洹몃━???앹꽦 ??
-const llmGrid = $('#llmGrid');
-llmGrid.innerHTML = Object.keys(LLMS).map(k => `
-  <div class="llm-tile ${k === 'deepseek' ? 'selected' : ''}" id="opt-${k}" onclick="selectLLM('${k}')">
-    <div class="llm-logo ${LLMS[k].cls}">${LLMS[k].logo}</div>
-    <div class="llm-tile-name">${LLMS[k].name}</div>
-    <div class="llm-tile-maker">${LLMS[k].maker}</div>
-  </div>
-`).join('');
-
-// ?? AI ?먮룞 異붿텧 ??
-async function extractFromFacts() {
-  const facts = $('#facts').value.trim();
-  if (facts.length < 20) { toast('?ш굔 媛쒖슂瑜?20???댁긽 ?낅젰?섏꽭??); return; }
-  const btn = $('#btnExtract');
-  const statusEl = $('#extractStatus');
-  btn.disabled = true;
-  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 異붿텧 以?..`;
-  statusEl.style.display = 'block';
-  statusEl.style.background = 'var(--primary-light)';
-  statusEl.style.color = 'var(--primary)';
-  statusEl.innerText = 'AI 遺꾩꽍 以?..';
-
-  const sys = `?뱀떊? 踰뺣쪧 臾몄꽌 遺꾩꽍 ?꾨Ц媛?낅땲?? ?ш굔 媛쒖슂?먯꽌 ?ㅼ쓬 7媛吏 ?뺣낫瑜?異붿텧?섏뿬 JSON留?異쒕젰?섏꽭??
-{
-  "caseType": "肄붾뱶",
-  "claimAmount": "湲덉븸",
-  "plaintiff": "?먭퀬紐?,
-  "defendant": "?쇨퀬紐?,
-  "plaintiffClaim": "?먭퀬??二쇱옣 ?붿빟",
-  "defendantClaim": "?쇨퀬??二쇱옣 ?붿빟",
-  "undisputedFacts": "?ㅽ댘 ?녿뒗 ?ъ떎 ?붿빟"
-}
-caseType 肄붾뱶: civil_damage, civil_traffic, civil_medical, civil_contract, civil_lease, civil_insurance, family_divorce, family_custody, family_inherit, criminal_fraud, criminal_embezzle, criminal_assault, admin_cancel, admin_compensation`;
-
-  try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
-      body: JSON.stringify({ model: 'deepseek-chat', messages: [{ role: 'system', content: sys }, { role: 'user', content: facts }], temperature: 0.1, max_tokens: 800 })
-    });
-    if (!res.ok) throw new Error('API ?ㅻ쪟');
-    const data = await res.json();
-    const content = data.choices[0].message.content;
-    const match = content.match(/\{[\s\S]*\}/);
-    if (!match) throw new Error('JSON 異붿텧 ?ㅽ뙣');
-    const ex = JSON.parse(match[0]);
-    const valid = ['civil_damage','civil_traffic','civil_medical','civil_contract','civil_lease','civil_insurance','family_divorce','family_custody','family_inherit','criminal_fraud','criminal_embezzle','criminal_assault','admin_cancel','admin_compensation'];
-    let filled = [];
-    if (ex.caseType && valid.includes(ex.caseType)) { $('#caseType').value = ex.caseType; $('#caseTypeAiBadge').style.display = 'inline-block'; filled.push('?ш굔遺꾨쪟'); }
-    if (ex.claimAmount) { $('#claimAmount').value = ex.claimAmount; $('#claimAmountAiBadge').style.display = 'inline-block'; filled.push('泥?뎄湲덉븸'); }
-    if (ex.plaintiff) { $('#plaintiff').value = ex.plaintiff; $('#plaintiffAiBadge').style.display = 'inline-block'; filled.push('?먭퀬'); }
-    if (ex.defendant) { $('#defendant').value = ex.defendant; $('#defendantAiBadge').style.display = 'inline-block'; filled.push('?쇨퀬'); }
-    if (ex.undisputedFacts) { $('#undisputedFacts').value = ex.undisputedFacts; $('#undisputedAiBadge').style.display = 'inline-block'; filled.push('?ㅽ댘?녿뒗?ъ떎'); }
-    if (ex.plaintiffClaim) { $('#plaintiffClaim').value = ex.plaintiffClaim; $('#plaintiffClaimAiBadge').style.display = 'inline-block'; filled.push('?먭퀬二쇱옣'); }
-    if (ex.defendantClaim) { $('#defendantClaim').value = ex.defendantClaim; $('#defendantClaimAiBadge').style.display = 'inline-block'; filled.push('?쇨퀬二쇱옣'); }
-    statusEl.style.background = 'var(--success-light)';
-    statusEl.style.color = 'var(--success)';
-    statusEl.innerText = `??異붿텧 ?꾨즺: ${filled.join(' 쨌 ')} ???꾩슂 ??吏곸젒 ?섏젙 媛?ν빀?덈떎.`;
-  } catch (e) {
-    statusEl.style.background = 'var(--error-light)';
-    statusEl.style.color = 'var(--error)';
-    statusEl.innerText = `?ㅻ쪟: ${e.message}`;
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> AI ?먮룞 異붿텧`;
-  }
-}
-
-// ?? 臾몄꽌 ?앹꽦 ??
-function toSec2() {
-  const ct = $('#caseType').value, pl = $('#plaintiff').value.trim(), df = $('#defendant').value.trim();
-  const fc = $('#facts').value.trim(), pc = $('#plaintiffClaim').value.trim(), dc = $('#defendantClaim').value.trim();
-  if (!ct || !pl || !df || !fc || !pc || !dc) {
-    toast('?꾩닔 ??ぉ??紐⑤몢 ?낅젰?섏꽭??(?ш굔 遺꾨쪟/?먭퀬/?쇨퀬/?먭퀬二쇱옣/?쇨퀬二쇱옣)');
-    return;
-  }
-  caseId = genId();
-  $('#caseChip').innerText = `?ш굔踰덊샇 ${caseId}`;
-  $('#caseChip').style.display = 'block';
-  caseData = {
-    caseType: ct, plaintiff: pl, defendant: df, facts: fc,
-    plaintiffClaim: pc, defendantClaim: dc,
-    undisputedFacts: $('#undisputedFacts').value.trim(),
-    caseId, claimAmount: $('#claimAmount').value
-  };
-  renderDoc();
-  goSec(2);
-}
-
-function renderDoc() {
-  const d = caseData;
-  const label = { civil_damage:'?먰빐諛곗긽(遺덈쾿?됱쐞)', civil_traffic:'?먰빐諛곗긽(援먰넻?ш퀬)', civil_medical:'?먰빐諛곗긽(?섎즺)', civil_contract:'怨꾩빟?꾨컲', civil_lease:'?꾨?李?, civil_insurance:'蹂댄뿕', family_divorce:'?댄샎쨌?꾩옄猷?, family_custody:'移쒓텒쨌?묒쑁沅?, family_inherit:'?곸냽', criminal_fraud:'?ш린', criminal_embezzle:'?〓졊쨌諛곗엫', criminal_assault:'??뻾쨌?곹빐', admin_cancel:'?됱젙泥섎텇 痍⑥냼', admin_compensation:'援??諛곗긽' }[d.caseType] || d.caseType;
-  const llm = LLMS[sel];
-  $('#mandatoryDoc').innerText = `?먥븧??K-LAW MANDATORY EXECUTE v6.4 ?먥븧??
-[?ш굔踰덊샇] ${d.caseId}
-[?ш굔遺꾨쪟] ${label}
-[泥?뎄湲덉븸] ${d.claimAmount || '誘멸린??}
-[遺꾩꽍 LLM] ${llm.name}
-
-?? ?뱀궗????
-?먭퀬: ${d.plaintiff}
-?쇨퀬: ${d.defendant}
-
-?? ?ㅽ댘 ?녿뒗 ?ъ떎 ??
-${d.undisputedFacts || '(?놁쓬)'}
-
-?? ?ш굔 媛쒖슂 ??
-${d.facts}
-
-?? ?먭퀬 二쇱옣 ??
-${d.plaintiffClaim}
-
-?? ?쇨퀬 二쇱옣 ??
-${d.defendantClaim}
-?먥븧??END ?먥븧??;
-}
-
-// ?? 異붽? ?뺣낫 ?붿껌 ??
-async function toSec25() {
-  const btn = $('#btnToSec25');
-  btn.disabled = true;
-  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> ?앹꽦 以?..`;
-  const mandatory = $('#mandatoryDoc').innerText;
-  const sys = `You are K-Law AI. Based on the mandatory document, generate up to 5 additional information questions (JSON array) with fields: id, text, priority("required"/"important"/"optional"), hint. Output only JSON array.`;
-  try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
-      body: JSON.stringify({ model: 'deepseek-chat', messages: [{ role: 'system', content: sys }, { role: 'user', content: mandatory }], temperature: 0.3, max_tokens: 1000 })
-    });
-    const data = await res.json();
-    const content = data.choices[0].message.content;
-    const match = content.match(/\[[\s\S]*\]/);
-    if (match) dynamicQuestions = JSON.parse(match[0]).slice(0, 5);
-    else throw new Error('no json');
-  } catch (e) {
-    dynamicQuestions = [
-      { id: 'q1', text: '異붽? 利앷굅 ?먮즺媛 ?덉뒿?덇퉴?', priority: 'required', hint: '怨꾩빟?? ?곸닔利? ?ъ쭊, 利앹씤 ?? },
-      { id: 'q2', text: '?⑹쓽 ?쒕룄媛 ?덉뿀?듬땲源?', priority: 'optional', hint: '?묒긽 寃쎌쐞 諛?寃곌낵' }
-    ];
-  }
-  renderQuestions();
-  goSec('25');
-  btn.disabled = false;
-  btn.innerHTML = `AI 異붽? ?뺣낫 ?붿껌 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
-}
-
-function renderQuestions() {
-  $('#dynamicInfoBanner').style.display = 'flex';
-  const req = dynamicQuestions.filter(q => q.priority === 'required').length;
-  const imp = dynamicQuestions.filter(q => q.priority === 'important').length;
-  const opt = dynamicQuestions.filter(q => q.priority === 'optional').length;
-  $('#qTotal').innerText = dynamicQuestions.length;
-  $('#reqCnt').innerText = req;
-  $('#impCnt').innerText = imp;
-  $('#optCnt').innerText = opt;
-  $('#questionList').innerHTML = dynamicQuestions.map((q, i) => `
-    <div class="question-item">
-      <div class="q-meta">
-        <div class="q-index">${i + 1}</div>
-        <span class="priority-chip ${q.priority === 'required' ? 'req' : q.priority === 'important' ? 'imp' : 'opt'}">${q.priority === 'required' ? '?꾩닔' : q.priority === 'important' ? '以묒슂' : '?좏깮'}</span>
-      </div>
-      <div class="q-text">${q.text}</div>
-      <div class="q-hint">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        ${q.hint}
-      </div>
-      <textarea class="field" id="ans-${q.id}" rows="2" oninput="onAns('${q.id}')"></textarea>
-      <div class="ans-status" id="st-${q.id}">??誘몄엯??/div>
-    </div>
-  `).join('');
-}
-
-function onAns(id) {
-  const v = $(`ans-${id}`).value.trim();
-  extraAnswers[id] = v;
-  const st = $(`st-${id}`);
-  st.innerText = v ? '???듬??? : '??誘몄엯??;
-  st.style.color = v ? 'var(--success)' : '';
-}
-
-function skipQ() { runAnalysis(); }
-
-async function submitQ() {
-  const unans = dynamicQuestions.filter(q => q.priority === 'required' && !extraAnswers[q.id]?.trim());
-  if (unans.length) { toast(`?꾩닔 吏덈Ц ${unans.length}媛쒖뿉 ?듬??섏꽭??); return; }
-  toast('?듬? 諛섏쁺 ??遺꾩꽍 ?쒖옉');
-  await sleep(500);
-  runAnalysis();
-}
-
-// ?? K-Law 遺꾩꽍 ??
-async function runAnalysis() {
-  goSec(3);
-  await sleep(200);
-  const status = $('#aStatus'), prog = $('#aProg'), thinking = $('#aThinking'), result = $('#aResult'), err = $('#errBanner');
-  status.innerText = 'K-Law 諛⑸쾿濡?v6.4 ?곸슜 以?..';
-  prog.style.width = '5%';
-  thinking.style.display = 'none';
-  result.style.display = 'none';
-  err.style.display = 'none';
-  $('#sec3Btn').style.display = 'none';
-
-  const extra = dynamicQuestions.filter(q => extraAnswers[q.id]?.trim()).map(q => `Q: ${q.text}\nA: ${extraAnswers[q.id]}`).join('\n\n');
-  const mandatory = $('#mandatoryDoc').innerText;
-  const sysPrompt = `You are K-Law AI. Follow the K-Law v6.4 mandatory steps exactly.
-STEP A (?쇨퀬 ?뱀냼 ?쇨굅): Write at least 300 characters defending the defendant, cite at least one precedent or general principle. End with [STEP-A-COMPLETE].
-STEP B (?먭껐臾?: Perform in order: 1) legal relationship, 2) issue decomposition, 3) syllogism for both parties, 4) causal analysis and value balancing, 5) damage calculation, 6) metacognition self-check. Then output JSON: {"ruling":"?먭퀬 ?뱀냼|?쇨퀬 ?뱀냼|?쇰??뱀냼","key_legal_theory":"...","reasoning":"...","legal_basis":["..."],"ruling_text":"...","verdict_summary":"..."}. End with [STEP-B-COMPLETE].
-STEP C (consistency check): Answer three questions. End with [STEP-C-COMPLETE].`;
-  const userMsg = `${mandatory}\n\n異붽? ?뺣낫:\n${extra}`;
-
-  try {
-    const llm = LLMS[sel];
-    const apiKey = llm.needKey ? userKey : DS_KEY;
-    const res = await fetch(llm.ep, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${apiKey}` },
-      body: JSON.stringify({ model: llm.model, messages: [{ role: 'system', content: sysPrompt }, { role: 'user', content: userMsg }], stream: true, temperature: 0.2, max_tokens: 8000 })
-    });
-    if (!res.ok) throw new Error(`API ${res.status}`);
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let full = '', pct = 20;
-    thinking.style.display = 'block';
-    thinking.innerText = '異붾줎 吏꾪뻾 以?..\n';
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      const chunk = decoder.decode(value);
-      const lines = chunk.split('\n').filter(l => l.startsWith('data: '));
-      for (const line of lines) {
-        const data = line.slice(6).trim();
-        if (data === '[DONE]') continue;
-        try {
-          const j = JSON.parse(data);
-          const delta = j.choices?.[0]?.delta;
-          if (delta?.reasoning_content) { thinking.innerText += delta.reasoning_content; thinking.scrollTop = thinking.scrollHeight; }
-          if (delta?.content) { full += delta.content; if (pct < 90) { pct += 0.5; prog.style.width = pct + '%'; status.innerText = `?앹꽦 以?.. (${full.length}??`; } }
-        } catch (e) { /* ignore parse errors */ }
-      }
-    }
-    prog.style.width = '100%';
-    status.style.color = 'var(--success)';
-    status.innerText = '??遺꾩꽍 ?꾨즺';
-    const jsonMatch = full.match(/\{[\s\S]*"ruling"[\s\S]*\}/);
-    if (jsonMatch) {
-      try { parsed = JSON.parse(jsonMatch[0]); }
-      catch (e) { throw new Error('JSON ?뚯떛 ?ㅽ뙣: ' + e.message); }
-    } else {
-      throw new Error('JSON 誘몄텛異?);
-    }
-    result.style.display = 'block';
-    result.innerHTML = `<strong>?먭껐:</strong> ${parsed.ruling}<br><strong>踰뺣━:</strong> ${parsed.key_legal_theory}`;
-    $('#sec3Btn').style.display = 'flex';
-    renderSec4();
-    if (llm.needKey) { userKey = null; $('#userApiKey').value = ''; toast('API Key ??젣??); }
-  } catch (e) {
-    status.innerText = '?ㅻ쪟 諛쒖깮';
-    status.style.color = 'var(--error)';
-    err.style.display = 'block';
-    $('#errMsg').innerText = e.message;
-  }
-}
-
-function renderSec4() {
-  const r = parsed || { ruling:'-', key_legal_theory:'-', reasoning:'-', legal_basis:[], ruling_text:'-', verdict_summary:'-' };
-  $('#sec4Content').innerHTML = `
-    <div class="ruling-chip">${r.ruling}</div>
-    <div><strong>?듭떖 踰뺣━</strong><p>${r.key_legal_theory}</p></div>
-    <div><strong>?몃? ?쇱쬆</strong><p>${r.reasoning}</p></div>
-    <div><strong>踰뺤“臾?/strong><p>${(r.legal_basis || []).join(', ')}</p></div>
-    <div><strong>?먭껐 ?붿?</strong><p>${r.verdict_summary}</p></div>
-  `;
-}
-
-function renderVerdict() {
-  const d = caseData, r = parsed || {};
-  const label = { civil_damage:'?먰빐諛곗긽(遺덈쾿?됱쐞)', civil_traffic:'?먰빐諛곗긽(援먰넻?ш퀬)', civil_medical:'?먰빐諛곗긽(?섎즺)', civil_contract:'怨꾩빟?꾨컲', civil_lease:'?꾨?李?, civil_insurance:'蹂댄뿕', family_divorce:'?댄샎쨌?꾩옄猷?, family_custody:'移쒓텒쨌?묒쑁沅?, family_inherit:'?곸냽', criminal_fraud:'?ш린', criminal_embezzle:'?〓졊쨌諛곗엫', criminal_assault:'??뻾쨌?곹빐', admin_cancel:'?됱젙泥섎텇 痍⑥냼', admin_compensation:'援??諛곗긽' }[d.caseType] || d.caseType;
-  const extraCount = dynamicQuestions.filter(q => extraAnswers[q.id]?.trim()).length;
-  $('#verdictDoc').innerHTML = `
-    <div class="verdict-doc">
-      <div class="verdict-doc-header">
-        <h2>K-Law AI 媛???먭껐臾?/h2>
-        <div>?ш굔踰덊샇 ${d.caseId}</div>
-        <div>${label}</div>
-      </div>
-      <div class="verdict-doc-body">
-        <div class="verdict-section-title">?뱀궗??/div>
-        <p>?먭퀬 ${d.plaintiff}<br>?쇨퀬 ${d.defendant}</p>
-        <div class="verdict-section-title">?ㅽ댘 ?녿뒗 ?ъ떎</div>
-        <p>${d.undisputedFacts || '-'}</p>
-        <div class="verdict-section-title">踰뺣━ ?먮떒</div>
-        <p>${r.key_legal_theory || '-'}</p>
-        <div class="verdict-section-title">?쇱쬆</div>
-        <p>${r.reasoning || '-'}</p>
-        <div class="verdict-ruling-box">
-          <h3>二쇰Ц</h3>
-          <p>${r.ruling_text || r.ruling || '-'}</p>
-        </div>
-        <div class="verdict-chips">${extraCount > 0 ? `<span>異붽??뺣낫 ${extraCount}嫄?諛섏쁺</span>` : ''}</div>
-      </div>
-    </div>
-    <div class="disclaimer-box">??蹂??먭껐? AI ?앹꽦 媛???먭껐濡?踰뺤쟻 ?⑤젰???놁뒿?덈떎. ?ㅼ젣 踰뺣쪧 臾몄젣??蹂?몄궗? ?곷떞?섏떆湲?諛붾엻?덈떎.</div>
-  `;
-}
-
-function dlVerdict() {
-  renderVerdict();
-  const txt = $('#verdictDoc').innerText;
-  const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `K-Law_${caseData.caseId}.txt`;
-  a.click();
-  URL.revokeObjectURL(a.href);
-  toast('?먭껐臾??ㅼ슫濡쒕뱶');
-}
-
-// sec5濡??대룞?????먭껐臾??뚮뜑留?
-function resetAll() { location.reload(); }
-
-$('#facts').addEventListener('input', function () {
-  const len = this.value.length;
-  $('#factsCount').innerText = len;
-  if (len > 2000) this.value = this.value.slice(0, 2000);
-});
-</script>
+<script src="js/script.js"></script>
 </body>
 </html>
-
