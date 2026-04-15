@@ -652,12 +652,11 @@ textarea { resize:vertical; line-height:1.6; }
 const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
 
 /* ═══════════════════════════════════════════════════
-   ROUTING
+   ROUTING (기존과 동일)
 ═══════════════════════════════════════════════════ */
 function showPage(id) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   g('page-' + id).classList.add('active');
-  // Breadcrumb
   const lbl = { index:'재판부 선택', bench:'사건 입력', verdict:'판결 생성' };
   const bc = g('breadcrumb');
   bc.innerHTML = id === 'index'
@@ -666,16 +665,13 @@ function showPage(id) {
   window.scrollTo({ top:0, behavior:'smooth' });
 }
 
-/* ═══════════════════════════════════════════════════
-   INDEX
-═══════════════════════════════════════════════════ */
 function selectTrial(type) {
   g('card-single').classList.toggle('selected', type === 'single');
 }
 function goToBench() { showPage('bench'); }
 
 /* ═══════════════════════════════════════════════════
-   BENCH — 자동 추출
+   BENCH — 자동 추출 (기존과 동일)
 ═══════════════════════════════════════════════════ */
 async function extractFromFacts() {
   const facts = g('facts').value.trim();
@@ -734,7 +730,6 @@ function goToVerdict() {
     csRow('피고',     defendant) +
     csRow('청구 금액', g('claimAmount').value || '명시되지 않음');
 
-  // 리셋
   g('thinkingPanel').textContent  = '판결 생성 버튼을 클릭하면 분석이 시작됩니다.';
   g('rawOutputPanel').textContent = '—';
   g('verdictCard').style.display  = 'none';
@@ -750,7 +745,7 @@ function csRow(k, v) {
 }
 
 /* ═══════════════════════════════════════════════════
-   VERDICT — 판결 생성
+   VERDICT — 판결 생성 (JSON 추출 함수 추가)
 ═══════════════════════════════════════════════════ */
 function buildSys() {
   return `당신은 K-Law 방법론 v6.4를 따르는 AI 법률 분석관입니다.
@@ -809,6 +804,27 @@ ${g('undisputedFacts').value || '없음'}
 STEP A, B, C를 순서대로 수행하고 최종 판결 JSON을 포함시켜 주세요.`;
 }
 
+// 강화된 JSON 추출 함수
+function extractJSON(str) {
+  // 1) 마크다운 코드 블록 제거
+  let cleaned = str.replace(/```json\s*|\s*```/g, '');
+  // 2) 가장 마지막에 있는 { ... } 찾기 (중첩 중괄호 고려)
+  let start = cleaned.lastIndexOf('{');
+  if (start === -1) return null;
+  let braceCount = 0, end = start;
+  for (let i = start; i < cleaned.length; i++) {
+    if (cleaned[i] === '{') braceCount++;
+    else if (cleaned[i] === '}') braceCount--;
+    if (braceCount === 0) { end = i; break; }
+  }
+  const candidate = cleaned.slice(start, end + 1);
+  try {
+    return JSON.parse(candidate);
+  } catch(e) {
+    return null;
+  }
+}
+
 async function runGenerate() {
   g('btnGenerate').disabled = true;
   g('btnReGen').style.display = 'none';
@@ -862,10 +878,10 @@ async function runGenerate() {
 
     setProgress(100, '분석 완료. 판결 정리 중...');
 
-    const m = fullOut.match(/\{[\s\S]*?"ruling"[\s\S]*?\}/);
-    if (m) {
-      try { renderVerdict(JSON.parse(m[0])); }
-      catch(_) { renderFallback(fullOut); }
+    // 향상된 JSON 추출 사용
+    const jsonObj = extractJSON(fullOut);
+    if (jsonObj && jsonObj.ruling) {
+      renderVerdict(jsonObj);
     } else {
       renderFallback(fullOut);
     }
