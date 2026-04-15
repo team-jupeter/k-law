@@ -1,6 +1,6 @@
 # K-Law — AI 기반 법률 중재 보조 시스템
 > ## 🏛️ K-Law AI 가상 법원 — 지금 바로 체험하기
-> **[▶ https://team-jupeter.github.io/k-law/](https://team-jupeter.github.io/k-law/)**
+> **[▶ https://jejuro.github.io/k-law/)**
 >
 > AI가 K-Law 방법론으로 분석하는 가상 법원을 직접 체험해 보세요.
 > 사건 정보를 입력하면 DeepSeek R1이 법리를 분석하여 가상 판결을 도출합니다.
