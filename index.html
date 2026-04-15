@@ -17,7 +17,6 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 
 :root {
-  /* KRDS 색상 토큰 */
   --primary:        #0054A6;
   --primary-dark:   #1A4A8A;
   --primary-light:  #E8F0FB;
@@ -39,26 +38,21 @@
   --info:           #0054A6;
   --info-bg:        #E8F0FB;
 
-  /* MD3 Elevation (그림자) */
+  /* MD3 Elevation */
   --elev-1: 0 1px 3px rgba(0,0,0,0.10), 0 1px 2px rgba(0,0,0,0.06);
   --elev-2: 0 3px 8px rgba(0,0,0,0.10), 0 1px 3px rgba(0,0,0,0.08);
   --elev-3: 0 6px 16px rgba(0,0,0,0.10), 0 2px 6px rgba(0,0,0,0.08);
 
-  /* 타이포그래피 스케일 */
   --font-body:      'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
   --font-serif:     'Noto Serif KR', serif;
   --text-xs:   12px; --text-sm: 14px; --text-md: 16px;
   --text-lg:   18px; --text-xl: 22px; --text-2xl: 28px; --text-3xl: 36px;
 
-  /* 간격 */
   --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;--sp-5:20px;
   --sp-6:24px;--sp-8:32px;--sp-10:40px;--sp-12:48px;--sp-16:64px;
 
-  /* 반경 */
   --radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;--radius-pill:100px;
 }
-
-/* 리셋 */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { font-size: 16px; scroll-behavior: smooth; }
 body {
@@ -67,11 +61,8 @@ body {
   color: var(--on-surface);
   line-height: 1.6;
   min-height: 100vh;
-  -webkit-font-smoothing: antialiased;
 }
 img { max-width: 100%; }
-
-/* ── 스킵 내비 (접근성) ── */
 .skip-nav {
   position: absolute; top: -999px; left: 0; z-index: 9999;
   background: var(--primary); color: #fff; padding: var(--sp-3) var(--sp-6);
@@ -79,7 +70,6 @@ img { max-width: 100%; }
 }
 .skip-nav:focus { top: 0; }
 
-/* ══ 공식 서비스 배너 (KRDS 필수 컴포넌트) ══ */
 .gov-banner {
   background: #154C99;
   color: #fff;
@@ -100,7 +90,6 @@ img { max-width: 100%; }
 .gov-banner-text { opacity: 0.9; }
 .gov-banner-text strong { opacity: 1; margin: 0 var(--sp-1); }
 
-/* ══ 헤더 ══ */
 header {
   background: var(--surface);
   border-bottom: 2px solid var(--primary);
@@ -124,7 +113,6 @@ header {
   display: flex; align-items: center; justify-content: center;
   font-family: var(--font-serif);
   font-size: 20px; font-weight: 700; color: #fff;
-  flex-shrink: 0;
 }
 .brand-name { font-size: var(--text-lg); font-weight: 700; color: var(--primary); letter-spacing: -0.3px; }
 .brand-sub  { font-size: var(--text-xs); color: var(--on-surface-var); margin-top: 1px; }
@@ -152,13 +140,11 @@ header {
 }
 .case-id-chip.visible { display: block; }
 
-/* ══ 메인 레이아웃 ══ */
 main {
   max-width: 960px; margin: 0 auto;
   padding: var(--sp-8) var(--sp-6) var(--sp-16);
 }
 
-/* ══ 페이지 제목 영역 ══ */
 .page-hero {
   text-align: center;
   padding: var(--sp-10) var(--sp-6);
@@ -184,7 +170,6 @@ main {
   font-size: var(--text-md); color: var(--on-surface-var); max-width: 520px; margin: 0 auto;
 }
 
-/* ══ 단계 표시 (KRDS 진행 표시) ══ */
 .step-indicator {
   background: var(--surface);
   border-radius: var(--radius-xl);
@@ -233,7 +218,6 @@ main {
 .step-connector.done   { background: var(--success); }
 .step-connector.active { background: var(--primary); }
 
-/* ══ 카드 (MD3 Elevated Card) ══ */
 .card {
   background: var(--surface);
   border-radius: var(--radius-xl);
@@ -244,13 +228,11 @@ main {
   animation: slideUp 0.3s ease;
 }
 .card.visible { display: block; }
-.card.active  { box-shadow: var(--elev-2); }
 @keyframes slideUp {
   from { opacity: 0; transform: translateY(12px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* 카드 헤더 */
 .card-header {
   display: flex; align-items: flex-start; gap: var(--sp-4);
   margin-bottom: var(--sp-6);
@@ -261,7 +243,7 @@ main {
   width: 48px; height: 48px; border-radius: var(--radius-lg);
   background: var(--primary-light);
   display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
+  font-size: 22px;
 }
 .card-header-text h2 {
   font-size: var(--text-xl); font-weight: 700; color: var(--on-surface);
@@ -269,13 +251,12 @@ main {
 }
 .card-header-text p { font-size: var(--text-sm); color: var(--on-surface-var); }
 .step-badge {
-  margin-left: auto; flex-shrink: 0;
+  margin-left: auto;
   background: var(--primary-light); color: var(--primary);
   padding: var(--sp-1) var(--sp-3); border-radius: var(--radius-pill);
   font-size: var(--text-xs); font-weight: 700;
 }
 
-/* ══ 모드 선택 카드 ══ */
 .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); margin-bottom: var(--sp-5); }
 .mode-option {
   border: 2px solid var(--outline); border-radius: var(--radius-lg);
@@ -292,7 +273,7 @@ main {
 .mode-radio {
   width: 20px; height: 20px; border-radius: 50%;
   border: 2px solid var(--outline); position: absolute; top: var(--sp-4); right: var(--sp-4);
-  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
 }
 .mode-option.selected .mode-radio {
   border-color: var(--primary); background: var(--primary);
@@ -310,7 +291,6 @@ main {
 .mode-option h3 { font-size: var(--text-md); font-weight: 700; color: var(--on-surface); margin-bottom: var(--sp-2); }
 .mode-option p  { font-size: var(--text-sm); color: var(--on-surface-var); line-height: 1.5; }
 
-/* ══ LLM 선택 패널 ══ */
 .llm-section {
   border: 1px solid var(--outline); border-radius: var(--radius-lg);
   overflow: hidden; margin-bottom: var(--sp-4);
@@ -322,7 +302,7 @@ main {
   display: flex; align-items: center; gap: var(--sp-2);
 }
 .llm-grid {
-  display: grid; grid-template-columns: repeat(6,1fr); gap: 1px;
+  display: grid; grid-template-columns: repeat(6,1fr);
   background: var(--outline);
 }
 .llm-tile {
@@ -357,7 +337,6 @@ main {
   letter-spacing: 0.5px;
 }
 
-/* ══ API Key 패널 ══ */
 .api-key-section {
   border: 1px solid var(--warning); border-radius: var(--radius-lg);
   background: var(--warning-bg); overflow: hidden; display: none; margin-bottom: var(--sp-4);
@@ -374,10 +353,10 @@ main {
 .api-key-input {
   flex: 1; padding: var(--sp-3) var(--sp-4);
   border: 1px solid var(--outline); border-radius: var(--radius-md);
-  font-family: 'JetBrains Mono', 'Courier New', monospace; font-size: var(--text-sm);
-  color: var(--on-surface); background: var(--surface); outline: none;
+  font-family: monospace; font-size: var(--text-sm);
+  color: var(--on-surface); background: var(--surface);
+  outline: none;
   transition: border-color 0.2s, box-shadow 0.2s;
-  letter-spacing: 0.5px;
 }
 .api-key-input:focus {
   border-color: var(--outline-focus);
@@ -386,14 +365,13 @@ main {
 .icon-btn {
   padding: var(--sp-3); border: 1px solid var(--outline); border-radius: var(--radius-md);
   background: var(--surface); cursor: pointer; font-size: 16px;
-  transition: all 0.2s; flex-shrink: 0;
+  transition: all 0.2s;
 }
 .icon-btn:hover { background: var(--surface-variant); }
 .key-status { font-size: var(--text-xs); margin-top: var(--sp-2); display: flex; align-items: center; gap: var(--sp-1); }
 .key-status.ok   { color: var(--success); }
 .key-status.wait { color: var(--on-surface-var); }
 
-/* ══ 폼 요소 (KRDS + MD3) ══ */
 .form-group { display: flex; flex-direction: column; gap: var(--sp-2); }
 .form-label {
   font-size: var(--text-sm); font-weight: 600; color: var(--on-surface);
@@ -402,7 +380,6 @@ main {
 .required-mark { color: var(--error); font-size: 14px; }
 .form-helper { font-size: var(--text-xs); color: var(--on-surface-var); margin-top: var(--sp-1); }
 
-/* 입력 필드 */
 .field {
   padding: var(--sp-3) var(--sp-4);
   border: 1px solid var(--outline); border-radius: var(--radius-md);
@@ -421,15 +398,13 @@ main {
 .field.error:focus { box-shadow: 0 0 0 3px var(--error-bg); }
 textarea.field { resize: vertical; min-height: 120px; }
 select.field option { background: var(--surface); }
+.field[readonly] { background-color: var(--surface-variant); cursor: default; }
 
 .field-count { font-size: var(--text-xs); color: var(--on-surface-var); text-align: right; }
-
-/* 그리드 */
 .form-row { display: grid; gap: var(--sp-5); }
 .form-row.cols-2 { grid-template-columns: 1fr 1fr; }
 .form-stack { display: flex; flex-direction: column; gap: var(--sp-5); }
 
-/* ══ 인포 배너 ══ */
 .info-banner {
   display: flex; align-items: flex-start; gap: var(--sp-4);
   padding: var(--sp-4) var(--sp-5); border-radius: var(--radius-lg);
@@ -442,7 +417,6 @@ select.field option { background: var(--surface); }
 .info-banner-body h4{ font-size: var(--text-sm); font-weight: 700; color: var(--on-surface); margin-bottom: 4px; }
 .info-banner-body p { font-size: var(--text-sm); color: var(--on-surface-var); line-height: 1.6; }
 
-/* ══ 요약 카드 그리드 ══ */
 .stat-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: var(--sp-3); margin-bottom: var(--sp-5); }
 .stat-card {
   background: var(--surface-variant); border-radius: var(--radius-lg);
@@ -451,7 +425,6 @@ select.field option { background: var(--surface); }
 .stat-num   { font-size: 28px; font-weight: 700; color: var(--primary); }
 .stat-label { font-size: var(--text-xs); color: var(--on-surface-var); margin-top: var(--sp-1); }
 
-/* ══ 질문 카드 ══ */
 .question-panel {
   border: 1px solid var(--outline); border-radius: var(--radius-lg);
   overflow: hidden;
@@ -484,7 +457,6 @@ select.field option { background: var(--surface); }
 .ans-status { font-size: var(--text-xs); margin-top: var(--sp-2); color: var(--on-surface-var); }
 .ans-status.done { color: var(--success); font-weight: 600; }
 
-/* ══ 분석 진행 카드 ══ */
 .analysis-card {
   border: 1px solid var(--outline); border-radius: var(--radius-xl);
   padding: var(--sp-8); text-align: center; background: var(--surface);
@@ -504,7 +476,6 @@ select.field option { background: var(--surface); }
 .analysis-status.done    { color: var(--success); font-weight: 600; }
 .analysis-status.error   { color: var(--error); font-weight: 500; }
 
-/* MD3 진행 표시줄 */
 .progress-track {
   height: 6px; background: var(--surface-variant);
   border-radius: var(--radius-pill); overflow: hidden; margin-bottom: var(--sp-5);
@@ -522,7 +493,7 @@ select.field option { background: var(--surface); }
   border-radius: var(--radius-md); padding: var(--sp-4);
   font-size: var(--text-sm); color: var(--on-surface-var); line-height: 1.7;
   max-height: 180px; overflow-y: auto; display: none; margin-bottom: var(--sp-4);
-  font-family: 'Courier New', monospace;
+  font-family: monospace;
 }
 .result-summary {
   text-align: left; background: var(--success-bg);
@@ -531,7 +502,6 @@ select.field option { background: var(--surface); }
   display: none; margin-top: var(--sp-4);
 }
 
-/* ══ 오류 배너 ══ */
 .error-banner {
   background: var(--error-bg); border: 1px solid #F0B0B0;
   border-radius: var(--radius-lg); padding: var(--sp-4) var(--sp-5);
@@ -540,7 +510,6 @@ select.field option { background: var(--surface); }
 .error-banner h4 { font-size: var(--text-sm); font-weight: 700; color: var(--error); margin-bottom: var(--sp-2); }
 .error-banner p  { font-size: var(--text-sm); color: var(--on-surface-var); line-height: 1.6; }
 
-/* ══ 판결 확인 ══ */
 .verdict-section {
   border: 1px solid var(--outline); border-radius: var(--radius-lg);
   overflow: hidden; margin-bottom: var(--sp-3);
@@ -560,7 +529,6 @@ select.field option { background: var(--surface); }
   background: var(--primary); color: #fff; margin-bottom: var(--sp-3);
 }
 
-/* ══ 최종 판결문 ══ */
 .verdict-doc {
   border: 2px solid var(--primary); border-radius: var(--radius-xl);
   overflow: hidden; background: var(--surface);
@@ -568,7 +536,7 @@ select.field option { background: var(--surface); }
 .verdict-doc-header {
   background: var(--primary); color: #fff;
   padding: var(--sp-8) var(--sp-10);
-  text-align: center; position: relative;
+  text-align: center;
 }
 .verdict-doc-header h2 {
   font-family: var(--font-serif); font-size: var(--text-2xl);
@@ -611,7 +579,6 @@ select.field option { background: var(--surface); }
   margin-top: var(--sp-5);
 }
 
-/* ══ 버튼 (MD3) ══ */
 .btn-row { display: flex; gap: var(--sp-3); justify-content: flex-end; margin-top: var(--sp-8); }
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: var(--sp-2);
@@ -620,29 +587,23 @@ select.field option { background: var(--surface); }
   font-family: var(--font-body); font-size: var(--text-md); font-weight: 600;
   cursor: pointer; transition: all 0.2s; text-decoration: none; line-height: 1;
 }
-/* Filled */
 .btn-filled {
   background: var(--primary); color: #fff;
   box-shadow: var(--elev-1);
 }
 .btn-filled:hover { background: var(--primary-hover); box-shadow: var(--elev-2); }
 .btn-filled:active{ background: var(--primary-dark); transform: scale(0.98); }
-/* Outlined */
 .btn-outlined {
   background: transparent; color: var(--primary);
   border: 1px solid var(--primary);
 }
 .btn-outlined:hover { background: var(--primary-light); }
-/* Text */
 .btn-text { background: transparent; color: var(--primary); border: none; min-width: auto; }
 .btn-text:hover { background: var(--primary-light); }
-/* Disabled */
 .btn:disabled { opacity: 0.38; cursor: not-allowed; box-shadow: none; transform: none; }
-/* Danger */
 .btn-danger { background: var(--error); color: #fff; }
 .btn-danger:hover { background: #A00; }
 
-/* ══ 설정 바 ══ */
 .config-bar {
   background: var(--surface); border: 1px solid var(--outline);
   border-radius: var(--radius-lg); padding: var(--sp-3) var(--sp-5);
@@ -657,7 +618,6 @@ select.field option { background: var(--surface); }
 .config-divider { width: 1px; height: 16px; background: var(--outline); }
 .config-change { margin-left: auto; }
 
-/* ══ 토스트 (MD3 Snackbar) ══ */
 .snackbar {
   position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px);
   background: #2C2C2C; color: #fff; border-radius: var(--radius-pill);
@@ -667,7 +627,6 @@ select.field option { background: var(--surface); }
 }
 .snackbar.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-/* ══ 푸터 ══ */
 footer {
   background: var(--surface); border-top: 1px solid var(--outline);
   padding: var(--sp-6) var(--sp-6); margin-top: var(--sp-10);
@@ -676,7 +635,6 @@ footer {
 footer a { color: var(--primary); text-decoration: none; }
 footer a:hover { text-decoration: underline; }
 
-/* ══ 반응형 ══ */
 @media (max-width: 768px) {
   main { padding: var(--sp-5) var(--sp-4) var(--sp-12); }
   .card { padding: var(--sp-5); }
@@ -696,8 +654,7 @@ footer a:hover { text-decoration: underline; }
 
 <a href="#main-content" class="skip-nav">본문으로 바로가기</a>
 
-<!-- KRDS 공식 서비스 배너 -->
-<div class="gov-banner" role="banner" aria-label="공식 서비스 안내">
+<div class="gov-banner" role="banner">
   <div class="gov-banner-emblem" aria-hidden="true">법</div>
   <span class="gov-banner-text">
     이 서비스는 <strong>케이로주식회사(K-Law Inc.)</strong>가 운영하는 AI 법률 중재 보조 서비스입니다.
@@ -705,14 +662,13 @@ footer a:hover { text-decoration: underline; }
   </span>
 </div>
 
-<!-- 헤더 -->
 <header role="banner">
   <div class="header-inner">
     <a href="#" class="brand" aria-label="K-Law AI 가상 법원 홈">
       <div class="brand-icon" aria-hidden="true">法</div>
       <div>
         <div class="brand-name">K-Law AI 가상 법원</div>
-        <div class="brand-sub">케이로주식회사 · K-Law Methodology v6.3</div>
+        <div class="brand-sub">케이로주식회사 · K-Law Methodology v6.4</div>
       </div>
     </a>
     <div class="header-meta" role="status" aria-live="polite">
@@ -722,69 +678,35 @@ footer a:hover { text-decoration: underline; }
   </div>
 </header>
 
-<!-- 메인 -->
 <main id="main-content" tabindex="-1">
 
-  <!-- 페이지 제목 -->
-  <div class="page-hero" role="region" aria-label="서비스 소개">
+  <div class="page-hero" role="region">
     <div class="service-tag" aria-label="서비스 유형">⚖️ AI 법률 중재 보조</div>
     <h1>AI가 분석하는<br><em>공정한 법리 판단</em></h1>
-    <p>사건 정보를 입력하면 K-Law 방법론에 따라 AI가 법리를 분석하고 가상 판결을 도출합니다.</p>
+    <p>사건 정보를 입력하면 K-Law 방법론 v6.4에 따라 AI가 법리를 분석하고 가상 판결을 도출합니다.</p>
   </div>
 
-  <!-- 단계 표시 -->
   <nav class="step-indicator" id="stepIndicator" aria-label="진행 단계">
     <div class="step-list" role="list">
-      <div class="step-item-wrap" role="listitem">
-        <div class="step-node" id="sn-1"><div class="step-circle" aria-current="step">1</div><div class="step-label">사건 입력</div></div>
-        <div class="step-connector" id="sc-1"></div>
-      </div>
-      <div class="step-item-wrap" role="listitem">
-        <div class="step-node" id="sn-2"><div class="step-circle">2</div><div class="step-label">문서 생성</div></div>
-        <div class="step-connector" id="sc-2"></div>
-      </div>
-      <div class="step-item-wrap" role="listitem">
-        <div class="step-node" id="sn-25"><div class="step-circle">3</div><div class="step-label">추가 정보</div></div>
-        <div class="step-connector" id="sc-25"></div>
-      </div>
-      <div class="step-item-wrap" role="listitem">
-        <div class="step-node" id="sn-3"><div class="step-circle">4</div><div class="step-label">AI 분석</div></div>
-        <div class="step-connector" id="sc-3"></div>
-      </div>
-      <div class="step-item-wrap" role="listitem">
-        <div class="step-node" id="sn-4"><div class="step-circle">5</div><div class="step-label">판결 확인</div></div>
-        <div class="step-connector" id="sc-4"></div>
-      </div>
-      <div class="step-item-wrap" role="listitem">
-        <div class="step-node" id="sn-5"><div class="step-circle">6</div><div class="step-label">최종 판결</div></div>
-      </div>
+      <div class="step-item-wrap" role="listitem"><div class="step-node" id="sn-1"><div class="step-circle" aria-current="step">1</div><div class="step-label">사건 입력</div></div><div class="step-connector" id="sc-1"></div></div>
+      <div class="step-item-wrap" role="listitem"><div class="step-node" id="sn-2"><div class="step-circle">2</div><div class="step-label">문서 생성</div></div><div class="step-connector" id="sc-2"></div></div>
+      <div class="step-item-wrap" role="listitem"><div class="step-node" id="sn-25"><div class="step-circle">3</div><div class="step-label">추가 정보</div></div><div class="step-connector" id="sc-25"></div></div>
+      <div class="step-item-wrap" role="listitem"><div class="step-node" id="sn-3"><div class="step-circle">4</div><div class="step-label">AI 분석</div></div><div class="step-connector" id="sc-3"></div></div>
+      <div class="step-item-wrap" role="listitem"><div class="step-node" id="sn-4"><div class="step-circle">5</div><div class="step-label">판결 확인</div></div><div class="step-connector" id="sc-4"></div></div>
+      <div class="step-item-wrap" role="listitem"><div class="step-node" id="sn-5"><div class="step-circle">6</div><div class="step-label">최종 판결</div></div></div>
     </div>
   </nav>
 
-  <!-- 설정 바 -->
-  <div class="config-bar" id="configBar" role="status" aria-live="polite">
-    <div class="config-item">
-      <span class="config-label">AI 모델</span>
-      <span class="config-val" id="cfgLLM">DeepSeek R1</span>
-    </div>
+  <div class="config-bar" id="configBar" role="status">
+    <div class="config-item"><span class="config-label">AI 모델</span><span class="config-val" id="cfgLLM">DeepSeek R1</span></div>
     <div class="config-divider"></div>
-    <div class="config-item">
-      <span class="config-label">방법론</span>
-      <span class="config-val">K-Law v6.3</span>
-    </div>
+    <div class="config-item"><span class="config-label">방법론</span><span class="config-val">K-Law v6.4</span></div>
     <div class="config-divider"></div>
-    <div class="config-item" id="cfgKeyWrap">
-      <span class="config-label">API Key</span>
-      <span class="config-val" id="cfgKey" style="color:var(--success)">✓ 시스템 제공</span>
-    </div>
-    <div class="config-change">
-      <button class="btn btn-text" onclick="changeMode()" aria-label="분석 모드 변경" style="height:36px;padding:0 var(--sp-3);font-size:var(--text-sm);">
-        ⚙ 모드 변경
-      </button>
-    </div>
+    <div class="config-item" id="cfgKeyWrap"><span class="config-label">API Key</span><span class="config-val" id="cfgKey" style="color:var(--success)">✓ 시스템 제공</span></div>
+    <div class="config-change"><button class="btn btn-text" onclick="changeMode()" style="height:36px;padding:0 var(--sp-3);font-size:var(--text-sm);">⚙ 모드 변경</button></div>
   </div>
 
-  <!-- ── SECTION 0: 모드 선택 ── -->
+  <!-- SECTION 0: 모드 선택 -->
   <section id="sec0" class="card visible active" aria-labelledby="sec0-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">🔧</div>
@@ -793,11 +715,10 @@ footer a:hover { text-decoration: underline; }
         <p>AI 모델과 분석 방식을 선택하십시오.</p>
       </div>
     </div>
-
     <fieldset style="border:none;padding:0;margin:0 0 var(--sp-4);">
       <legend style="font-size:var(--text-sm);font-weight:600;color:var(--on-surface-var);margin-bottom:var(--sp-3);">분석 방식</legend>
-      <div class="mode-grid" role="radiogroup" aria-labelledby="modeGroupLabel">
-        <div class="mode-option selected" id="card-single" onclick="selectMode('single')" role="radio" aria-checked="true" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')selectMode('single')">
+      <div class="mode-grid" role="radiogroup">
+        <div class="mode-option selected" id="card-single" onclick="selectMode('single')" role="radio" aria-checked="true" tabindex="0">
           <div class="mode-radio" aria-hidden="true"></div>
           <div class="mode-chip chip-primary">★ 기본값</div>
           <div class="mode-option-icon" aria-hidden="true">🤖</div>
@@ -813,75 +734,34 @@ footer a:hover { text-decoration: underline; }
         </div>
       </div>
     </fieldset>
-
-    <!-- LLM 선택 -->
     <div class="llm-section" id="llmPicker">
-      <div class="llm-section-header">
-        <span>🤖</span>
-        <span>AI 모델 선택 — DeepSeek R1은 별도 API Key 없이 사용 가능합니다</span>
-      </div>
-      <div class="llm-grid" role="radiogroup" aria-label="AI 모델 선택">
-        <div class="llm-tile selected" id="opt-deepseek" onclick="selectLLM('deepseek')" role="radio" aria-checked="true" tabindex="0">
-          <div class="default-tag">기본</div>
-          <div class="llm-logo lc-deepseek" aria-hidden="true">D</div>
-          <div class="llm-tile-name">DeepSeek R1</div>
-          <div class="llm-tile-maker">DeepSeek AI</div>
-        </div>
-        <div class="llm-tile" id="opt-gpt" onclick="selectLLM('gpt')" role="radio" aria-checked="false" tabindex="0">
-          <div class="llm-logo lc-gpt" aria-hidden="true">G</div>
-          <div class="llm-tile-name">GPT-4o</div>
-          <div class="llm-tile-maker">OpenAI</div>
-        </div>
-        <div class="llm-tile" id="opt-claude" onclick="selectLLM('claude')" role="radio" aria-checked="false" tabindex="0">
-          <div class="llm-logo lc-claude" aria-hidden="true">C</div>
-          <div class="llm-tile-name">Claude Opus</div>
-          <div class="llm-tile-maker">Anthropic</div>
-        </div>
-        <div class="llm-tile" id="opt-gemini" onclick="selectLLM('gemini')" role="radio" aria-checked="false" tabindex="0">
-          <div class="llm-logo lc-gemini" aria-hidden="true">✦</div>
-          <div class="llm-tile-name">Gemini 1.5</div>
-          <div class="llm-tile-maker">Google</div>
-        </div>
-        <div class="llm-tile" id="opt-grok" onclick="selectLLM('grok')" role="radio" aria-checked="false" tabindex="0">
-          <div class="llm-logo lc-grok" aria-hidden="true">X</div>
-          <div class="llm-tile-name">Grok 3</div>
-          <div class="llm-tile-maker">xAI</div>
-        </div>
-        <div class="llm-tile" id="opt-llama" onclick="selectLLM('llama')" role="radio" aria-checked="false" tabindex="0">
-          <div class="llm-logo lc-llama" aria-hidden="true">L</div>
-          <div class="llm-tile-name">Llama 3.1</div>
-          <div class="llm-tile-maker">Meta / Groq</div>
-        </div>
+      <div class="llm-section-header"><span>🤖</span><span>AI 모델 선택 — DeepSeek R1은 별도 API Key 없이 사용 가능합니다</span></div>
+      <div class="llm-grid" role="radiogroup">
+        <div class="llm-tile selected" id="opt-deepseek" onclick="selectLLM('deepseek')" role="radio" aria-checked="true" tabindex="0"><div class="default-tag">기본</div><div class="llm-logo lc-deepseek" aria-hidden="true">D</div><div class="llm-tile-name">DeepSeek R1</div><div class="llm-tile-maker">DeepSeek AI</div></div>
+        <div class="llm-tile" id="opt-gpt" onclick="selectLLM('gpt')" role="radio" aria-checked="false" tabindex="0"><div class="llm-logo lc-gpt" aria-hidden="true">G</div><div class="llm-tile-name">GPT-4o</div><div class="llm-tile-maker">OpenAI</div></div>
+        <div class="llm-tile" id="opt-claude" onclick="selectLLM('claude')" role="radio" aria-checked="false" tabindex="0"><div class="llm-logo lc-claude" aria-hidden="true">C</div><div class="llm-tile-name">Claude Opus</div><div class="llm-tile-maker">Anthropic</div></div>
+        <div class="llm-tile" id="opt-gemini" onclick="selectLLM('gemini')" role="radio" aria-checked="false" tabindex="0"><div class="llm-logo lc-gemini" aria-hidden="true">✦</div><div class="llm-tile-name">Gemini 1.5</div><div class="llm-tile-maker">Google</div></div>
+        <div class="llm-tile" id="opt-grok" onclick="selectLLM('grok')" role="radio" aria-checked="false" tabindex="0"><div class="llm-logo lc-grok" aria-hidden="true">X</div><div class="llm-tile-name">Grok 3</div><div class="llm-tile-maker">xAI</div></div>
+        <div class="llm-tile" id="opt-llama" onclick="selectLLM('llama')" role="radio" aria-checked="false" tabindex="0"><div class="llm-logo lc-llama" aria-hidden="true">L</div><div class="llm-tile-name">Llama 3.1</div><div class="llm-tile-maker">Meta / Groq</div></div>
       </div>
     </div>
-
-    <!-- API Key 입력 -->
-    <div class="api-key-section" id="apiKeySection" role="region" aria-label="API Key 입력">
+    <div class="api-key-section" id="apiKeySection" role="region">
       <div class="api-key-header">⚠️ <span id="apiKeyLlmName">이 LLM</span>은 API Key가 필요합니다</div>
       <div class="api-key-body">
-        <p class="api-key-desc">
-          입력하신 Key는 <strong>이 브라우저 세션에서만</strong> 사용됩니다.
-          분석 완료 즉시 메모리에서 삭제되며, 서버에 저장되지 않습니다.
-        </p>
+        <p class="api-key-desc">입력하신 Key는 <strong>이 브라우저 세션에서만</strong> 사용됩니다. 분석 완료 즉시 메모리에서 삭제되며, 서버에 저장되지 않습니다.</p>
         <div class="input-with-btn">
-          <input type="password" class="api-key-input" id="userApiKey"
-            aria-label="API Key 입력" autocomplete="off" spellcheck="false"
-            placeholder="API Key를 입력하세요 (예: sk-...)"
-            oninput="validateKey()">
+          <input type="password" class="api-key-input" id="userApiKey" autocomplete="off" spellcheck="false" placeholder="API Key를 입력하세요 (예: sk-...)" oninput="validateKey()">
           <button class="icon-btn" onclick="toggleKey()" aria-label="Key 표시/숨김" title="표시/숨김">👁</button>
         </div>
         <div class="key-status wait" id="keyStatus" aria-live="polite">— Key를 입력해 주십시오</div>
       </div>
     </div>
-
     <div class="btn-row">
-      <button class="btn btn-filled" onclick="confirmMode()" id="btnConfirm">
-        선택 완료 — 사건 접수 시작
-      </button>
+      <button class="btn btn-filled" onclick="confirmMode()" id="btnConfirm">선택 완료 — 사건 접수 시작</button>
     </div>
   </section>
 
-  <!-- ── SECTION 1: 사건 정보 입력 ── -->
+  <!-- SECTION 1: 사건 정보 입력 -->
   <section id="sec1" class="card" aria-labelledby="sec1-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">📋</div>
@@ -891,73 +771,48 @@ footer a:hover { text-decoration: underline; }
       </div>
       <span class="step-badge">1단계 / 6</span>
     </div>
-
+    <div class="info-banner info" style="margin-bottom:var(--sp-5);">
+      <div style="font-size:22px;flex-shrink:0;">🤖</div>
+      <div style="font-size:var(--text-sm);color:var(--on-surface);line-height:1.7;">
+        <strong>AI 자동 입력 지원</strong> — 아래 <strong>사건 개요</strong>를 입력한 후 <strong>「AI 자동 추출」</strong> 버튼을 누르면 DeepSeek AI가 <em>사건 분류 · 청구 금액 · 원고 · 피고</em>를 자동으로 분석하여 입력합니다. 이후 필드는 직접 수정할 수 없으며, 필요한 경우 사건 개요를 수정하고 다시 추출하십시오.
+      </div>
+    </div>
     <div class="form-stack">
-      <div class="form-row cols-2">
-        <div class="form-group">
-          <label class="form-label" for="caseType">
-            사건 분류 <span class="required-mark" aria-label="필수">*</span>
-          </label>
-          <select class="field" id="caseType" required aria-required="true">
-            <option value="">선택하십시오</option>
-            <optgroup label="민사">
-              <option value="civil_damage">손해배상 (불법행위)</option>
-              <option value="civil_traffic">손해배상 (교통사고)</option>
-              <option value="civil_medical">손해배상 (의료사고)</option>
-              <option value="civil_contract">계약 위반·채무불이행</option>
-              <option value="civil_lease">임대차</option>
-              <option value="civil_insurance">보험·구상금</option>
-            </optgroup>
-            <optgroup label="가사">
-              <option value="family_divorce">이혼·위자료</option>
-              <option value="family_custody">친권·양육비</option>
-              <option value="family_inherit">상속·유류분</option>
-            </optgroup>
-            <optgroup label="형사">
-              <option value="criminal_fraud">사기</option>
-              <option value="criminal_embezzle">횡령·배임</option>
-              <option value="criminal_assault">폭행·상해</option>
-            </optgroup>
-            <optgroup label="행정">
-              <option value="admin_cancel">처분취소</option>
-              <option value="admin_compensation">국가배상</option>
-            </optgroup>
-          </select>
-          <span class="form-helper">해당 사건과 가장 가까운 분류를 선택하십시오.</span>
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="claimAmount">청구 금액</label>
-          <input type="text" class="field" id="claimAmount" placeholder="예: 50,000,000원" aria-describedby="claimHelper">
-          <span class="form-helper" id="claimHelper">금전 청구 사건의 경우 기재하십시오.</span>
-        </div>
-      </div>
-
-      <div class="form-row cols-2">
-        <div class="form-group">
-          <label class="form-label" for="plaintiff">원고 (신청인) <span class="required-mark" aria-label="필수">*</span></label>
-          <input type="text" class="field" id="plaintiff" required aria-required="true" placeholder="예: 홍길동 (개인) / A주식회사 (법인)">
-        </div>
-        <div class="form-group">
-          <label class="form-label" for="defendant">피고 (상대방) <span class="required-mark" aria-label="필수">*</span></label>
-          <input type="text" class="field" id="defendant" required aria-required="true" placeholder="예: 김철수 (개인) / B주식회사 (법인)">
-        </div>
-      </div>
-
       <div class="form-group">
-        <label class="form-label" for="facts">
-          사건의 실체 (합의된 사실관계) <span class="required-mark" aria-label="필수">*</span>
-        </label>
-        <span class="form-helper" style="margin-bottom:var(--sp-2);">
-          판결 또는 결론을 암시하지 않고, 분쟁의 배경·경위·쌍방이 동의하는 사실관계를 기술하십시오.
-        </span>
-        <textarea class="field" id="facts" required aria-required="true" rows="6"
-          aria-describedby="factsHelper" style="min-height:140px;"></textarea>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--sp-1);">
-          <span class="form-helper" id="factsHelper">사실관계만 기재하고 결론 판단은 포함하지 마십시오.</span>
+        <label class="form-label" for="facts">사건 개요 (합의된 사실관계) <span class="required-mark" aria-label="필수">*</span></label>
+        <span class="form-helper" style="margin-bottom:var(--sp-2);">판결 또는 결론을 암시하지 않고, 분쟁의 배경·경위·쌍방이 동의하는 사실관계를 기술하십시오. 원고·피고 이름과 청구 금액을 포함하면 AI가 더 정확하게 추출합니다.</span>
+        <textarea class="field" id="facts" required aria-required="true" rows="7" style="min-height:160px;"></textarea>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:var(--sp-2);gap:var(--sp-3);flex-wrap:wrap;">
           <span class="field-count" aria-live="polite"><span id="factsCount">0</span> / 2,000자</span>
+          <button type="button" class="btn btn-filled" id="btnExtract" onclick="extractFromFacts()" style="height:40px;padding:0 var(--sp-5);font-size:var(--text-sm);border-radius:var(--radius-pill);">🤖 AI 자동 추출</button>
+        </div>
+        <div id="extractStatus" aria-live="polite" style="display:none;margin-top:var(--sp-2);padding:var(--sp-2) var(--sp-4);border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:500;"></div>
+      </div>
+      <div class="form-row cols-2">
+        <div class="form-group">
+          <label class="form-label" for="caseType">사건 분류 <span class="required-mark" aria-label="필수">*</span><span id="caseTypeAiBadge" style="display:none;background:var(--primary);color:#fff;font-size:10px;padding:2px 8px;border-radius:var(--radius-pill);font-weight:700;margin-left:4px;">AI 추출</span></label>
+          <select class="field" id="caseType" required disabled><option value="">선택하십시오</option><optgroup label="민사"><option value="civil_damage">손해배상 (불법행위)</option><option value="civil_traffic">손해배상 (교통사고)</option><option value="civil_medical">손해배상 (의료사고)</option><option value="civil_contract">계약 위반·채무불이행</option><option value="civil_lease">임대차</option><option value="civil_insurance">보험·구상금</option></optgroup><optgroup label="가사"><option value="family_divorce">이혼·위자료</option><option value="family_custody">친권·양육비</option><option value="family_inherit">상속·유류분</option></optgroup><optgroup label="형사"><option value="criminal_fraud">사기</option><option value="criminal_embezzle">횡령·배임</option><option value="criminal_assault">폭행·상해</option></optgroup><optgroup label="행정"><option value="admin_cancel">처분취소</option><option value="admin_compensation">국가배상</option></optgroup></select>
+          <span class="form-helper" id="caseTypeHelper">AI가 자동으로 추출합니다. 정확하지 않으면 사건 개요를 수정하고 다시 추출하세요.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="claimAmount">청구 금액 <span id="claimAmountAiBadge" style="display:none;background:var(--primary);color:#fff;font-size:10px;padding:2px 8px;border-radius:var(--radius-pill);font-weight:700;margin-left:4px;">AI 추출</span></label>
+          <input type="text" class="field" id="claimAmount" placeholder="예: 50,000,000원" readonly>
+          <span class="form-helper" id="claimHelper">AI가 사건 개요에서 자동 추출합니다.</span>
         </div>
       </div>
-
+      <div class="form-row cols-2">
+        <div class="form-group">
+          <label class="form-label" for="plaintiff">원고 (신청인) <span class="required-mark" aria-label="필수">*</span><span id="plaintiffAiBadge" style="display:none;background:var(--primary);color:#fff;font-size:10px;padding:2px 8px;border-radius:var(--radius-pill);font-weight:700;margin-left:4px;">AI 추출</span></label>
+          <input type="text" class="field" id="plaintiff" required readonly placeholder="AI가 추출합니다">
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="defendant">피고 (상대방) <span class="required-mark" aria-label="필수">*</span><span id="defendantAiBadge" style="display:none;background:var(--primary);color:#fff;font-size:10px;padding:2px 8px;border-radius:var(--radius-pill);font-weight:700;margin-left:4px;">AI 추출</span></label>
+          <input type="text" class="field" id="defendant" required readonly placeholder="AI가 추출합니다">
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="form-helper" id="factsHelper">사실관계만 기재하고 결론 판단은 포함하지 마십시오.</span>
+      </div>
       <div class="form-row cols-2">
         <div class="form-group">
           <label class="form-label" for="plaintiffClaim">원고의 주장 <span class="required-mark" aria-label="필수">*</span></label>
@@ -971,58 +826,37 @@ footer a:hover { text-decoration: underline; }
         </div>
       </div>
     </div>
-
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="goSec(0)">← 이전</button>
       <button class="btn btn-filled" onclick="toSec2()">다음: 문서 생성 →</button>
     </div>
   </section>
 
-  <!-- ── SECTION 2: Mandatory Execute ── -->
+  <!-- SECTION 2: Mandatory Execute -->
   <section id="sec2" class="card" aria-labelledby="sec2-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">📄</div>
-      <div class="card-header-text">
-        <h2 id="sec2-title">Mandatory Execute 문서</h2>
-        <p>사건 정보를 K-Law 실행 문서로 변환하였습니다. 내용을 확인하십시오.</p>
-      </div>
+      <div class="card-header-text"><h2 id="sec2-title">Mandatory Execute 문서</h2><p>사건 정보를 K-Law 실행 문서로 변환하였습니다. 내용을 확인하십시오.</p></div>
       <span class="step-badge">2단계 / 6</span>
     </div>
-    <div id="mandatoryDoc" style="font-family:'Courier New',monospace;font-size:13px;line-height:1.8;background:var(--surface-variant);border:1px solid var(--outline);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:320px;overflow-y:auto;white-space:pre-wrap;" aria-label="Mandatory Execute 문서 내용" tabindex="0"></div>
+    <div id="mandatoryDoc" style="font-family:monospace;font-size:13px;line-height:1.8;background:var(--surface-variant);border:1px solid var(--outline);border-radius:var(--radius-lg);padding:var(--sp-5);max-height:320px;overflow-y:auto;white-space:pre-wrap;" tabindex="0"></div>
     <div class="btn-row">
       <button class="btn btn-outlined" onclick="goSec(1)">← 이전</button>
       <button class="btn btn-filled" id="btnToSec25" onclick="toSec25()">AI 추가 정보 요청 →</button>
     </div>
   </section>
 
-  <!-- ── SECTION 2.5: 추가 정보 ── -->
+  <!-- SECTION 2.5: 추가 정보 (동적 생성) -->
   <section id="sec25" class="card" aria-labelledby="sec25-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">💬</div>
-      <div class="card-header-text">
-        <h2 id="sec25-title">AI 추가 정보 요청</h2>
-        <p id="sec25Sub">AI가 1차 검토 후 법리 판단에 필요한 추가 정보를 요청합니다.</p>
-      </div>
+      <div class="card-header-text"><h2 id="sec25-title">AI 추가 정보 요청</h2><p id="sec25Sub">AI가 사건을 분석하여 필요한 추가 정보를 요청합니다.</p></div>
       <span class="step-badge">3단계 / 6</span>
     </div>
-    <div class="info-banner info" role="status" aria-live="polite">
-      <div class="info-banner-icon" aria-hidden="true">🔍</div>
-      <div class="info-banner-body">
-        <h4>1차 검토 완료 — 추가 정보 요청</h4>
-        <p><strong id="qTotal" style="color:var(--primary)">-</strong>개 항목의 추가 정보가 분석 정확도를 높입니다. <strong>필수</strong> 항목은 반드시 응답해 주십시오.</p>
-      </div>
-    </div>
-    <div class="stat-grid" role="group" aria-label="질문 현황">
-      <div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div class="stat-label">필수 질문</div></div>
-      <div class="stat-card"><div class="stat-num" id="impCnt">-</div><div class="stat-label">중요 질문</div></div>
-      <div class="stat-card"><div class="stat-num" id="optCnt">-</div><div class="stat-label">선택 질문</div></div>
-    </div>
-    <div class="question-panel" role="region" aria-label="추가 정보 질문 목록">
-      <div class="question-panel-header">
-        <div class="llm-logo" id="qPanelLogo" style="width:28px;height:28px;border-radius:6px;font-size:13px;font-weight:700;" aria-hidden="true">D</div>
-        <div><span id="qPanelName" style="font-size:13px;font-weight:600;color:var(--on-surface);">DeepSeek R1</span> · <span id="qPanelMaker" style="font-size:12px;color:var(--on-surface-var);">DeepSeek AI</span></div>
-        <span style="margin-left:auto;font-size:11px;font-weight:600;color:var(--success);background:var(--success-bg);padding:2px 8px;border-radius:var(--radius-pill);">1차 검토 완료</span>
-      </div>
+    <div class="info-banner info" role="status" id="dynamicInfoBanner" style="display:none;"><div class="info-banner-icon">🔍</div><div class="info-banner-body"><h4>1차 검토 완료 — 추가 정보 요청</h4><p><strong id="qTotal">-</strong>개 항목의 추가 정보가 필요합니다. <strong>필수</strong> 항목은 반드시 응답해 주십시오.</p></div></div>
+    <div class="stat-grid" role="group"><div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div class="stat-label">필수 질문</div></div><div class="stat-card"><div class="stat-num" id="impCnt">-</div><div class="stat-label">중요 질문</div></div><div class="stat-card"><div class="stat-num" id="optCnt">-</div><div class="stat-label">선택 질문</div></div></div>
+    <div class="question-panel" role="region">
+      <div class="question-panel-header"><div class="llm-logo" id="qPanelLogo" style="width:28px;height:28px;border-radius:6px;font-size:13px;">D</div><div><span id="qPanelName">DeepSeek R1</span> · <span id="qPanelMaker">DeepSeek AI</span></div><span style="margin-left:auto;font-size:11px;background:var(--success-bg);padding:2px 8px;border-radius:var(--radius-pill);">동적 생성</span></div>
       <div class="question-list" id="questionList" role="list"></div>
     </div>
     <div class="btn-row">
@@ -1032,340 +866,241 @@ footer a:hover { text-decoration: underline; }
     </div>
   </section>
 
-  <!-- ── SECTION 3: AI 분석 ── -->
+  <!-- SECTION 3: AI 분석 -->
   <section id="sec3" class="card" aria-labelledby="sec3-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">🤖</div>
-      <div class="card-header-text">
-        <h2 id="sec3-title">AI 법리 분석</h2>
-        <p>K-Law 방법론에 따라 AI가 실제로 사건을 분석합니다.</p>
-      </div>
+      <div class="card-header-text"><h2 id="sec3-title">AI 법리 분석 (K-Law v6.4)</h2><p>K-Law 방법론 v6.4에 따라 AI가 사건을 분석합니다.</p></div>
       <span class="step-badge">4단계 / 6</span>
     </div>
-    <div class="analysis-card" id="analysisCard" role="status" aria-live="polite" aria-label="분석 진행 상황">
-      <div class="analysis-logo lc-deepseek" id="aLogo" aria-hidden="true">D</div>
+    <div class="analysis-card" id="analysisCard">
+      <div class="analysis-logo lc-deepseek" id="aLogo">D</div>
       <div class="analysis-title" id="aTitle">DeepSeek R1</div>
       <div class="analysis-status" id="aStatus">⏳ 분석 준비 중...</div>
-      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
-        <div class="progress-fill" id="aProg"></div>
-      </div>
-      <div class="thinking-box" id="aThinking" aria-label="AI 추론 과정"></div>
-      <div class="result-summary" id="aResult" aria-label="분석 결과 요약"></div>
+      <div class="progress-track" role="progressbar" aria-valuenow="0"><div class="progress-fill" id="aProg"></div></div>
+      <div class="thinking-box" id="aThinking"></div>
+      <div class="result-summary" id="aResult"></div>
     </div>
-    <div class="error-banner" id="errBanner" role="alert">
-      <h4>⚠️ 오류가 발생했습니다</h4>
-      <p id="errMsg">API 호출 중 오류가 발생했습니다. API Key를 확인하거나 잠시 후 다시 시도해 주십시오.</p>
-    </div>
-    <div class="btn-row" id="sec3Btn" style="display:none;">
-      <button class="btn btn-filled" onclick="goSec(4)">판결 내용 확인 →</button>
-    </div>
+    <div class="error-banner" id="errBanner" role="alert"><h4>⚠️ 오류가 발생했습니다</h4><p id="errMsg">API 호출 중 오류가 발생했습니다.</p></div>
+    <div class="btn-row" id="sec3Btn" style="display:none;"><button class="btn btn-filled" onclick="goSec(4)">판결 내용 확인 →</button></div>
   </section>
 
-  <!-- ── SECTION 4: 판결 확인 ── -->
+  <!-- SECTION 4: 판결 확인 -->
   <section id="sec4" class="card" aria-labelledby="sec4-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">✅</div>
-      <div class="card-header-text">
-        <h2 id="sec4-title">판결 내용 확인</h2>
-        <p>AI가 도출한 가상 판결을 검토하십시오. 이의가 있으면 이전으로 돌아갈 수 있습니다.</p>
-      </div>
+      <div class="card-header-text"><h2 id="sec4-title">판결 내용 확인</h2><p>AI가 도출한 가상 판결을 검토하십시오.</p></div>
       <span class="step-badge">5단계 / 6</span>
     </div>
-    <div id="sec4Content" aria-label="판결 내용" role="region"></div>
-    <div class="btn-row">
-      <button class="btn btn-outlined" onclick="goSec(3)">← 재분석</button>
-      <button class="btn btn-filled" onclick="goSec(5)">최종 판결 제출 →</button>
-    </div>
+    <div id="sec4Content" role="region"></div>
+    <div class="btn-row"><button class="btn btn-outlined" onclick="goSec(3)">← 재분석</button><button class="btn btn-filled" onclick="goSec(5)">최종 판결 제출 →</button></div>
   </section>
 
-  <!-- ── SECTION 5: 최종 판결 ── -->
+  <!-- SECTION 5: 최종 판결 -->
   <section id="sec5" class="card" aria-labelledby="sec5-title">
     <div class="card-header">
       <div class="card-icon" aria-hidden="true">📜</div>
-      <div class="card-header-text">
-        <h2 id="sec5-title">K-Law AI 가상 판결</h2>
-        <p>본 판결은 연구 목적의 AI 가상 판결이며 법적 구속력이 없습니다.</p>
-      </div>
+      <div class="card-header-text"><h2 id="sec5-title">K-Law AI 가상 판결</h2><p>본 판결은 연구 목적의 AI 가상 판결이며 법적 구속력이 없습니다.</p></div>
       <span class="step-badge">6단계 / 6</span>
     </div>
-    <div id="verdictDoc" role="article" aria-label="최종 판결문"></div>
-    <div class="btn-row" style="margin-top:var(--sp-5);">
-      <button class="btn btn-outlined" onclick="resetAll()">새 사건 접수</button>
-      <button class="btn btn-filled" onclick="dlVerdict()">📄 판결문 내려받기</button>
-    </div>
+    <div id="verdictDoc" role="article"></div>
+    <div class="btn-row" style="margin-top:var(--sp-5);"><button class="btn btn-outlined" onclick="resetAll()">새 사건 접수</button><button class="btn btn-filled" onclick="dlVerdict()">📄 판결문 내려받기</button></div>
   </section>
 
 </main>
 
-<!-- 푸터 -->
 <footer role="contentinfo">
-  <p>
-    케이로주식회사(K-Law Inc.) · K-Law AI 가상 법원 · 
-    <a href="https://github.com/team-jupeter/k-law" target="_blank" rel="noopener noreferrer">GitHub</a> ·
-    GPL-3.0 오픈소스
-  </p>
-  <p style="margin-top:var(--sp-2);font-size:var(--text-xs);">
-    본 서비스는 연구·교육 목적으로 제공되며 대한민국 변호사법상 법률 자문에 해당하지 않습니다.
-  </p>
+  <p>케이로주식회사(K-Law Inc.) · K-Law AI 가상 법원 · <a href="https://github.com/jejuro/k-law" target="_blank">GitHub</a> · GPL-3.0</p>
+  <p style="margin-top:var(--sp-2);font-size:var(--text-xs);">본 서비스는 연구·교육 목적으로 제공되며 법률 자문에 해당하지 않습니다. K-Law 방법론은 지속적으로 갱신됩니다.</p>
 </footer>
-
-<div class="snackbar" id="snackbar" role="status" aria-live="assertive"></div>
+<div class="snackbar" id="snackbar" role="status"></div>
 
 <script>
 /* ════════════════════════════════════════════
-   상수 & 상태
+   CONSTANTS & STATE
 ════════════════════════════════════════════ */
-const DS_KEY = '__DEEPSEEK_API_KEY__';
-
+const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
 const LLMS = {
-  deepseek:{name:'DeepSeek R1',   maker:'DeepSeek AI', logo:'D', cls:'lc-deepseek', model:'deepseek-reasoner', ep:'https://api.deepseek.com/chat/completions',         needKey:false},
-  gpt:     {name:'GPT-4o',        maker:'OpenAI',      logo:'G', cls:'lc-gpt',      model:'gpt-4o',            ep:'https://api.openai.com/v1/chat/completions',          needKey:true},
-  claude:  {name:'Claude Opus',   maker:'Anthropic',   logo:'C', cls:'lc-claude',   model:'claude-opus-4-6',   ep:'https://api.anthropic.com/v1/messages',               needKey:true},
-  gemini:  {name:'Gemini 1.5',    maker:'Google',      logo:'✦', cls:'lc-gemini', model:'gemini-1.5-pro',    ep:'',                                                     needKey:true},
-  grok:    {name:'Grok 3',        maker:'xAI',         logo:'X', cls:'lc-grok',     model:'grok-3',            ep:'https://api.x.ai/v1/chat/completions',                needKey:true},
-  llama:   {name:'Llama 3.1',     maker:'Meta/Groq',   logo:'L', cls:'lc-llama',    model:'llama-3.1-70b-versatile',ep:'https://api.groq.com/openai/v1/chat/completions',needKey:true},
+  deepseek:{name:'DeepSeek R1',maker:'DeepSeek AI',logo:'D',cls:'lc-deepseek',model:'deepseek-reasoner',ep:'https://api.deepseek.com/chat/completions',needKey:false},
+  gpt:{name:'GPT-4o',maker:'OpenAI',logo:'G',cls:'lc-gpt',model:'gpt-4o',ep:'https://api.openai.com/v1/chat/completions',needKey:true},
+  claude:{name:'Claude Opus',maker:'Anthropic',logo:'C',cls:'lc-claude',model:'claude-3-opus-20240229',ep:'https://api.anthropic.com/v1/messages',needKey:true},
+  gemini:{name:'Gemini 1.5',maker:'Google',logo:'✦',cls:'lc-gemini',model:'gemini-1.5-pro',ep:'',needKey:true},
+  grok:{name:'Grok 3',maker:'xAI',logo:'X',cls:'lc-grok',model:'grok-3',ep:'https://api.x.ai/v1/chat/completions',needKey:true},
+  llama:{name:'Llama 3.1',maker:'Meta/Groq',logo:'L',cls:'lc-llama',model:'llama-3.1-70b-versatile',ep:'https://api.groq.com/openai/v1/chat/completions',needKey:true},
 };
-
 const LABELS={
-  civil_damage:'민사 손해배상 (불법행위)',civil_traffic:'민사 손해배상 (교통사고)',
-  civil_medical:'민사 손해배상 (의료사고)',civil_contract:'민사 계약 위반',
-  civil_lease:'민사 임대차',civil_insurance:'민사 보험·구상금',
-  family_divorce:'가사 이혼·위자료',family_custody:'가사 친권·양육',
-  family_inherit:'가사 상속·유류분',criminal_fraud:'형사 사기',
-  criminal_embezzle:'형사 횡령·배임',criminal_assault:'형사 폭행·상해',
+  civil_damage:'민사 손해배상 (불법행위)',civil_traffic:'민사 손해배상 (교통사고)',civil_medical:'민사 손해배상 (의료사고)',
+  civil_contract:'민사 계약 위반',civil_lease:'민사 임대차',civil_insurance:'민사 보험·구상금',
+  family_divorce:'가사 이혼·위자료',family_custody:'가사 친권·양육',family_inherit:'가사 상속·유류분',
+  criminal_fraud:'형사 사기',criminal_embezzle:'형사 횡령·배임',criminal_assault:'형사 폭행·상해',
   admin_cancel:'행정 처분취소',admin_compensation:'행정 국가배상',
 };
-
 let sel='deepseek', userKey=null;
-let caseId='', caseData={}, extraAnswers={}, questions=[];
+let caseId='', caseData={}, extraAnswers={}, dynamicQuestions=[];
 let parsed=null;
 
-/* ── 유틸 ── */
-const $=id=>document.getElementById(id);
-function toast(msg,ms=3000){
-  const s=$('snackbar'); s.textContent=msg; s.classList.add('show');
-  setTimeout(()=>s.classList.remove('show'),ms);
-}
+const $ = id => document.getElementById(id);
+function toast(msg,ms=3000){ const s=$('snackbar'); s.textContent=msg; s.classList.add('show'); setTimeout(()=>s.classList.remove('show'),ms); }
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 function genId(){return `KL-${new Date().getFullYear()}-${Math.floor(Math.random()*90000+10000)}`;}
 function clearKey(){userKey=null;const i=$('userApiKey');if(i)i.value='';}
 
-/* ── 단계 표시 ── */
 const STEPS=['1','2','25','3','4','5'];
 function updateSteps(cur){
   const idx=STEPS.indexOf(cur);
   STEPS.forEach((s,i)=>{
-    const n=$(`sn-${s}`); if(!n)return;
+    const n=$( `sn-${s}`); if(!n)return;
     n.classList.remove('active','done');
     if(i<idx) n.classList.add('done');
     else if(i===idx) n.classList.add('active');
-    const c=$(`sc-${s}`); if(!c)return;
-    c.classList.remove('done','active');
-    if(i<idx) c.classList.add('done');
-    else if(i===idx) c.classList.add('active');
+    const c=$( `sc-${s}`); if(c){c.classList.remove('done','active'); if(i<idx) c.classList.add('done'); else if(i===idx) c.classList.add('active');}
   });
 }
 
-/* ── 섹션 이동 ── */
 const ALL_SECS=['0','1','2','25','3','4','5'];
 function goSec(n){
-  ALL_SECS.forEach(id=>{
-    const el=$(`sec${id}`); if(el){el.classList.remove('visible','active');}
-  });
-  const el=$(`sec${n}`); if(el){el.classList.add('visible','active');}
+  ALL_SECS.forEach(id=>{const el=$( `sec${id}`); if(el)el.classList.remove('visible','active');});
+  const el=$( `sec${n}`); if(el){el.classList.add('visible','active');}
   if(n!=='0') updateSteps(String(n));
   window.scrollTo({top:0,behavior:'smooth'});
-  // 포커스 이동 (접근성)
   const heading=el?.querySelector('h2');
   if(heading){setTimeout(()=>heading.focus(),100);}
 }
 
-/* ── 모드 선택 ── */
-function selectMode(m){
-  $('card-single').classList.toggle('selected',m==='single');
-  $('card-single').setAttribute('aria-checked',m==='single');
-}
-
+function selectMode(m){ $('card-single').classList.toggle('selected',m==='single'); $('card-single').setAttribute('aria-checked',m==='single');}
 function selectLLM(id){
   sel=id;
-  document.querySelectorAll('.llm-tile').forEach(el=>{
-    el.classList.toggle('selected',el.id===`opt-${id}`);
-    el.setAttribute('aria-checked',el.id===`opt-${id}`);
-  });
+  document.querySelectorAll('.llm-tile').forEach(el=>{el.classList.toggle('selected',el.id===`opt-${id}`);el.setAttribute('aria-checked',el.id===`opt-${id}`);});
   const llm=LLMS[id];
   const panel=$('apiKeySection');
   $('apiKeyLlmName').textContent=llm.name;
-  if(llm.needKey){ panel.classList.add('visible'); }
-  else           { panel.classList.remove('visible'); userKey=null; }
+  if(llm.needKey){ panel.classList.add('visible'); } else { panel.classList.remove('visible'); userKey=null; }
 }
-
-function validateKey(){
-  const v=$('userApiKey').value.trim();
-  const s=$('keyStatus');
-  if(v.length>10){s.className='key-status ok';s.textContent='✓ Key 입력됨 — 분석 완료 후 즉시 삭제됩니다.';}
-  else            {s.className='key-status wait';s.textContent='— Key를 입력해 주십시오';}
-}
-function toggleKey(){
-  const i=$('userApiKey'); i.type=i.type==='password'?'text':'password';
-}
+function validateKey(){ const v=$('userApiKey').value.trim(); const s=$('keyStatus'); if(v.length>10){s.className='key-status ok';s.textContent='✓ Key 입력됨 — 분석 완료 후 즉시 삭제됩니다.';} else {s.className='key-status wait';s.textContent='— Key를 입력해 주십시오';} }
+function toggleKey(){ const i=$('userApiKey'); i.type=i.type==='password'?'text':'password'; }
 
 function confirmMode(){
   const llm=LLMS[sel];
-  if(llm.needKey){
-    const v=$('userApiKey').value.trim();
-    if(!v||v.length<10){toast('⚠️ API Key를 입력해 주십시오.');return;}
-    userKey=v;
-  }
-  // 설정 바 업데이트
+  if(llm.needKey){ const v=$('userApiKey').value.trim(); if(!v||v.length<10){toast('⚠️ API Key를 입력해 주십시오.');return;} userKey=v; }
   $('cfgLLM').textContent=llm.name;
   $('cfgKey').textContent=llm.needKey?'✓ 입력됨':'✓ 시스템 제공';
-  $('cfgKey').style.color=llm.needKey?'var(--success)':'var(--success)';
+  $('cfgKey').style.color='var(--success)';
   $('configBar').classList.add('visible');
   $('stepIndicator').classList.add('visible');
-
-  // 분석 카드 설정
-  const aLogo=$('aLogo');
-  aLogo.textContent=llm.logo; aLogo.className=`analysis-logo ${llm.cls}`;
+  const aLogo=$('aLogo'); aLogo.textContent=llm.logo; aLogo.className=`analysis-logo ${llm.cls}`;
   $('aTitle').textContent=llm.name;
-  $('sec3-title').textContent=`${llm.name} 법리 분석`;
+  $('sec3-title').textContent=`${llm.name} 법리 분석 (K-Law v6.4)`;
+  const qLogo=$('qPanelLogo'); qLogo.textContent=llm.logo; qLogo.className=`llm-logo ${llm.cls}`;
+  $('qPanelName').textContent=llm.name; $('qPanelMaker').textContent=llm.maker;
+  $('sec25Sub').textContent=`${llm.name}이(가) 사건을 분석하고 필요한 추가 정보를 요청합니다.`;
+  $('sec0').classList.remove('visible','active'); goSec(1);
+}
+function changeMode(){ clearKey(); $('configBar').classList.remove('visible'); $('stepIndicator').classList.remove('visible'); goSec(0); }
 
-  // 추가 정보 패널 설정
-  const qLogo=$('qPanelLogo');
-  qLogo.textContent=llm.logo; qLogo.className=`llm-logo ${llm.cls}`;
-  $('qPanelName').textContent=llm.name;
-  $('qPanelMaker').textContent=llm.maker;
-  $('sec25Sub').textContent=`${llm.name}이(가) 사건을 1차 검토하고 추가 정보를 요청합니다.`;
-
-  $('sec0').classList.remove('visible','active');
-  goSec(1);
+async function extractFromFacts(){
+  const facts=$('facts').value.trim();
+  if(facts.length<20){toast('⚠️ 사건 개요를 20자 이상 입력한 후 시도해 주십시오.');return;}
+  const btn=$('btnExtract');
+  const statusEl=$('extractStatus');
+  btn.disabled=true; btn.textContent='⏳ AI 분석 중...';
+  statusEl.style.display='block'; statusEl.style.background='var(--info-bg)'; statusEl.style.color='var(--info)'; statusEl.textContent='🔍 DeepSeek AI가 사건 개요를 분석하고 있습니다...';
+  const sys=`당신은 법률 문서 분석 전문가입니다. 사용자가 제공하는 사건 개요에서 아래 4가지 정보를 추출하여 반드시 JSON 형식으로만 응답하십시오(코드블록·마크다운·설명 없이 순수 JSON만):
+{
+  "caseType": "<아래 코드 중 하나>",
+  "claimAmount": "<금액 문자열, 없으면 빈 문자열>",
+  "plaintiff": "<원고/신청인 이름>",
+  "defendant": "<피고/상대방 이름>"
+}
+caseType 허용 값: civil_damage, civil_traffic, civil_medical, civil_contract, civil_lease, civil_insurance, family_divorce, family_custody, family_inherit, criminal_fraud, criminal_embezzle, criminal_assault, admin_cancel, admin_compensation`;
+  try{
+    const resp=await fetch('https://api.deepseek.com/chat/completions',{
+      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${DS_KEY}`},
+      body:JSON.stringify({model:'deepseek-chat',messages:[{role:'system',content:sys},{role:'user',content:facts}],temperature:0.1,max_tokens:300})
+    });
+    if(!resp.ok)throw new Error(`API 오류 ${resp.status}`);
+    const data=await resp.json();
+    const text=(data.choices?.[0]?.message?.content||'').trim();
+    const m=text.match(/\{[\s\S]*\}/);
+    if(!m)throw new Error('AI 응답 파싱 실패');
+    const ex=JSON.parse(m[0]);
+    let filled=[];
+    const validTypes=['civil_damage','civil_traffic','civil_medical','civil_contract','civil_lease','civil_insurance','family_divorce','family_custody','family_inherit','criminal_fraud','criminal_embezzle','criminal_assault','admin_cancel','admin_compensation'];
+    if(ex.caseType&&validTypes.includes(ex.caseType)){ $('caseType').value=ex.caseType; $('caseTypeAiBadge').style.display='inline-block'; filled.push('사건 분류');}
+    if(ex.claimAmount&&ex.claimAmount.trim()){ $('claimAmount').value=ex.claimAmount.trim(); $('claimAmountAiBadge').style.display='inline-block'; filled.push('청구 금액');}
+    if(ex.plaintiff&&ex.plaintiff.trim()){ $('plaintiff').value=ex.plaintiff.trim(); $('plaintiffAiBadge').style.display='inline-block'; filled.push('원고');}
+    if(ex.defendant&&ex.defendant.trim()){ $('defendant').value=ex.defendant.trim(); $('defendantAiBadge').style.display='inline-block'; filled.push('피고');}
+    if(filled.length){ statusEl.style.background='var(--success-bg)'; statusEl.style.color='var(--success)'; statusEl.textContent=`✅ AI 자동 추출 완료: ${filled.join(' · ')} — 내용을 확인하고 필요 시 사건 개요를 수정한 후 다시 추출할 수 있습니다.`; }
+    else { statusEl.style.background='var(--warning-bg)'; statusEl.style.color='var(--warning)'; statusEl.textContent='⚠️ 추출할 정보가 부족합니다. 개요를 더 상세히 작성한 후 다시 시도하십시오.'; }
+  }catch(e){ statusEl.style.background='var(--error-bg)'; statusEl.style.color='var(--error)'; statusEl.textContent=`❌ 추출 실패: ${e.message}`; }
+  finally{ btn.disabled=false; btn.textContent='🤖 AI 자동 추출'; }
 }
 
-function changeMode(){
-  clearKey();
-  $('configBar').classList.remove('visible');
-  $('stepIndicator').classList.remove('visible');
-  goSec(0);
-}
-
-/* ── STEP 1 → 2 ── */
 function toSec2(){
-  const ct=$('caseType').value, pl=$('plaintiff').value.trim(),
-        df=$('defendant').value.trim(), fc=$('facts').value.trim(),
-        pc=$('plaintiffClaim').value.trim(), dc=$('defendantClaim').value.trim();
-  if(!ct||!pl||!df||!fc||!pc||!dc){toast('⚠️ 모든 필수 항목을 입력해 주십시오.');return;}
+  const ct=$('caseType').value, pl=$('plaintiff').value.trim(), df=$('defendant').value.trim(), fc=$('facts').value.trim(), pc=$('plaintiffClaim').value.trim(), dc=$('defendantClaim').value.trim();
+  if(!ct||!pl||!df||!fc||!pc||!dc){toast('⚠️ 모든 필수 항목을 입력해 주십시오. (사건 분류/원고/피고는 AI 추출 필요)');return;}
   caseId=genId();
-  const chip=$('caseChip');
-  chip.textContent=`사건번호 ${caseId}`;
-  chip.classList.add('visible');
+  $('caseChip').textContent=`사건번호 ${caseId}`; $('caseChip').classList.add('visible');
   caseData={caseType:ct,plaintiff:pl,defendant:df,facts:fc,plaintiffClaim:pc,defendantClaim:dc,caseId,claimAmount:$('claimAmount').value};
   renderDoc();
   goSec(2);
 }
-
 function renderDoc(){
   const d=caseData, label=LABELS[d.caseType]||d.caseType, llm=LLMS[sel];
-  $('mandatoryDoc').textContent=
-`═══ K-LAW MANDATORY EXECUTE v6.3 ═══
-
-[사건번호]  ${d.caseId}
-[접수일시]  ${new Date().toLocaleString('ko-KR')}
-[사건분류]  ${label}
-[청구금액]  ${d.claimAmount||'미기재'}
-[분석 LLM]  ${llm.name}
-
-── 당사자 ──
-[원    고]  ${d.plaintiff}
-[피    고]  ${d.defendant}
-
-── 사건의 실체 ──
-${d.facts}
-
-── 당사자 주장 ──
-[원고] ${d.plaintiffClaim}
-[피고] ${d.defendantClaim}
-
-═══ END OF MANDATORY EXECUTE ═══`;
+  $('mandatoryDoc').textContent=`═══ K-LAW MANDATORY EXECUTE v6.4 ═══\n\n[사건번호]  ${d.caseId}\n[접수일시]  ${new Date().toLocaleString('ko-KR')}\n[사건분류]  ${label}\n[청구금액]  ${d.claimAmount||'미기재'}\n[분석 LLM]  ${llm.name}\n\n── 당사자 ──\n[원    고]  ${d.plaintiff}\n[피    고]  ${d.defendant}\n\n── 사건의 실체 ──\n${d.facts}\n\n── 당사자 주장 ──\n[원고] ${d.plaintiffClaim}\n[피고] ${d.defendantClaim}\n\n═══ END OF MANDATORY EXECUTE ═══`;
 }
 
-/* ── STEP 2.5: 추가 정보 ── */
 async function toSec25(){
-  $('btnToSec25').disabled=true;
-  $('btnToSec25').textContent='⏳ AI 검토 중...';
-  await sleep(1000);
-  buildQ();
+  $('btnToSec25').disabled=true; $('btnToSec25').textContent='⏳ AI가 질문 생성 중...';
+  await generateDynamicQuestions();
+  $('btnToSec25').disabled=false; $('btnToSec25').textContent='AI 추가 정보 요청 →';
   goSec('25');
-  $('btnToSec25').disabled=false;
-  $('btnToSec25').textContent='AI 추가 정보 요청 →';
 }
-
-function buildQ(){
-  const POOLS={
-    civil_damage:[
-      {id:'q1',p:'required',text:'불법행위 발생 일시와 장소를 구체적으로 기술해 주십시오.',hint:'소멸시효 및 인과관계 판단에 필수입니다.'},
-      {id:'q2',p:'required',text:'원고가 입은 손해 항목과 금액을 구체적으로 기술해 주십시오.',hint:'치료비·일실수입·재산손해·위자료를 구분하여 기재하십시오.'},
-      {id:'q3',p:'important',text:'피고 행위와 원고 손해 사이의 인과관계를 입증할 증거가 있습니까?',hint:'목격자 진술·의료기록·CCTV·감정서 등이 포함됩니다.'},
-      {id:'q4',p:'optional',text:'원고에게 사고 발생에 기여한 과실이 있습니까?',hint:'과실상계 비율 산정에 활용됩니다.'},
-    ],
-    civil_traffic:[
-      {id:'q1',p:'required',text:'교통사고 당시 쌍방 차량의 속도와 진행 방향을 기술해 주십시오.',hint:'과실 비율 산정의 핵심 요소입니다.'},
-      {id:'q2',p:'required',text:'사고로 인한 신체 부위별 상해 내용과 진단명을 기재해 주십시오.',hint:'상해 등급 및 치료비 산정에 활용됩니다.'},
-      {id:'q3',p:'important',text:'사고 당시 신호 상태와 도로 상황은 어떠하였습니까?',hint:'주의의무 판단에 중요합니다.'},
-    ],
-    family_divorce:[
-      {id:'q1',p:'required',text:'혼인 파탄의 주된 원인과 시작 시점을 기술해 주십시오.',hint:'민법 제840조 이혼 사유 판단에 활용됩니다.'},
-      {id:'q2',p:'required',text:'미성년 자녀 수·나이·현재 거주 현황을 기재해 주십시오.',hint:'친권·양육권 판단의 전제입니다.'},
-      {id:'q3',p:'important',text:'공동 재산의 종류와 규모를 기술해 주십시오.',hint:'재산분할 청구의 기초입니다.'},
-    ],
-    criminal_fraud:[
-      {id:'q1',p:'required',text:'피고의 기망 행위가 어떤 말·행동으로 이루어졌습니까?',hint:'사기죄 기망행위 요건 판단에 필수입니다.'},
-      {id:'q2',p:'required',text:'원고가 재산을 처분한 시점과 동기를 기술해 주십시오.',hint:'인과관계 판단에 활용됩니다.'},
-    ],
-  };
-  const DEFAULT=[
-    {id:'dq1',p:'required',text:'현재까지 법원 소송·조정·중재를 진행한 이력이 있습니까?',hint:'기판력 및 중복 제소 여부 판단에 필수입니다.'},
-    {id:'dq2',p:'important',text:'분쟁 관련 합의서·각서·계약서 등 서면 문서가 있습니까?',hint:'서면 문서가 법리 판단에 중요한 영향을 줍니다.'},
+async function generateDynamicQuestions(){
+  const mandatoryText=$('mandatoryDoc').textContent;
+  const sys=`You are K-Law AI, a legal analysis assistant. Based on the provided case mandatory document, identify what additional information is needed to make a fair legal judgment following K-Law methodology v6.4.
+Return a JSON array of questions. Each question must have: "id" (auto, e.g., "q1"), "text" (specific question), "priority" (one of "required", "important", "optional"), "hint" (brief explanation).
+Maximum 5 questions. Output ONLY valid JSON array, no other text.`;
+  const usr=`Mandatory Document:\n${mandatoryText}\n\nGenerate up to 5 specific additional information questions.`;
+  try{
+    const resp=await fetch('https://api.deepseek.com/chat/completions',{
+      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${DS_KEY}`},
+      body:JSON.stringify({model:'deepseek-chat',messages:[{role:'system',content:sys},{role:'user',content:usr}],temperature:0.3,max_tokens:1000})
+    });
+    if(!resp.ok)throw new Error('질문 생성 API 오류');
+    const data=await resp.json();
+    const content=data.choices[0].message.content;
+    const jsonMatch=content.match(/\[[\s\S]*\]/);
+    if(!jsonMatch)throw new Error('JSON 응답 없음');
+    const qs=JSON.parse(jsonMatch[0]);
+    dynamicQuestions=qs.slice(0,5);
+    renderDynamicQuestions();
+  }catch(e){ console.error(e); toast('⚠️ 추가 정보 생성 실패, 기본 질문을 사용합니다.'); useFallbackQuestions(); }
+}
+function useFallbackQuestions(){
+  dynamicQuestions=[
+    {id:'q1',text:'현재까지 법원 소송·조정·중재를 진행한 이력이 있습니까?',priority:'required',hint:'기판력 및 중복 제소 여부 판단에 필수입니다.'},
+    {id:'q2',text:'분쟁 관련 합의서·각서·계약서 등 서면 문서가 있습니까?',priority:'important',hint:'서면 문서가 법리 판단에 중요한 영향을 줍니다.'},
+    {id:'q3',text:'양측 당사자 간 협상 시도가 있었습니까?',priority:'optional',hint:'화해 가능성 참작.'}
   ];
-  questions=[...(POOLS[caseData.caseType]||POOLS['civil_damage']),...DEFAULT];
-
-  const req=questions.filter(q=>q.p==='required').length;
-  const imp=questions.filter(q=>q.p==='important').length;
-  const opt=questions.filter(q=>q.p==='optional').length;
-  $('qTotal').textContent=questions.length;
-  $('reqCnt').textContent=req;
-  $('impCnt').textContent=imp;
-  $('optCnt').textContent=opt;
-
-  $('questionList').innerHTML=questions.map((q,i)=>{
-    const pc=q.p==='required'?'req':q.p==='important'?'imp':'opt';
-    const pl=q.p==='required'?'필수':q.p==='important'?'중요':'선택';
-    return `<div class="question-item" role="listitem">
-      <div class="q-meta">
-        <div class="q-index" aria-hidden="true">${i+1}</div>
-        <span class="priority-chip ${pc}" aria-label="${pl} 항목">${pl}</span>
-      </div>
-      <div class="q-text">${q.text}</div>
-      <div class="q-hint">💡 ${q.hint}</div>
-      <label for="ans-${q.id}" class="form-label" style="font-size:var(--text-sm);margin-top:var(--sp-2);">답변</label>
-      <textarea class="field" id="ans-${q.id}" rows="3"
-        aria-label="${q.text}"
-        placeholder="해당 없으면 '해당 없음'으로 기재하십시오."
-        oninput="onAns('${q.id}')"></textarea>
-      <div class="ans-status" id="st-${q.id}" aria-live="polite">— 미입력</div>
-    </div>`;
+  renderDynamicQuestions();
+}
+function renderDynamicQuestions(){
+  const req=dynamicQuestions.filter(q=>q.priority==='required').length;
+  const imp=dynamicQuestions.filter(q=>q.priority==='important').length;
+  const opt=dynamicQuestions.filter(q=>q.priority==='optional').length;
+  $('qTotal').textContent=dynamicQuestions.length;
+  $('reqCnt').textContent=req; $('impCnt').textContent=imp; $('optCnt').textContent=opt;
+  $('dynamicInfoBanner').style.display='flex';
+  $('questionList').innerHTML=dynamicQuestions.map((q,i)=>{
+    const pc=q.priority==='required'?'req':q.priority==='important'?'imp':'opt';
+    const pl=q.priority==='required'?'필수':q.priority==='important'?'중요':'선택';
+    return `<div class="question-item"><div class="q-meta"><div class="q-index">${i+1}</div><span class="priority-chip ${pc}">${pl}</span></div><div class="q-text">${q.text}</div><div class="q-hint">💡 ${q.hint}</div><label for="ans-${q.id}" class="form-label" style="font-size:var(--text-sm);margin-top:var(--sp-2);">답변</label><textarea class="field" id="ans-${q.id}" rows="3" oninput="onAns('${q.id}')"></textarea><div class="ans-status" id="st-${q.id}">— 미입력</div></div>`;
   }).join('');
 }
-
-function onAns(qid){
-  const v=$(`ans-${qid}`).value.trim();
-  extraAnswers[qid]=v;
-  const s=$(`st-${qid}`);
-  s.className=v?'ans-status done':'ans-status';
-  s.textContent=v?'✓ 답변 입력됨':'— 미입력';
-}
-
-function skipQ(){runAnalysis();}
+function onAns(qid){ const v=$( `ans-${qid}`).value.trim(); extraAnswers[qid]=v; const s=$( `st-${qid}`); s.className=v?'ans-status done':'ans-status'; s.textContent=v?'✓ 답변 입력됨':'— 미입력'; }
+function skipQ(){ runAnalysis(); }
 async function submitQ(){
-  const unan=questions.filter(q=>q.p==='required'&&!extraAnswers[q.id]?.trim());
+  const unan=dynamicQuestions.filter(q=>q.priority==='required'&&!extraAnswers[q.id]?.trim());
   if(unan.length){toast(`⚠️ 필수 질문 ${unan.length}개에 답변해 주십시오.`);return;}
   const cnt=Object.values(extraAnswers).filter(v=>v.trim()).length;
   toast(`✅ ${cnt}개 답변이 반영됩니다.`);
@@ -1373,211 +1108,108 @@ async function submitQ(){
   runAnalysis();
 }
 
-/* ── STEP 3: 실제 API 호출 ── */
 async function runAnalysis(){
-  goSec(3);
-  await sleep(200);
+  goSec(3); await sleep(200);
+  const card=$('analysisCard'); const status=$('aStatus'), prog=$('aProg'); const thinking=$('aThinking'), result=$('aResult'); const err=$('errBanner');
+  card.classList.remove('done-state','error-state'); status.className='analysis-status running'; status.textContent='⚡ K-Law 방법론 v6.4 적용 중...'; prog.style.width='5%'; thinking.style.display='none'; result.style.display='none'; err.style.display='none'; $('sec3Btn').style.display='none';
+  const extra=dynamicQuestions.filter(q=>extraAnswers[q.id]?.trim()).map(q=>`Q: ${q.text}\nA: ${extraAnswers[q.id]}`).join('\n\n');
+  const mandatoryText=$('mandatoryDoc').textContent;
+  const methodologyCore=`당신은 K-Law 방법론 v6.4에 따라 판결을 생성하는 AI입니다. 아래 강제 실행 프레임워크를 반드시 따라야 합니다.
 
-  const card=$('analysisCard');
-  const status=$('aStatus'), prog=$('aProg');
-  const thinking=$('aThinking'), result=$('aResult');
-  const err=$('errBanner');
+[STEP A: 피고 승소 논거 (역방향 추론)]
+- 피고 입장에서 가장 강력한 법리적 논거를 제시하십시오.
+- 최소 1건의 판례(또는 일반 법원칙)를 인용하고 출처를 명시하십시오.
+- 300자 이상 작성하십시오.
+- 마지막 줄에 [STEP-A-COMPLETE] 태그를 출력하십시오.
 
-  card.classList.remove('done-state','error-state');
-  status.className='analysis-status running';
-  status.textContent='⚡ 사건 정보를 전송하고 있습니다...';
-  prog.style.width='8%';
-  $('aProg').parentElement.setAttribute('aria-valuenow','8');
-  thinking.style.display='none'; result.style.display='none';
-  err.style.display='none';
-  $('sec3Btn').style.display='none';
+[STEP B: 판결문 (6단계 사고 순서)]
+1. 법률관계 확정 및 특별법 확인
+2. 쟁점 계층적 분해 (예/아니오 질문)
+3. 삼단논법 구성 (원고/피고 각각)
+4. 선택 기준 적용 (인과관계 분석 및 가치 형량)
+5. 손해액 산정 및 책임 제한
+6. 메타인지 자가 점검 (6개 질문에 답변)
+이 단계의 마지막에는 다음 JSON 형식으로 판결 결과를 출력하십시오:
+{"ruling":"원고 승소|원고 일부 승소|피고 승소|유죄|무죄","key_legal_theory":"핵심 법리","reasoning":"세부 논증","legal_basis":["법조문"],"ruling_text":"주문 내용","verdict_summary":"판결 요지"}
+마지막 줄에 [STEP-B-COMPLETE] 태그를 출력하십시오.
 
-  // 추가 정보 합산
-  const extra=questions.filter(q=>extraAnswers[q.id]?.trim())
-    .map(q=>`Q: ${q.text}\nA: ${extraAnswers[q.id]}`).join('\n\n');
-
-  const sys=`당신은 K-Law 방법론(v6.3)에 따라 대한민국 법률 분쟁을 분석하는 AI 법률 중재 보조 시스템입니다.
-
-K-Law 핵심 원칙:
-1. 헌법·법률·대법원 판례에 근거하여 판단한다
-2. 인과관계를 단계별로 분해하여 분석한다
-3. 양측 주장을 공정하게 형량한다
-4. 증명책임 원칙을 준수한다
-5. 추상적·보편적·일반적 법 원칙을 적용한다
-
-반드시 아래 JSON 형식으로만 응답하라 (코드블록·설명 없이):
-{"ruling":"원고 승소|원고 일부 승소|피고 승소|유죄|무죄","key_legal_theory":"핵심 법리 2~3문장","reasoning":"세부 논증 3~5문장","legal_basis":["적용 법조문"],"ruling_text":"주문 내용","verdict_summary":"판결 요지 3문장"}`;
-
-  const usr=`${$('mandatoryDoc').textContent}${extra?'\n\n── 추가 제출 정보 ──\n'+extra:''}
-
-위 사건을 K-Law 방법론에 따라 분석하고 가상 판결을 도출하라.`;
-
-  try {
-    prog.style.width='20%';
-    status.textContent=`⚡ ${LLMS[sel].name}이(가) 분석 중입니다... (30초~2분 소요)`;
+[STEP C: 정합성 검증]
+- Q1: 판결문의 논리가 STEP A의 판례/원칙과 일관되는가? (true/false, 불일치 시 사유 설명)
+- Q2: 판결문이 STEP A의 피고 승소 논거를 법리적으로 완전히 반박하였는가? (설명)
+- Q3: 유사 사건과 현저히 차이가 나는가? (차이 있다면 이유)
+마지막 줄에 [STEP-C-COMPLETE] 태그를 출력하십시오.`;
+  const usr=`${mandatoryText}\n\n${extra ? '── 추가 제출 정보 ──\n'+extra : ''}\n\n위 사건을 K-Law 방법론 v6.4에 따라 분석하고 상기 STEP A, B, C를 순서대로 출력하십시오.`;
+  try{
+    prog.style.width='20%'; status.textContent=`⚡ ${LLMS[sel].name}이(가) K-Law 방법론으로 분석 중...`;
     const apiKey=LLMS[sel].needKey?userKey:DS_KEY;
-    const resp=await callAPI(apiKey,sys,usr,prog,status,thinking);
-    prog.style.width='100%';
-    $('aProg').parentElement.setAttribute('aria-valuenow','100');
-    card.classList.add('done-state');
-    status.className='analysis-status done';
-    status.textContent='✓ 분석이 완료되었습니다';
-    parsed=parseJSON(resp);
-    result.style.display='block';
-    result.innerHTML=`<strong>판결 방향:</strong> ${parsed.ruling||'-'}<br><br><strong>핵심 법리:</strong><br>${parsed.key_legal_theory||'-'}`;
-    if(LLMS[sel].needKey){clearKey();toast('🔐 API Key가 메모리에서 삭제되었습니다.',4000);}
+    const fullResp=await callMethodologyAPI(apiKey,methodologyCore,usr,prog,status,thinking);
+    prog.style.width='100%'; card.classList.add('done-state'); status.className='analysis-status done'; status.textContent='✓ 분석 완료 (K-Law v6.4)';
+    const jsonMatch=fullResp.match(/\{[\s\S]*"ruling"[\s\S]*\}/);
+    if(jsonMatch) parsed=JSON.parse(jsonMatch[0]);
+    else throw new Error('판결 JSON 추출 실패');
+    result.style.display='block'; result.innerHTML=`<strong>판결 방향:</strong> ${parsed.ruling||'-'}<br><br><strong>핵심 법리:</strong><br>${parsed.key_legal_theory||'-'}`;
+    if(LLMS[sel].needKey){ clearKey(); toast('🔐 API Key가 메모리에서 삭제되었습니다.',4000); }
     $('sec3Btn').style.display='flex';
-    // 판결 확인 페이지 미리 렌더
     renderSec4();
-  } catch(e){
-    card.classList.add('error-state');
-    prog.style.width='100%';
-    status.className='analysis-status error';
-    status.textContent='❌ 오류가 발생했습니다';
-    err.style.display='block';
-    $('errMsg').textContent=e.message||'API 호출 중 오류가 발생했습니다.';
+  }catch(e){
+    card.classList.add('error-state'); prog.style.width='100%'; status.className='analysis-status error'; status.textContent='❌ 방법론 적용 실패';
+    err.style.display='block'; $('errMsg').textContent=e.message||'오류 발생';
     if(LLMS[sel].needKey) clearKey();
   }
 }
-
-async function callAPI(key,sys,usr,prog,status,thinking){
+async function callMethodologyAPI(key,sys,usr,prog,status,thinking){
   const llm=LLMS[sel];
-  const r=await fetch(llm.ep,{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
-    body:JSON.stringify({model:llm.model,messages:[{role:'system',content:sys},{role:'user',content:usr}],stream:true,temperature:0.1,max_tokens:4000}),
+  const resp=await fetch(llm.ep,{
+    method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${key}`},
+    body:JSON.stringify({model:llm.model,messages:[{role:'system',content:sys},{role:'user',content:usr}],stream:true,temperature:0.2,max_tokens:8000})
   });
-  if(!r.ok){const e=await r.json().catch(()=>({}));throw new Error(`오류 ${r.status}: ${e?.error?.message||r.statusText}`);}
-
-  const reader=r.body.getReader(), dec=new TextDecoder();
-  let content='', thk='', pct=20;
-  thinking.style.display='block';
-  thinking.textContent='추론 중...';
-
+  if(!resp.ok){const e=await resp.json().catch(()=>({}));throw new Error(`오류 ${resp.status}: ${e?.error?.message||resp.statusText}`);}
+  const reader=resp.body.getReader(), dec=new TextDecoder();
+  let full='', pct=20;
+  thinking.style.display='block'; thinking.textContent='K-Law 추론 진행 중...';
   while(true){
-    const {done,value}=await reader.read();
-    if(done)break;
-    const lines=dec.decode(value).split('\n').filter(l=>l.startsWith('data: '));
+    const {done,value}=await reader.read(); if(done)break;
+    const chunk=dec.decode(value,{stream:true});
+    const lines=chunk.split('\n').filter(l=>l.startsWith('data: '));
     for(const line of lines){
-      const d=line.slice(6).trim();
-      if(d==='[DONE]')break;
+      const d=line.slice(6).trim(); if(d==='[DONE]')break;
       try{
         const j=JSON.parse(d), delta=j.choices?.[0]?.delta;
-        if(!delta)continue;
-        if(delta.reasoning_content){thk+=delta.reasoning_content;thinking.textContent=thk.slice(-500);thinking.scrollTop=thinking.scrollHeight;}
-        if(delta.content){content+=delta.content;if(pct<90){pct+=1;prog.style.width=pct+'%';$('aProg').parentElement.setAttribute('aria-valuenow',pct);}status.textContent=`⚡ 판결 도출 중... (${content.length}자 생성됨)`;}
+        if(delta?.reasoning_content){ thinking.textContent+=delta.reasoning_content; thinking.scrollTop=thinking.scrollHeight; }
+        if(delta?.content){ full+=delta.content; if(pct<90){ pct+=0.5; prog.style.width=pct+'%'; status.textContent=`⚡ ${LLMS[sel].name} 판결 생성 중... (${full.length}자)`; } }
       }catch(e){}
     }
   }
-  if(!content)throw new Error('AI 응답이 비어 있습니다. 다시 시도해 주십시오.');
-  return content;
+  if(!full)throw new Error('AI 응답 없음');
+  return full;
 }
-
-function parseJSON(raw){
-  try{const m=raw.match(/\{[\s\S]*\}/);if(m)return JSON.parse(m[0]);}catch(e){}
-  return{ruling:'판단 결과',key_legal_theory:raw.slice(0,300),reasoning:raw.slice(0,500),legal_basis:[],ruling_text:raw.slice(0,200),verdict_summary:raw.slice(0,300)};
-}
-
-/* ── STEP 4: 판결 확인 ── */
+function parseJSON(raw){ try{ const m=raw.match(/\{[\s\S]*\}/); if(m)return JSON.parse(m[0]); }catch(e){} return{ruling:'판단 결과',key_legal_theory:raw.slice(0,300),reasoning:'',legal_basis:[],ruling_text:'',verdict_summary:''}; }
 function renderSec4(){
   const llm=LLMS[sel], r=parsed||{};
   $('sec4Content').innerHTML=`
-  <div style="display:flex;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-5);padding:var(--sp-4);background:var(--surface-variant);border-radius:var(--radius-lg);border:1px solid var(--outline);">
-    <div class="analysis-logo ${llm.cls}" style="width:44px;height:44px;font-size:18px;margin:0;">${llm.logo}</div>
-    <div><div style="font-size:var(--text-md);font-weight:700;color:var(--on-surface);">${llm.name} 가상 판결</div>
-    <div style="font-size:var(--text-sm);color:var(--on-surface-var);">${llm.maker} · K-Law v6.3</div></div>
-    <div class="ruling-chip" style="margin-left:auto;">${r.ruling||'-'}</div>
-  </div>
-  ${[['결론 방향',r.ruling],['핵심 법리',r.key_legal_theory],['세부 논증',r.reasoning],['적용 법조문',(r.legal_basis||[]).join(' · ')||'-'],['판결 요지',r.verdict_summary]].map(([h,v])=>`
-  <div class="verdict-section"><div class="verdict-section-head">${h}</div>
-  <div class="verdict-section-body">${v||'-'}</div></div>`).join('')}
-  <div class="info-banner info" style="margin-top:var(--sp-4);">
-    <div class="info-banner-icon">💡</div>
-    <div class="info-banner-body"><p>판결 내용에 이의가 있으면 <strong>← 재분석</strong>으로 돌아갈 수 있습니다. 확인 후 <strong>최종 판결 제출</strong>을 누르면 판결문이 생성됩니다.</p></div>
-  </div>`;
+  <div style="display:flex;align-items:center;gap:var(--sp-4);margin-bottom:var(--sp-5);padding:var(--sp-4);background:var(--surface-variant);border-radius:var(--radius-lg);"><div class="analysis-logo ${llm.cls}" style="width:44px;height:44px;font-size:18px;margin:0;">${llm.logo}</div><div><div style="font-weight:700;">${llm.name} 가상 판결</div><div style="font-size:var(--text-sm);">${llm.maker} · K-Law v6.4</div></div><div class="ruling-chip" style="margin-left:auto;">${r.ruling||'-'}</div></div>
+  ${[['결론 방향',r.ruling],['핵심 법리',r.key_legal_theory],['세부 논증',r.reasoning],['적용 법조문',(r.legal_basis||[]).join(' · ')||'-'],['판결 요지',r.verdict_summary]].map(([h,v])=>`<div class="verdict-section"><div class="verdict-section-head">${h}</div><div class="verdict-section-body">${v||'-'}</div></div>`).join('')}
+  <div class="info-banner info" style="margin-top:var(--sp-4);"><div class="info-banner-icon">💡</div><div class="info-banner-body"><p>판결 내용에 이의가 있으면 <strong>← 재분석</strong>으로 돌아갈 수 있습니다.</p></div></div>`;
 }
-
-/* ── STEP 5: 최종 판결 ── */
-function goSec(n){
-  ALL_SECS.forEach(id=>{const el=$(`sec${id}`);if(el){el.classList.remove('visible','active');}});
-  const el=$(`sec${n}`);if(el){el.classList.add('visible','active');}
-  if(String(n)!=='0')updateSteps(String(n));
-  if(n===5)renderVerdict();
-  window.scrollTo({top:0,behavior:'smooth'});
-  const heading=el?.querySelector('h2');
-  if(heading)setTimeout(()=>{heading.setAttribute('tabindex','-1');heading.focus();},100);
-}
-
 function renderVerdict(){
   const d=caseData, llm=LLMS[sel], r=parsed||{};
   const label=LABELS[d.caseType]||d.caseType;
-  const extra=questions.filter(q=>extraAnswers[q.id]?.trim());
+  const extra=dynamicQuestions.filter(q=>extraAnswers[q.id]?.trim());
   $('verdictDoc').innerHTML=`
-  <div class="verdict-doc" role="document">
-    <div class="verdict-doc-header">
-      <h2>K-Law AI 가상 판결문</h2>
-      <div class="verdict-doc-meta">
-        <span>사건번호: ${d.caseId}</span>
-        <span>사건분류: ${label}</span>
-        <span>선고일: ${new Date().toLocaleDateString('ko-KR')}</span>
-      </div>
-    </div>
-    <div class="verdict-doc-body">
-      <div class="verdict-section-title">1. 당사자</div>
-      <p class="verdict-text">원고(신청인): ${d.plaintiff}<br>피고(상대방): ${d.defendant}</p>
-
-      <div class="verdict-section-title">2. 사건의 요지</div>
-      <p class="verdict-text">${d.facts.slice(0,300)}${d.facts.length>300?'...':''}</p>
-
-      ${extra.length?`<div class="verdict-section-title">3. 추가 제출 정보 반영</div>
-      <p class="verdict-text">${extra.length}개 항목의 추가 정보가 본 판결 분석에 반영되었습니다.</p>`:''}
-
-      <div class="verdict-section-title">${extra.length?'4':'3'}. 법리 판단</div>
-      <p class="verdict-text">${r.key_legal_theory||'-'}</p>
-
-      <div class="verdict-section-title">${extra.length?'5':'4'}. 논증</div>
-      <p class="verdict-text">${r.reasoning||'-'}</p>
-
-      ${(r.legal_basis||[]).length?`<div class="verdict-section-title">${extra.length?'6':'5'}. 적용 법조문</div>
-      <p class="verdict-text">${r.legal_basis.join(', ')}</p>`:''}
-
-      <div class="verdict-ruling-box">
-        <h3>주 문</h3>
-        <div class="verdict-ruling-text">${r.ruling_text||r.ruling||'-'}</div>
-      </div>
-
-      <div class="verdict-chips">
-        <span class="verdict-chip">${llm.logo} ${llm.name} 분석</span>
-        <span class="verdict-chip">⚖️ K-Law v6.3</span>
-        ${extra.length?`<span class="verdict-chip">💬 추가정보 ${extra.length}건 반영</span>`:''}
-      </div>
-    </div>
-  </div>
-  <div class="disclaimer-box" role="note">
-    ⚠️ <strong>면책 고지:</strong> 본 K-Law AI 가상 판결은 학술 연구 목적으로 제공되며,
-    대한민국 변호사법상 법률 자문에 해당하지 않습니다.
-    실제 법적 분쟁에는 반드시 자격을 갖춘 법률 전문가의 조언을 구하시기 바랍니다.
-  </div>`;
+  <div class="verdict-doc"><div class="verdict-doc-header"><h2>K-Law AI 가상 판결문</h2><div class="verdict-doc-meta"><span>사건번호: ${d.caseId}</span><span>사건분류: ${label}</span><span>선고일: ${new Date().toLocaleDateString('ko-KR')}</span></div></div>
+  <div class="verdict-doc-body"><div class="verdict-section-title">1. 당사자</div><p class="verdict-text">원고: ${d.plaintiff}<br>피고: ${d.defendant}</p>
+  <div class="verdict-section-title">2. 사건의 요지</div><p class="verdict-text">${d.facts.slice(0,300)}${d.facts.length>300?'...':''}</p>
+  ${extra.length?`<div class="verdict-section-title">3. 추가 제출 정보 반영</div><p class="verdict-text">${extra.length}개 항목의 추가 정보가 본 판결 분석에 반영되었습니다.</p>`:''}
+  <div class="verdict-section-title">${extra.length?'4':'3'}. 법리 판단</div><p class="verdict-text">${r.key_legal_theory||'-'}</p>
+  <div class="verdict-section-title">${extra.length?'5':'4'}. 논증</div><p class="verdict-text">${r.reasoning||'-'}</p>
+  ${(r.legal_basis||[]).length?`<div class="verdict-section-title">${extra.length?'6':'5'}. 적용 법조문</div><p class="verdict-text">${r.legal_basis.join(', ')}</p>`:''}
+  <div class="verdict-ruling-box"><h3>주 문</h3><div class="verdict-ruling-text">${r.ruling_text||r.ruling||'-'}</div></div>
+  <div class="verdict-chips"><span class="verdict-chip">${llm.logo} ${llm.name}</span><span class="verdict-chip">⚖️ K-Law v6.4</span>${extra.length?`<span class="verdict-chip">💬 추가정보 ${extra.length}건 반영</span>`:''}</div></div></div>
+  <div class="disclaimer-box">⚠️ <strong>면책 고지:</strong> 본 판결은 연구 목적의 AI 가상 판결이며 법적 구속력이 없습니다. 실제 법적 분쟁에는 법률 전문가의 조언을 구하십시오.</div>`;
 }
-
-function dlVerdict(){
-  const txt=$('verdictDoc').innerText;
-  const blob=new Blob([txt],{type:'text/plain;charset=utf-8'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob);
-  a.download=`K-Law_판결문_${caseData.caseId||'download'}.txt`;
-  a.click();
-  toast('📄 판결문을 내려받았습니다.');
-}
-
-function resetAll(){clearKey();parsed=null;extraAnswers={};questions=[];location.reload();}
-
-/* ── 글자 수 카운터 ── */
-$('facts').addEventListener('input',function(){
-  const n=this.value.length;
-  $('factsCount').textContent=n;
-  if(n>2000){this.classList.add('error');}else{this.classList.remove('error');}
-});
+function dlVerdict(){ const txt=$('verdictDoc').innerText; const blob=new Blob([txt],{type:'text/plain'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`K-Law_판결문_${caseData.caseId||'download'}.txt`; a.click(); toast('📄 판결문 내려받기 완료'); }
+function resetAll(){ clearKey(); parsed=null; extraAnswers={}; dynamicQuestions=[]; location.reload(); }
+$('facts').addEventListener('input',function(){ const n=this.value.length; $('factsCount').textContent=n; if(n>2000){this.classList.add('error');}else{this.classList.remove('error');} });
 </script>
 </body>
 </html>
