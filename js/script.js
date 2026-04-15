@@ -76,65 +76,49 @@ function selectLLM(id) {
   panel.style.display = llm.needKey ? 'block' : 'none';
   if (!llm.needKey) userKey = null;
 }
-
 function confirmMode() {
   console.log("confirmMode 실행됨");
   const llm = LLMS[sel];
   if (!llm) { toast("LLM 선택 오류"); return; }
   if (llm.needKey) {
-    const keyInput = $('#userApiKey');
-    if (!keyInput) { toast("API Key 입력 필드 없음"); return; }
-    const v = keyInput.value.trim();
+    const v = $('#userApiKey').value.trim();
     if (!v) { toast('API Key를 입력하세요'); return; }
     userKey = v;
   }
-
-  // 안전하게 요소 확인
   const configBar = $('#configBar');
   if (configBar) {
     configBar.style.display = 'flex';
-    configBar.innerHTML = `
-      <div class="config-item">모드: 단일 LLM</div>
-      <div class="config-item">모델: ${llm.name}</div>
-      <div class="config-item">방법론: K-Law v6.4</div>
-    `;
-  } else {
-    console.warn("configBar 요소 없음");
-  }
-
-  const stepIndicator = $('#stepIndicator');
-  if (stepIndicator) stepIndicator.style.display = 'block';
-  
-  const aLogo = $('#aLogo');
-  if (aLogo) aLogo.innerText = llm.logo;
-  
-  const aTitle = $('#aTitle');
-  if (aTitle) aTitle.innerText = llm.name;
-  
-  const sec3Title = $('#sec3-title');
-  if (sec3Title) sec3Title.innerText = `${llm.name} 법리 분석 (K-Law v6.4)`;
-  
+    configBar.innerHTML = `<div class="config-item">모드: 단일 LLM</div><div class="config-item">모델: ${llm.name}</div><div class="config-item">방법론: K-Law v6.4</div>`;
+  } else console.warn("configBar 요소 없음");
+  $('#stepIndicator').style.display = 'block';
+  $('#aLogo').innerText = llm.logo;
+  $('#aTitle').innerText = llm.name;
+  $('#sec3-title').innerText = `${llm.name} 법리 분석 (K-Law v6.4)`;
   goSec(1);
 }
 
 // LLM 그리드 생성
 const llmGrid = $('#llmGrid');
-llmGrid.innerHTML = Object.keys(LLMS).map(k => `
-  <div class="llm-tile ${k === 'deepseek' ? 'selected' : ''}" id="opt-${k}" onclick="selectLLM('${k}')">
-    <div class="llm-logo ${LLMS[k].cls}">${LLMS[k].logo}</div>
-    <div class="llm-tile-name">${LLMS[k].name}</div>
-    <div class="llm-tile-maker">${LLMS[k].maker}</div>
-  </div>
-`).join('');
+if (llmGrid) {
+  llmGrid.innerHTML = Object.keys(LLMS).map(k => `
+    <div class="llm-tile ${k === 'deepseek' ? 'selected' : ''}" id="opt-${k}" onclick="selectLLM('${k}')">
+      <div class="llm-logo ${LLMS[k].cls}">${LLMS[k].logo}</div>
+      <div class="llm-tile-name">${LLMS[k].name}</div>
+      <div class="llm-tile-maker">${LLMS[k].maker}</div>
+    </div>
+  `).join('');
+} else console.error("llmGrid 요소 없음");
 
 // ── AI 자동 추출 ──
 async function extractFromFacts() {
-  const facts = $('#facts').value.trim();
+  const factsElem = $('#facts');
+  if (!factsElem) { toast("사건 개요 입력창을 찾을 수 없습니다."); return; }
+  const facts = factsElem.value.trim();
   if (facts.length < 20) { toast('사건 개요를 20자 이상 입력하세요'); return; }
   const btn = $('#btnExtract');
   const statusEl = $('#extractStatus');
   btn.disabled = true;
-  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 추출 중...`;
+  btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 추출 중...`;
   statusEl.style.display = 'block';
   statusEl.style.background = 'var(--primary-light)';
   statusEl.style.color = 'var(--primary)';
@@ -182,11 +166,11 @@ caseType 코드: civil_damage, civil_traffic, civil_medical, civil_contract, civ
     statusEl.innerText = `오류: ${e.message}`;
   } finally {
     btn.disabled = false;
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> AI 자동 추출`;
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> AI 자동 추출`;
   }
 }
 
-// ── 문서 생성 ──
+// ── 문서 생성 (toSec2, renderDoc 등) ──
 function toSec2() {
   const ct = $('#caseType').value, pl = $('#plaintiff').value.trim(), df = $('#defendant').value.trim();
   const fc = $('#facts').value.trim(), pc = $('#plaintiffClaim').value.trim(), dc = $('#defendantClaim').value.trim();
@@ -236,11 +220,11 @@ ${d.defendantClaim}
 ═══ END ═══`;
 }
 
-// ── 추가 정보 요청 ──
+// ── 추가 정보 요청 (toSec25, renderQuestions, onAns, skipQ, submitQ) ──
 async function toSec25() {
   const btn = $('#btnToSec25');
   btn.disabled = true;
-  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 생성 중...`;
+  btn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> 생성 중...`;
   const mandatory = $('#mandatoryDoc').innerText;
   const sys = `You are K-Law AI. Based on the mandatory document, generate up to 5 additional information questions (JSON array) with fields: id, text, priority("required"/"important"/"optional"), hint. Output only JSON array.`;
   try {
@@ -263,7 +247,7 @@ async function toSec25() {
   renderQuestions();
   goSec('25');
   btn.disabled = false;
-  btn.innerHTML = `AI 추가 정보 요청 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+  btn.innerHTML = `AI 추가 정보 요청 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
 }
 
 function renderQuestions() {
@@ -282,10 +266,7 @@ function renderQuestions() {
         <span class="priority-chip ${q.priority === 'required' ? 'req' : q.priority === 'important' ? 'imp' : 'opt'}">${q.priority === 'required' ? '필수' : q.priority === 'important' ? '중요' : '선택'}</span>
       </div>
       <div class="q-text">${q.text}</div>
-      <div class="q-hint">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-        ${q.hint}
-      </div>
+      <div class="q-hint"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg> ${q.hint}</div>
       <textarea class="field" id="ans-${q.id}" rows="2" oninput="onAns('${q.id}')"></textarea>
       <div class="ans-status" id="st-${q.id}">— 미입력</div>
     </div>
@@ -299,9 +280,7 @@ function onAns(id) {
   st.innerText = v ? '✓ 답변됨' : '— 미입력';
   st.style.color = v ? 'var(--success)' : '';
 }
-
 function skipQ() { runAnalysis(); }
-
 async function submitQ() {
   const unans = dynamicQuestions.filter(q => q.priority === 'required' && !extraAnswers[q.id]?.trim());
   if (unans.length) { toast(`필수 질문 ${unans.length}개에 답변하세요`); return; }
@@ -439,18 +418,20 @@ function dlVerdict() {
 
 function resetAll() { location.reload(); }
 
-$('#facts').addEventListener('input', function () {
+// 이벤트 리스너
+$('#facts')?.addEventListener('input', function () {
   const len = this.value.length;
   $('#factsCount').innerText = len;
   if (len > 2000) this.value = this.value.slice(0, 2000);
 });
 
-window.confirmMode = confirmMode;
+// 전역 노출 (onclick에서 접근 가능하도록)
 window.selectMode = selectMode;
 window.selectLLM = selectLLM;
+window.confirmMode = confirmMode;
+window.extractFromFacts = extractFromFacts;
 window.toSec2 = toSec2;
 window.goSec = goSec;
-window.extractFromFacts = extractFromFacts;
 window.toSec25 = toSec25;
 window.skipQ = skipQ;
 window.submitQ = submitQ;
