@@ -695,7 +695,19 @@ textarea { resize:vertical; line-height:1.6; }
       <div class="vr-head">최종 판결 · K-Law v6.4</div>
       <div class="vr-body" id="verdictBody"></div>
     </div>
-
+<!-- 판결 정당성 설명 및 추가 질문 섹션 -->
+<div id="explanationSection" class="explanation-card" style="display:none;">
+  <div class="explanation-title">📖 판결의 논리적 근거와 정당성</div>
+  <div id="explanationContent" class="explanation-text"></div>
+  <div id="analogyContent" class="analogy-box"></div>
+  
+  <div class="question-area">
+    <div class="explanation-title">💬 판결에 대해 궁금한 점을 물어보세요</div>
+    <textarea id="questionInput" class="question-input" rows="2" placeholder="예: 왜 피고가 승소했나요? 어떤 법이 적용되었나요?"></textarea>
+    <button class="question-submit" onclick="askAdditionalQuestion()">질문하기</button>
+    <div id="questionAnswer" class="question-answer"></div>
+  </div>
+</div>
     <div class="btn-row" style="margin-top:20px;">
       <button class="btn btn-secondary" onclick="showPage('bench')">&larr; 사건 수정</button>
       <button class="btn btn-secondary" id="btnReGen"  onclick="runGenerate()" style="display:none;">다시 생성</button>
