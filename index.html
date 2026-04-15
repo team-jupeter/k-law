@@ -2,263 +2,73 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>K-Law AI 가상 법원 — 케이로주식회사</title>
+<title>K-Law AI 가상 법원 (테스트)</title>
 <style>
-/* ========== 모든 스타일 (간결하게) ========== */
-*{margin:0;padding:0;box-sizing:border-box;}
-:root{--primary:#003E8A;--primary-dark:#00286A;--surface:#FFFFFF;--surface-variant:#F4F6F8;--on-surface:#1A1D21;--outline:#D0D5DB;--error:#B91C1C;--success:#166534;--shadow-sm:0 1px 2px rgba(0,0,0,.06);--radius-md:8px;--radius-xl:16px;}
-body{font-family:'Noto Sans KR',sans-serif;background:#EEF2F7;color:var(--on-surface);font-size:14px;}
-.gov-banner{background:var(--primary-dark);color:#fff;padding:6px 24px;display:flex;gap:8px;font-size:12px;}
-header{background:var(--surface);border-bottom:3px solid var(--primary);padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;}
-.brand{display:flex;align-items:center;gap:14px;text-decoration:none;}
-.brand-emblem{width:44px;height:44px;background:var(--primary);border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.brand-name{font-size:17px;font-weight:700;color:var(--primary);}
-.brand-sub{font-size:11px;color:#5A6169;}
-.status-badge{background:#F0FDF4;color:var(--success);padding:4px 12px;border-radius:100px;font-size:12px;display:flex;gap:6px;}
-.status-dot{width:7px;height:7px;background:#22C55E;border-radius:50%;}
-.case-id-chip{background:#E8F0FA;color:var(--primary);padding:4px 12px;border-radius:100px;font-size:12px;display:none;}
-main{max-width:980px;margin:0 auto;padding:32px 24px;}
-.page-hero{background:var(--surface);border-radius:var(--radius-xl);padding:52px 32px;text-align:center;margin-bottom:20px;border-top:4px solid var(--primary);}
-.page-hero h1{font-size:30px;font-weight:700;margin-top:10px;}
-.page-hero h1 em{color:var(--primary);}
-.service-tag{background:#E8F0FA;color:var(--primary);padding:5px 16px;border-radius:100px;font-size:12px;display:inline-flex;gap:6px;}
-.step-indicator{background:var(--surface);border-radius:12px;padding:18px 24px;margin-bottom:20px;display:none;overflow-x:auto;}
-.step-list{display:flex;justify-content:center;}
-.step-node{display:flex;flex-direction:column;align-items:center;width:80px;}
-.step-circle{width:30px;height:30px;border-radius:50%;background:#F4F6F8;border:2px solid var(--outline);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;}
-.step-node.active .step-circle{background:var(--primary);color:#fff;border-color:var(--primary);}
-.step-node.done .step-circle{background:var(--success);color:#fff;}
-.step-label{font-size:11px;margin-top:6px;color:#5A6169;}
-.step-connector{height:2px;width:36px;background:var(--outline);margin-top:14px;}
-.card{background:var(--surface);border-radius:var(--radius-xl);padding:32px;margin-bottom:20px;display:none;box-shadow:var(--shadow-sm);}
-.card.visible{display:block;}
-.card-header{display:flex;gap:16px;margin-bottom:28px;border-bottom:1px solid var(--outline);padding-bottom:20px;}
-.card-icon{width:48px;height:48px;background:#E8F0FA;border-radius:8px;display:flex;align-items:center;justify-content:center;}
-.card-header-text h2{font-size:20px;font-weight:700;}
-.step-badge{margin-left:auto;background:#E8F0FA;color:var(--primary);padding:4px 12px;border-radius:100px;font-size:11px;}
-.mode-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;}
-.mode-option{border:2px solid var(--outline);border-radius:12px;padding:22px 20px;cursor:pointer;position:relative;}
-.mode-option.selected{border-color:var(--primary);background:#F2F6FC;}
-.mode-radio{position:absolute;top:16px;right:16px;width:18px;height:18px;border-radius:50%;border:2px solid var(--outline);background:#fff;}
-.mode-option.selected .mode-radio{border-color:var(--primary);background:var(--primary);box-shadow:inset 0 0 0 3px #fff;}
-.llm-grid{display:grid;grid-template-columns:repeat(6,1fr);background:var(--outline);gap:1px;border-radius:8px;overflow:hidden;margin-bottom:16px;}
-.llm-tile{background:var(--surface);padding:14px 8px;text-align:center;cursor:pointer;}
-.llm-tile.selected{background:#E8F0FA;}
-.llm-logo{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-weight:700;}
-.lc-deepseek{background:#E0F4F9;color:#0092B3;}
-.lc-gpt{background:#F0FFF4;color:#1A7340;}
-.api-key-section{border:1px solid #D97706;background:#FFFBEB;border-radius:8px;padding:16px;display:none;margin-bottom:16px;}
-.form-group{margin-bottom:22px;}
-.form-label{font-weight:600;font-size:13px;display:flex;gap:6px;margin-bottom:8px;}
-.required-mark{color:var(--error);}
-.field{width:100%;padding:11px 14px;border:1.5px solid var(--outline);border-radius:8px;font-size:14px;}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
-.btn-row{display:flex;gap:10px;justify-content:flex-end;margin-top:28px;}
-.btn{padding:0 22px;height:44px;border-radius:8px;font-weight:600;cursor:pointer;border:none;}
-.btn-filled{background:var(--primary);color:#fff;}
-.btn-outlined{background:transparent;border:1.5px solid var(--primary);color:var(--primary);}
-.btn-text{background:transparent;color:var(--primary);}
-.info-banner{background:#E8F0FA;border-left:3px solid var(--primary);padding:14px 16px;border-radius:8px;margin-bottom:20px;display:flex;gap:12px;}
-.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
-.stat-card{background:var(--surface-variant);border-radius:8px;padding:16px;text-align:center;border:1px solid var(--outline);}
-.stat-num{font-size:26px;font-weight:700;color:var(--primary);}
-.question-panel{border:1px solid var(--outline);border-radius:12px;overflow:hidden;}
-.question-item{padding:20px;border-bottom:1px solid var(--outline);}
-.q-meta{display:flex;gap:8px;margin-bottom:10px;}
-.q-index{width:22px;height:22px;border-radius:50%;background:var(--primary);color:#fff;font-size:11px;display:flex;align-items:center;justify-content:center;}
-.priority-chip{font-size:10px;padding:2px 8px;border-radius:100px;}
-.priority-chip.req{background:#FEE2E2;color:var(--error);}
-.analysis-card{max-width:560px;margin:0 auto;padding:32px;border:1px solid var(--outline);border-radius:16px;text-align:center;}
-.analysis-logo{width:56px;height:56px;background:var(--primary);color:#fff;border-radius:14px;display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:22px;}
-.progress-track{height:5px;background:var(--outline);border-radius:100px;overflow:hidden;}
-.progress-fill{width:0%;height:100%;background:var(--primary);transition:width 0.3s;}
-.verdict-doc{border:2px solid var(--primary);border-radius:16px;overflow:hidden;}
-.verdict-doc-header{background:var(--primary);color:#fff;padding:32px;text-align:center;}
-.verdict-doc-body{padding:32px;}
-.verdict-ruling-box{background:#E8F0FA;padding:20px;border-radius:12px;margin-top:24px;border-left:3px solid var(--primary);}
-.ruling-chip{display:inline-block;background:var(--primary);color:#fff;padding:6px 18px;border-radius:100px;margin-bottom:20px;}
-.disclaimer-box{font-size:12px;text-align:center;margin-top:24px;padding-top:16px;border-top:1px solid var(--outline);}
-#snackbar{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#1A1D21;color:#fff;padding:9px 24px;border-radius:100px;opacity:0;transition:0.25s;pointer-events:none;}
-@media (max-width:768px){.form-row{grid-template-columns:1fr;}.llm-grid{grid-template-columns:repeat(3,1fr);}.mode-grid{grid-template-columns:1fr;}}
+  body { font-family: sans-serif; padding: 20px; }
+  textarea, input, select { width: 100%; margin: 8px 0; padding: 8px; }
+  button { margin-top: 8px; padding: 8px 16px; background: #003E8A; color: white; border: none; border-radius: 4px; cursor: pointer; }
+  .card { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+  .extract-status { margin-top: 8px; font-size: 14px; }
 </style>
 </head>
 <body>
 
-<div class="gov-banner">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-  <span>이 서비스는 <strong>케이로주식회사(K-Law Inc.)</strong>가 운영하는 AI 법률 중재 보조 서비스입니다. 법적 구속력이 없으며 실제 법률 상담을 대체하지 않습니다.</span>
+<div class="card">
+  <h2>사건 정보 입력</h2>
+  <label>사건 개요:</label>
+  <textarea id="facts" rows="6" placeholder="예: 원고 A는 피고 B에게 2024년 1월 1일 5천만 원을 대여하였으나, 피고는 변제하지 않아 원고는 대여금 반환을 청구합니다."></textarea>
+  <button id="btnExtract">🤖 AI 자동 추출</button>
+  <div id="extractStatus" class="extract-status"></div>
+
+  <hr>
+  <h3>추출 결과 (자동 채워짐)</h3>
+  <label>사건 분류:</label>
+  <select id="caseType"><option value="">선택</option><option value="civil_contract">계약위반</option></select>
+  <label>청구 금액:</label>
+  <input id="claimAmount" placeholder="금액">
+  <label>원고:</label>
+  <input id="plaintiff" placeholder="원고">
+  <label>피고:</label>
+  <input id="defendant" placeholder="피고">
+  <label>원고 주장:</label>
+  <textarea id="plaintiffClaim" rows="2"></textarea>
+  <label>피고 주장:</label>
+  <textarea id="defendantClaim" rows="2"></textarea>
+  <label>다툼 없는 사실:</label>
+  <textarea id="undisputedFacts" rows="2"></textarea>
 </div>
 
-<header>
-  <a href="#" class="brand">
-    <div class="brand-emblem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 3v18M5 3h14M5 21h14"/><path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/><line x1="5" y1="13" x2="19" y2="13"/></svg></div>
-    <div><div class="brand-name">K-Law AI 가상 법원</div><div class="brand-sub">케이로주식회사 · K-Law v6.4</div></div>
-  </a>
-  <div class="header-right">
-    <div class="status-badge"><div class="status-dot"></div> 시스템 정상</div>
-    <div class="case-id-chip" id="caseChip"></div>
-  </div>
-</header>
-
-<main>
-  <div class="page-hero">
-    <div class="service-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v18M5 3h14M5 21h14"/><path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/><line x1="5" y1="13" x2="19" y2="13"/></svg> AI 법률 중재 보조</div>
-    <h1>AI가 분석하는<br><em>공정한 법리 판단</em></h1>
-    <p>사건 정보를 입력하면 K-Law 방법론 v6.4에 따라 AI가 법리를 분석합니다.</p>
-  </div>
-
-  <nav class="step-indicator" id="stepIndicator"><div class="step-list" id="stepList"></div></nav>
-  <div class="config-bar" id="configBar" style="display:none;"></div>
-
-  <!-- SECTION 0: 모드 선택 -->
-  <section id="sec0" class="card visible">
-    <div class="card-header"><div class="card-icon">⚙️</div><div class="card-header-text"><h2>분석 모드 선택</h2><p>AI 모델과 분석 방식을 선택하십시오.</p></div></div>
-    <div class="mode-grid">
-      <div class="mode-option selected" id="card-single" onclick="selectMode('single')"><div class="mode-radio"></div><div class="mode-chip">★ 기본값</div><div>🤖</div><h3>단일 LLM 모드</h3><p>하나의 AI가 K-Law 방법론으로 분석</p></div>
-      <div class="mode-option disabled" id="card-multi"><div class="mode-radio"></div><div>🏛️</div><h3>복수 LLM 합의 모드</h3><p>준비 중</p></div>
-    </div>
-    <div class="llm-section"><div class="llm-section-header">🤖 AI 모델 선택</div><div class="llm-grid" id="llmGrid"></div></div>
-    <div class="api-key-section" id="apiKeySection"><div class="api-key-label">🔑 <span id="apiKeyLlmName"></span>은 API Key 필요</div><input type="password" id="userApiKey" class="field" placeholder="API Key를 입력하십시오"><div id="keyStatus" style="font-size:12px; margin-top:6px;"></div></div>
-    <div class="btn-row"><button class="btn btn-filled" onclick="confirmMode()">선택 완료 — 사건 접수 시작 →</button></div>
-  </section>
-
-  <!-- SECTION 1: 사건 정보 입력 -->
-  <section id="sec1" class="card">
-    <div class="card-header"><div class="card-icon">📋</div><div class="card-header-text"><h2>사건 정보 입력</h2><p>판결을 암시하지 않고 사실관계와 양측 주장을 기술하십시오.</p></div><span class="step-badge">1단계 / 6</span></div>
-    <div class="info-banner"><div class="info-banner-icon">🤖</div><div><h4>AI 자동 입력 지원</h4><p>사건 개요 입력 후 「AI 자동 추출」 버튼을 누르면 사건 분류·청구 금액·원고·피고·주장·다툼 없는 사실을 자동 추출합니다.</p></div></div>
-    <div class="form-group"><label class="form-label">사건 개요 <span class="required-mark">*</span></label><textarea class="field" id="facts" rows="6" placeholder="분쟁의 배경, 경위, 사실관계를 구체적으로 기재하세요. 원고와 피고의 이름, 청구 금액을 포함하면 더 정확하게 추출됩니다."></textarea><div style="display:flex; justify-content:space-between; margin-top:8px;"><span class="char-count"><span id="factsCount">0</span>/2000자</span><button class="btn btn-filled" id="btnExtract" onclick="extractFromFacts()" style="height:36px;">🤖 AI 자동 추출</button></div><div id="extractStatus"></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">사건 분류 <span class="required-mark">*</span><span id="caseTypeAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><select class="field" id="caseType" required><option value="">선택</option><optgroup label="민사"><option value="civil_damage">손해배상(불법행위)</option><option value="civil_traffic">손해배상(교통사고)</option><option value="civil_medical">손해배상(의료)</option><option value="civil_contract">계약위반</option><option value="civil_lease">임대차</option><option value="civil_insurance">보험</option></optgroup><optgroup label="가사"><option value="family_divorce">이혼·위자료</option><option value="family_custody">친권·양육권</option><option value="family_inherit">상속</option></optgroup><optgroup label="형사"><option value="criminal_fraud">사기</option><option value="criminal_embezzle">횡령·배임</option><option value="criminal_assault">폭행·상해</option></optgroup><optgroup label="행정"><option value="admin_cancel">행정처분 취소</option><option value="admin_compensation">국가배상</option></optgroup></select></div><div class="form-group"><label class="form-label">청구 금액<span id="claimAmountAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><input class="field" id="claimAmount" placeholder="예: 50,000,000원"></div></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">원고 <span class="required-mark">*</span><span id="plaintiffAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><input class="field" id="plaintiff" required placeholder="원고 성명 또는 법인명"></div><div class="form-group"><label class="form-label">피고 <span class="required-mark">*</span><span id="defendantAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><input class="field" id="defendant" required placeholder="피고 성명 또는 법인명"></div></div>
-    <div class="form-group"><label class="form-label">다툼 없는 사실<span id="undisputedAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><textarea class="field" id="undisputedFacts" rows="3" placeholder="양측이 동의하는 핵심 사실을 기재하세요. (AI 자동 추출 가능)"></textarea></div>
-    <div class="form-row"><div class="form-group"><label class="form-label">원고의 주장 <span class="required-mark">*</span><span id="plaintiffClaimAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><textarea class="field" id="plaintiffClaim" required rows="4" placeholder="원고가 주장하는 사실관계와 법적 근거"></textarea></div><div class="form-group"><label class="form-label">피고의 주장 <span class="required-mark">*</span><span id="defendantClaimAiBadge" class="ai-badge" style="display:none;">AI 추출</span></label><textarea class="field" id="defendantClaim" required rows="4" placeholder="피고가 주장하는 사실관계와 법적 근거"></textarea></div></div>
-    <div class="btn-row"><button class="btn btn-outlined" onclick="goSec(0)">← 이전</button><button class="btn btn-filled" onclick="toSec2()">다음: 문서 생성 →</button></div>
-  </section>
-
-  <!-- SECTION 2: Mandatory Execute -->
-  <section id="sec2" class="card"><div class="card-header"><div class="card-icon">📄</div><div><h2>Mandatory Execute 문서</h2><p>사건 정보를 K-Law 실행 문서로 변환합니다.</p></div><span class="step-badge">2단계 / 6</span></div><pre class="code-doc" id="mandatoryDoc" style="background:#F8FAFC;padding:20px;border-radius:8px;overflow:auto;white-space:pre-wrap;"></pre><div class="btn-row"><button class="btn btn-outlined" onclick="goSec(1)">← 이전</button><button class="btn btn-filled" id="btnToSec25" onclick="toSec25()">AI 추가 정보 요청 →</button></div></section>
-
-  <!-- SECTION 2.5: 추가 정보 -->
-  <section id="sec25" class="card"><div class="card-header"><div class="card-icon">💬</div><div><h2>AI 추가 정보 요청</h2><p id="sec25Sub">AI가 정확한 판결을 위해 추가 정보를 요청합니다.</p></div><span class="step-badge">3단계 / 6</span></div><div class="info-banner" id="dynamicInfoBanner" style="display:none;"><div>🔍</div><div><h4>추가 정보 필요</h4><p><strong id="qTotal">-</strong>개 항목</p></div></div><div class="stat-grid"><div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div>필수</div></div><div class="stat-card"><div class="stat-num" id="impCnt">-</div><div>중요</div></div><div class="stat-card"><div class="stat-num" id="optCnt">-</div><div>선택</div></div></div><div class="question-panel" id="questionList"></div><div class="btn-row"><button class="btn btn-outlined" onclick="goSec(2)">← 이전</button><button class="btn btn-text" onclick="skipQ()">생략</button><button class="btn btn-filled" onclick="submitQ()">답변 제출 후 AI 분석 →</button></div></section>
-
-  <!-- SECTION 3: AI 분석 -->
-  <section id="sec3" class="card"><div class="card-header"><div class="card-icon">🤖</div><div><h2 id="sec3-title">AI 법리 분석</h2><p>K-Law 방법론 v6.4 적용</p></div><span class="step-badge">4단계 / 6</span></div><div class="analysis-card"><div class="analysis-logo" id="aLogo">D</div><div class="analysis-title" id="aTitle">DeepSeek R1</div><div class="analysis-status" id="aStatus">⚡ 준비 중</div><div class="progress-track"><div class="progress-fill" id="aProg"></div></div><div class="thinking-box" id="aThinking" style="display:none;"></div><div class="result-summary" id="aResult" style="display:none;"></div></div><div class="error-banner" id="errBanner" style="display:none;"><h4>오류 발생</h4><p id="errMsg"></p></div><div class="btn-row" id="sec3Btn" style="display:none;"><button class="btn btn-filled" onclick="goSec(4)">판결 내용 확인 →</button></div></section>
-
-  <!-- SECTION 4: 판결 확인 -->
-  <section id="sec4" class="card"><div class="card-header"><div class="card-icon">✅</div><div><h2>판결 내용 확인</h2><p>AI가 도출한 가상 판결을 검토하십시오.</p></div><span class="step-badge">5단계 / 6</span></div><div id="sec4Content"></div><div class="btn-row"><button class="btn btn-outlined" onclick="goSec(3)">← 재분석</button><button class="btn btn-filled" onclick="goSec(5)">최종 판결 제출 →</button></div></section>
-
-  <!-- SECTION 5: 최종 판결 -->
-  <section id="sec5" class="card"><div class="card-header"><div class="card-icon">📜</div><div><h2>K-Law AI 가상 판결</h2><p>연구 목적, 법적 구속력 없음</p></div><span class="step-badge">6단계 / 6</span></div><div id="verdictDoc"></div><div class="btn-row"><button class="btn btn-outlined" onclick="resetAll()">새 사건 접수</button><button class="btn btn-filled" onclick="dlVerdict()">판결문 내려받기</button></div></section>
-</main>
-
-<footer style="text-align:center;padding:24px;font-size:12px;"><p>케이로주식회사 · <a href="https://github.com/jejuro/k-law" target="_blank">GitHub</a> · GPL-3.0</p></footer>
-<div id="snackbar"></div>
-
 <script>
-// ========== 모든 자바스크립트 (스크립트는 모든 HTML 요소 이후에 위치) ==========
+// API 키 (노출 허용)
 const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
-const LLMS = {
-  deepseek: { name:'DeepSeek R1', maker:'DeepSeek AI', logo:'D', cls:'lc-deepseek', model:'deepseek-reasoner', ep:'https://api.deepseek.com/chat/completions', needKey:false },
-  gpt:      { name:'GPT-4o',      maker:'OpenAI',      logo:'G', cls:'lc-gpt',      model:'gpt-4o',          ep:'https://api.openai.com/v1/chat/completions',     needKey:true  },
-};
-let sel = 'deepseek', userKey = null;
-let caseId = '', caseData = {}, extraAnswers = {}, dynamicQuestions = [];
-let parsed = null;
 
+// DOM 요소 접근 함수
 const $ = id => document.getElementById(id);
-function toast(msg) {
-  const s = $('#snackbar');
-  if(s) { s.textContent = msg; s.style.opacity = '1'; setTimeout(() => { if(s) s.style.opacity = '0'; }, 3000); }
-}
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
-function genId() { return `KL-${new Date().getFullYear()}-${Math.floor(Math.random() * 90000 + 10000)}`; }
 
-// 단계 표시
-const STEPS = ['1', '2', '25', '3', '4', '5'];
-const STEP_LABELS = { '1':'사건입력', '2':'문서생성', '25':'추가정보', '3':'AI분석', '4':'판결확인', '5':'최종판결' };
-function renderStepIndicator() {
-  const container = $('#stepList');
-  if(container) {
-    container.innerHTML = STEPS.map((s, i) => `<div style="display:flex; align-items:center;"><div class="step-node" id="sn-${s}"><div class="step-circle">${i+1}</div><div class="step-label">${STEP_LABELS[s]}</div></div>${i<STEPS.length-1 ? `<div class="step-connector" id="sc-${s}"></div>` : ''}</div>`).join('');
-  }
-}
-renderStepIndicator();
-
-function updateSteps(cur) {
-  const idx = STEPS.indexOf(String(cur));
-  STEPS.forEach((s,i) => {
-    const node = $(`sn-${s}`);
-    if(node) { node.classList.remove('active','done'); if(i<idx) node.classList.add('done'); else if(i===idx) node.classList.add('active'); }
-    const conn = $(`sc-${s}`);
-    if(conn) { conn.classList.remove('done'); if(i<idx) conn.classList.add('done'); }
-  });
-}
-
-function goSec(n) {
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('visible'));
-  const el = $(`sec${n}`);
-  if(el) el.classList.add('visible');
-  if(n !== 0 && n !== '0') updateSteps(String(n));
-  if(n === 5 || n === '5') renderVerdict();
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// 모드 및 LLM 선택
-window.selectMode = function(m) { 
-  const single = $('#card-single');
-  if(single) single.classList.toggle('selected', m === 'single');
-};
-window.selectLLM = function(id) {
-  sel = id;
-  document.querySelectorAll('.llm-tile').forEach(t => t.classList.toggle('selected', t.id === `opt-${id}`));
-  const llm = LLMS[id];
-  const panel = $('#apiKeySection');
-  const llmNameSpan = $('#apiKeyLlmName');
-  if(llmNameSpan) llmNameSpan.innerText = llm.name;
-  if(panel) panel.style.display = llm.needKey ? 'block' : 'none';
-  if(!llm.needKey) userKey = null;
-};
-window.confirmMode = function() {
-  const llm = LLMS[sel];
-  if(!llm) { toast('LLM 선택 오류'); return; }
-  if(llm.needKey) {
-    const keyInput = $('#userApiKey');
-    if(!keyInput) { toast('API Key 입력창 없음'); return; }
-    const v = keyInput.value.trim();
-    if(!v) { toast('API Key를 입력하세요'); return; }
-    userKey = v;
-  }
-  const configBar = $('#configBar');
-  if(configBar) {
-    configBar.style.display = 'flex';
-    configBar.innerHTML = `<div class="config-item">모드: 단일 LLM</div><div class="config-item">모델: ${llm.name}</div><div class="config-item">방법론: K-Law v6.4</div>`;
-  } else { console.warn('configBar 없음'); }
-  const stepIndicator = $('#stepIndicator');
-  if(stepIndicator) stepIndicator.style.display = 'block';
-  const aLogo = $('#aLogo'); if(aLogo) aLogo.innerText = llm.logo;
-  const aTitle = $('#aTitle'); if(aTitle) aTitle.innerText = llm.name;
-  const sec3Title = $('#sec3-title'); if(sec3Title) sec3Title.innerText = `${llm.name} 법리 분석 (K-Law v6.4)`;
-  goSec(1);
-};
-
-// LLM 그리드 생성
-const llmGridElem = $('#llmGrid');
-if(llmGridElem) {
-  llmGridElem.innerHTML = Object.keys(LLMS).map(k => `<div class="llm-tile ${k==='deepseek'?'selected':''}" id="opt-${k}" onclick="selectLLM('${k}')"><div class="llm-logo ${LLMS[k].cls}">${LLMS[k].logo}</div><div class="llm-tile-name">${LLMS[k].name}</div><div class="llm-tile-maker">${LLMS[k].maker}</div></div>`).join('');
-}
-
-// AI 자동 추출
-window.extractFromFacts = async function() {
+// 추출 함수
+async function extractFromFacts() {
   const factsElem = $('#facts');
-  if(!factsElem) { toast('사건 개요 입력창 없음'); return; }
+  if (!factsElem) { alert('facts 요소 없음'); return; }
   const facts = factsElem.value.trim();
-  if(facts.length < 20) { toast('사건 개요를 20자 이상 입력하세요'); return; }
+  if (facts.length < 20) {
+    alert('사건 개요를 20자 이상 입력하세요');
+    return;
+  }
+
   const btn = $('#btnExtract');
-  const statusEl = $('#extractStatus');
-  if(btn) btn.disabled = true;
-  if(btn) btn.innerHTML = '⏳ 추출 중...';
-  if(statusEl) { statusEl.style.display = 'block'; statusEl.style.background = '#E8F0FA'; statusEl.style.color = '#003E8A'; statusEl.innerText = 'AI 분석 중...'; }
-  const sys = `당신은 법률 문서 분석 전문가입니다. 사건 개요에서 다음 7가지 정보를 추출하여 JSON만 출력하세요:
+  const statusDiv = $('#extractStatus');
+  if (btn) {
+    btn.disabled = true;
+    btn.innerText = '⏳ 추출 중...';
+  }
+  if (statusDiv) {
+    statusDiv.style.display = 'block';
+    statusDiv.innerText = 'AI 분석 중...';
+    statusDiv.style.background = '#E8F0FA';
+    statusDiv.style.padding = '8px';
+  }
+
+  const systemPrompt = `당신은 법률 문서 분석 전문가입니다. 사건 개요에서 다음 7가지 정보를 추출하여 JSON만 출력하세요:
 {
   "caseType": "코드",
   "claimAmount": "금액",
@@ -268,223 +78,61 @@ window.extractFromFacts = async function() {
   "defendantClaim": "피고의 주장 요약",
   "undisputedFacts": "다툼 없는 사실 요약"
 }
-caseType 코드: civil_damage, civil_traffic, civil_medical, civil_contract, civil_lease, civil_insurance, family_divorce, family_custody, family_inherit, criminal_fraud, criminal_embezzle, criminal_assault, admin_cancel, admin_compensation`;
+caseType 코드: civil_contract, civil_damage 등 (없으면 civil_contract)`;
+
   try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
-      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${DS_KEY}`},
-      body:JSON.stringify({model:'deepseek-chat', messages:[{role:'system',content:sys},{role:'user',content:facts}], temperature:0.1, max_tokens:800})
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: facts }],
+        temperature: 0.1,
+        max_tokens: 800
+      })
     });
-    if(!res.ok) throw new Error('API 오류');
-    const data = await res.json();
+    if (!response.ok) throw new Error(`API 오류: ${response.status}`);
+    const data = await response.json();
     const content = data.choices[0].message.content;
-    const match = content.match(/\{[\s\S]*\}/);
-    if(!match) throw new Error('JSON 추출 실패');
-    const ex = JSON.parse(match[0]);
-    const valid = ['civil_damage','civil_traffic','civil_medical','civil_contract','civil_lease','civil_insurance','family_divorce','family_custody','family_inherit','criminal_fraud','criminal_embezzle','criminal_assault','admin_cancel','admin_compensation'];
-    let filled = [];
-    if(ex.caseType && valid.includes(ex.caseType)) { const ct = $('#caseType'); if(ct) ct.value = ex.caseType; const badge = $('#caseTypeAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('사건분류'); }
-    if(ex.claimAmount) { const ca = $('#claimAmount'); if(ca) ca.value = ex.claimAmount; const badge = $('#claimAmountAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('청구금액'); }
-    if(ex.plaintiff) { const p = $('#plaintiff'); if(p) p.value = ex.plaintiff; const badge = $('#plaintiffAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('원고'); }
-    if(ex.defendant) { const d = $('#defendant'); if(d) d.value = ex.defendant; const badge = $('#defendantAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('피고'); }
-    if(ex.undisputedFacts) { const uf = $('#undisputedFacts'); if(uf) uf.value = ex.undisputedFacts; const badge = $('#undisputedAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('다툼없는사실'); }
-    if(ex.plaintiffClaim) { const pc = $('#plaintiffClaim'); if(pc) pc.value = ex.plaintiffClaim; const badge = $('#plaintiffClaimAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('원고주장'); }
-    if(ex.defendantClaim) { const dc = $('#defendantClaim'); if(dc) dc.value = ex.defendantClaim; const badge = $('#defendantClaimAiBadge'); if(badge) badge.style.display='inline-block'; filled.push('피고주장'); }
-    if(statusEl) { statusEl.style.background = '#F0FDF4'; statusEl.style.color = '#166534'; statusEl.innerText = `✓ 추출 완료: ${filled.join(' · ')} — 필요 시 직접 수정 가능합니다.`; }
-  } catch(e) {
-    if(statusEl) { statusEl.style.background = '#FEF2F2'; statusEl.style.color = '#B91C1C'; statusEl.innerText = `오류: ${e.message}`; }
-  } finally {
-    if(btn) { btn.disabled = false; btn.innerHTML = '🤖 AI 자동 추출'; }
-  }
-};
+    const jsonMatch = content.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('JSON 추출 실패');
+    const extracted = JSON.parse(jsonMatch[0]);
 
-// 문서 생성
-window.toSec2 = function() {
-  const ctElem = $('#caseType'); const plElem = $('#plaintiff'); const dfElem = $('#defendant');
-  const fcElem = $('#facts'); const pcElem = $('#plaintiffClaim'); const dcElem = $('#defendantClaim');
-  if(!ctElem || !plElem || !dfElem || !fcElem || !pcElem || !dcElem) { toast('일부 입력 필드 누락'); return; }
-  const ct = ctElem.value, pl = plElem.value.trim(), df = dfElem.value.trim();
-  const fc = fcElem.value.trim(), pc = pcElem.value.trim(), dc = dcElem.value.trim();
-  if(!ct || !pl || !df || !fc || !pc || !dc) { toast('필수 항목을 모두 입력하세요'); return; }
-  caseId = genId();
-  const caseChip = $('#caseChip');
-  if(caseChip) { caseChip.innerText = `사건번호 ${caseId}`; caseChip.style.display = 'block'; }
-  const claimAmountElem = $('#claimAmount');
-  const undisputedElem = $('#undisputedFacts');
-  caseData = {
-    caseType: ct, plaintiff: pl, defendant: df, facts: fc,
-    plaintiffClaim: pc, defendantClaim: dc,
-    undisputedFacts: undisputedElem ? undisputedElem.value.trim() : '',
-    caseId, claimAmount: claimAmountElem ? claimAmountElem.value : ''
-  };
-  renderDoc();
-  goSec(2);
-};
-function renderDoc() {
-  const d = caseData;
-  const label = { civil_damage:'손해배상(불법행위)', civil_traffic:'손해배상(교통사고)', civil_medical:'손해배상(의료)', civil_contract:'계약위반', civil_lease:'임대차', civil_insurance:'보험', family_divorce:'이혼·위자료', family_custody:'친권·양육권', family_inherit:'상속', criminal_fraud:'사기', criminal_embezzle:'횡령·배임', criminal_assault:'폭행·상해', admin_cancel:'행정처분 취소', admin_compensation:'국가배상' }[d.caseType] || d.caseType;
-  const llm = LLMS[sel];
-  const mandatoryElem = $('#mandatoryDoc');
-  if(mandatoryElem) {
-    mandatoryElem.innerText = `═══ K-LAW MANDATORY EXECUTE v6.4 ═══\n\n[사건번호] ${d.caseId}\n[사건분류] ${label}\n[청구금액] ${d.claimAmount || '미기재'}\n[분석 LLM] ${llm.name}\n\n── 당사자 ──\n원고: ${d.plaintiff}\n피고: ${d.defendant}\n\n── 다툼 없는 사실 ──\n${d.undisputedFacts || '(없음)'}\n\n── 사건 개요 ──\n${d.facts}\n\n── 원고 주장 ──\n${d.plaintiffClaim}\n\n── 피고 주장 ──\n${d.defendantClaim}\n═══ END ═══`;
-  }
-}
+    // 필드 채우기
+    if (extracted.caseType) $('#caseType').value = extracted.caseType;
+    if (extracted.claimAmount) $('#claimAmount').value = extracted.claimAmount;
+    if (extracted.plaintiff) $('#plaintiff').value = extracted.plaintiff;
+    if (extracted.defendant) $('#defendant').value = extracted.defendant;
+    if (extracted.plaintiffClaim) $('#plaintiffClaim').value = extracted.plaintiffClaim;
+    if (extracted.defendantClaim) $('#defendantClaim').value = extracted.defendantClaim;
+    if (extracted.undisputedFacts) $('#undisputedFacts').value = extracted.undisputedFacts;
 
-// 추가 정보 요청
-window.toSec25 = async function() {
-  const btn = $('#btnToSec25');
-  if(btn) { btn.disabled = true; btn.innerHTML = '⏳ 생성 중...'; }
-  const mandatory = $('#mandatoryDoc') ? $('#mandatoryDoc').innerText : '';
-  const sys = `You are K-Law AI. Based on the mandatory document, generate up to 5 additional information questions (JSON array) with fields: id, text, priority("required"/"important"/"optional"), hint. Output only JSON array.`;
-  try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
-      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${DS_KEY}`},
-      body:JSON.stringify({model:'deepseek-chat', messages:[{role:'system',content:sys},{role:'user',content:mandatory}], temperature:0.3, max_tokens:1000})
-    });
-    const data = await res.json();
-    const content = data.choices[0].message.content;
-    const match = content.match(/\[[\s\S]*\]/);
-    if(match) dynamicQuestions = JSON.parse(match[0]).slice(0,5);
-    else throw new Error('no json');
-  } catch(e) { dynamicQuestions = [{ id:'q1', text:'추가 증거 자료가 있습니까?', priority:'required', hint:'계약서, 영수증, 사진, 증인 등' },{ id:'q2', text:'합의 시도가 있었습니까?', priority:'optional', hint:'협상 경위 및 결과' }]; }
-  renderQuestions();
-  goSec('25');
-  if(btn) { btn.disabled = false; btn.innerHTML = 'AI 추가 정보 요청 →'; }
-};
-function renderQuestions() {
-  const banner = $('#dynamicInfoBanner');
-  if(banner) banner.style.display = 'flex';
-  const req = dynamicQuestions.filter(q=>q.priority==='required').length;
-  const imp = dynamicQuestions.filter(q=>q.priority==='important').length;
-  const opt = dynamicQuestions.filter(q=>q.priority==='optional').length;
-  const qTotal = $('#qTotal'); if(qTotal) qTotal.innerText = dynamicQuestions.length;
-  const reqCnt = $('#reqCnt'); if(reqCnt) reqCnt.innerText = req;
-  const impCnt = $('#impCnt'); if(impCnt) impCnt.innerText = imp;
-  const optCnt = $('#optCnt'); if(optCnt) optCnt.innerText = opt;
-  const qList = $('#questionList');
-  if(qList) {
-    qList.innerHTML = dynamicQuestions.map((q,i)=>`
-      <div class="question-item">
-        <div class="q-meta"><div class="q-index">${i+1}</div><span class="priority-chip ${q.priority==='required'?'req':q.priority==='important'?'imp':'opt'}">${q.priority==='required'?'필수':q.priority==='important'?'중요':'선택'}</span></div>
-        <div class="q-text">${q.text}</div>
-        <div class="q-hint">💡 ${q.hint}</div>
-        <textarea class="field" id="ans-${q.id}" rows="2" oninput="onAns('${q.id}')"></textarea>
-        <div class="ans-status" id="st-${q.id}">— 미입력</div>
-      </div>`).join('');
-  }
-}
-window.onAns = function(id) {
-  const input = $(`ans-${id}`);
-  if(!input) return;
-  const v = input.value.trim();
-  extraAnswers[id] = v;
-  const st = $(`st-${id}`);
-  if(st) { st.innerText = v ? '✓ 답변됨' : '— 미입력'; st.style.color = v ? '#166534' : ''; }
-};
-window.skipQ = function() { runAnalysis(); };
-window.submitQ = async function() {
-  const unans = dynamicQuestions.filter(q=>q.priority==='required' && !extraAnswers[q.id]?.trim());
-  if(unans.length) { toast(`필수 질문 ${unans.length}개에 답변하세요`); return; }
-  toast('답변 반영 후 분석 시작');
-  await sleep(500);
-  runAnalysis();
-};
-
-// K-Law 분석
-async function runAnalysis() {
-  goSec(3); await sleep(200);
-  const status = $('#aStatus'), prog = $('#aProg'), thinking = $('#aThinking'), result = $('#aResult'), err = $('#errBanner');
-  if(status) status.innerText = 'K-Law 방법론 v6.4 적용 중...';
-  if(prog) prog.style.width = '5%';
-  if(thinking) thinking.style.display = 'none';
-  if(result) result.style.display = 'none';
-  if(err) err.style.display = 'none';
-  const sec3Btn = $('#sec3Btn'); if(sec3Btn) sec3Btn.style.display = 'none';
-  const extra = dynamicQuestions.filter(q=>extraAnswers[q.id]?.trim()).map(q=>`Q: ${q.text}\nA: ${extraAnswers[q.id]}`).join('\n\n');
-  const mandatory = $('#mandatoryDoc') ? $('#mandatoryDoc').innerText : '';
-  const sysPrompt = `You are K-Law AI. Follow the K-Law v6.4 mandatory steps exactly.
-STEP A (피고 승소 논거): Write at least 300 characters defending the defendant, cite at least one precedent or general principle. End with [STEP-A-COMPLETE].
-STEP B (판결문): Perform in order: 1) legal relationship, 2) issue decomposition, 3) syllogism for both parties, 4) causal analysis and value balancing, 5) damage calculation, 6) metacognition self-check. Then output JSON: {"ruling":"원고 승소|피고 승소|일부승소","key_legal_theory":"...","reasoning":"...","legal_basis":["..."],"ruling_text":"...","verdict_summary":"..."}. End with [STEP-B-COMPLETE].
-STEP C (consistency check): Answer three questions. End with [STEP-C-COMPLETE].`;
-  const userMsg = `${mandatory}\n\n추가 정보:\n${extra}`;
-  try {
-    const llm = LLMS[sel];
-    const apiKey = llm.needKey ? userKey : DS_KEY;
-    const res = await fetch(llm.ep, {
-      method:'POST', headers:{'Content-Type':'application/json','Authorization':`Bearer ${apiKey}`},
-      body:JSON.stringify({model:llm.model, messages:[{role:'system',content:sysPrompt},{role:'user',content:userMsg}], stream:true, temperature:0.2, max_tokens:8000})
-    });
-    if(!res.ok) throw new Error(`API ${res.status}`);
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-    let full = '', pct = 20;
-    if(thinking) { thinking.style.display = 'block'; thinking.innerText = '추론 진행 중...\n'; }
-    while(true) {
-      const {done, value} = await reader.read();
-      if(done) break;
-      const chunk = decoder.decode(value);
-      const lines = chunk.split('\n').filter(l=>l.startsWith('data: '));
-      for(const line of lines) {
-        const data = line.slice(6).trim();
-        if(data === '[DONE]') continue;
-        try {
-          const j = JSON.parse(data);
-          const delta = j.choices?.[0]?.delta;
-          if(delta?.reasoning_content && thinking) { thinking.innerText += delta.reasoning_content; thinking.scrollTop = thinking.scrollHeight; }
-          if(delta?.content) { full += delta.content; if(pct<90 && prog) { pct += 0.5; prog.style.width = pct+'%'; if(status) status.innerText = `생성 중... (${full.length}자)`; } }
-        } catch(e) {}
-      }
+    if (statusDiv) {
+      statusDiv.style.background = '#F0FDF4';
+      statusDiv.style.color = '#166534';
+      statusDiv.innerText = '✅ 추출 완료!';
     }
-    if(prog) prog.style.width = '100%';
-    if(status) { status.style.color = '#166534'; status.innerText = '✓ 분석 완료'; }
-    const jsonMatch = full.match(/\{[\s\S]*"ruling"[\s\S]*\}/);
-    if(jsonMatch) parsed = JSON.parse(jsonMatch[0]);
-    else throw new Error('JSON 미추출');
-    if(result) { result.style.display = 'block'; result.innerHTML = `<strong>판결:</strong> ${parsed.ruling}<br><strong>법리:</strong> ${parsed.key_legal_theory}`; }
-    if(sec3Btn) sec3Btn.style.display = 'flex';
-    renderSec4();
-    if(llm.needKey) { userKey = null; const keyInput = $('#userApiKey'); if(keyInput) keyInput.value = ''; toast('API Key 삭제됨'); }
-  } catch(e) {
-    if(status) { status.innerText = '오류 발생'; status.style.color = '#B91C1C'; }
-    if(err) { err.style.display = 'block'; const errMsg = $('#errMsg'); if(errMsg) errMsg.innerText = e.message; }
+  } catch (err) {
+    console.error(err);
+    if (statusDiv) {
+      statusDiv.style.background = '#FEF2F2';
+      statusDiv.style.color = '#B91C1C';
+      statusDiv.innerText = `오류: ${err.message}`;
+    }
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.innerText = '🤖 AI 자동 추출';
+    }
   }
 }
-function renderSec4() {
-  const r = parsed || { ruling:'-', key_legal_theory:'-', reasoning:'-', legal_basis:[], ruling_text:'-', verdict_summary:'-' };
-  const contentDiv = $('#sec4Content');
-  if(contentDiv) {
-    contentDiv.innerHTML = `<div class="ruling-chip">${r.ruling}</div><div><strong>핵심 법리</strong><p>${r.key_legal_theory}</p></div><div><strong>세부 논증</strong><p>${r.reasoning}</p></div><div><strong>법조문</strong><p>${(r.legal_basis||[]).join(', ')}</p></div><div><strong>판결 요지</strong><p>${r.verdict_summary}</p></div>`;
-  }
-}
-function renderVerdict() {
-  const d = caseData, r = parsed || {};
-  const label = { civil_damage:'손해배상(불법행위)', civil_traffic:'손해배상(교통사고)', civil_medical:'손해배상(의료)', civil_contract:'계약위반', civil_lease:'임대차', civil_insurance:'보험', family_divorce:'이혼·위자료', family_custody:'친권·양육권', family_inherit:'상속', criminal_fraud:'사기', criminal_embezzle:'횡령·배임', criminal_assault:'폭행·상해', admin_cancel:'행정처분 취소', admin_compensation:'국가배상' }[d.caseType] || d.caseType;
-  const extraCount = dynamicQuestions.filter(q=>extraAnswers[q.id]?.trim()).length;
-  const verdictElem = $('#verdictDoc');
-  if(verdictElem) {
-    verdictElem.innerHTML = `<div class="verdict-doc"><div class="verdict-doc-header"><h2>K-Law AI 가상 판결문</h2><div>사건번호 ${d.caseId}</div><div>${label}</div></div><div class="verdict-doc-body"><div class="verdict-section-title">당사자</div><p>원고 ${d.plaintiff}<br>피고 ${d.defendant}</p><div class="verdict-section-title">다툼 없는 사실</div><p>${d.undisputedFacts || '-'}</p><div class="verdict-section-title">법리 판단</div><p>${r.key_legal_theory || '-'}</p><div class="verdict-section-title">논증</div><p>${r.reasoning || '-'}</p><div class="verdict-ruling-box"><h3>주문</h3><p>${r.ruling_text || r.ruling || '-'}</p></div><div class="verdict-chips">${extraCount>0?`<span>추가정보 ${extraCount}건 반영</span>`:''}</div></div></div><div class="disclaimer-box">※ 본 판결은 AI 생성 가상 판결로 법적 효력이 없습니다. 실제 법률 문제는 변호사와 상담하시기 바랍니다.</div>`;
-  }
-}
-window.dlVerdict = function() {
-  renderVerdict();
-  const txt = $('#verdictDoc') ? $('#verdictDoc').innerText : '';
-  const blob = new Blob([txt], {type:'text/plain'});
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = `K-Law_${caseData.caseId || 'download'}.txt`;
-  a.click(); URL.revokeObjectURL(a.href);
-  toast('판결문 다운로드');
-};
-window.resetAll = function() { location.reload(); };
 
-// 이벤트 리스너
-const factsTextarea = $('#facts');
-if(factsTextarea) {
-  factsTextarea.addEventListener('input', function() {
-    const countSpan = $('#factsCount');
-    if(countSpan) countSpan.innerText = this.value.length;
-    if(this.value.length > 2000) this.value = this.value.slice(0,2000);
-  });
-}
+// 버튼에 이벤트 연결 (HTML 로드 후)
+window.addEventListener('DOMContentLoaded', () => {
+  const btn = $('#btnExtract');
+  if (btn) btn.onclick = extractFromFacts;
+  else console.error('버튼 없음');
+});
 </script>
 </body>
 </html>
