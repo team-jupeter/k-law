@@ -7,7 +7,7 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif; background: #EEF2F7; color: #1A1D21; padding: 24px; }
-  .container { max-width: 900px; margin: 0 auto; }
+  .container { max-width: 1000px; margin: 0 auto; }
   .card { background: white; border-radius: 16px; padding: 24px; margin-bottom: 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
   h1, h2, h3 { color: #003E8A; margin-bottom: 16px; }
   textarea, input, select { width: 100%; margin: 8px 0 16px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; }
@@ -18,6 +18,9 @@
   .flex-buttons { display: flex; gap: 12px; justify-content: flex-end; margin-top: 20px; }
   hr { margin: 20px 0; border: none; border-top: 1px solid #e2e8f0; }
   footer { text-align: center; margin-top: 32px; font-size: 12px; color: #5A6169; }
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; background: #F8FAFC; padding: 16px; border-radius: 12px; margin-top: 8px; }
+  .summary-item { font-size: 14px; }
+  .summary-label { font-weight: 600; color: #003E8A; }
 </style>
 </head>
 <body>
@@ -59,6 +62,21 @@
     <textarea id="undisputedFacts" rows="2" placeholder="양측이 동의하는 핵심 사실"></textarea>
   </div>
 
+  <!-- 추가된 사건 요약 섹션 (하단) -->
+  <div class="card">
+    <h3>📑 현재 사건 요약 (판결 생성 시 전달됨)</h3>
+    <div id="liveSummary" class="summary-grid">
+      <div class="summary-item"><span class="summary-label">원고:</span> <span id="summaryPlaintiff">-</span></div>
+      <div class="summary-item"><span class="summary-label">피고:</span> <span id="summaryDefendant">-</span></div>
+      <div class="summary-item"><span class="summary-label">사건 분류:</span> <span id="summaryCaseType">-</span></div>
+      <div class="summary-item"><span class="summary-label">청구 금액:</span> <span id="summaryClaimAmount">-</span></div>
+      <div class="summary-item full-width"><span class="summary-label">사건 개요:</span> <span id="summaryFacts">-</span></div>
+      <div class="summary-item full-width"><span class="summary-label">원고 주장:</span> <span id="summaryPlaintiffClaim">-</span></div>
+      <div class="summary-item full-width"><span class="summary-label">피고 주장:</span> <span id="summaryDefendantClaim">-</span></div>
+      <div class="summary-item full-width"><span class="summary-label">다툼 없는 사실:</span> <span id="summaryUndisputed">-</span></div>
+    </div>
+  </div>
+
   <div class="flex-buttons">
     <button id="btnVerdict" style="background-color: #1A4A8A;">⚖️ K-Law 가상 판결 생성 (별도 페이지)</button>
   </div>
@@ -67,25 +85,47 @@
 </div>
 
 <script>
-// ====================== API 키 ======================
+// API 키
 const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
 
-// DOM 헬퍼
 function getEl(id) { return document.getElementById(id); }
 
-// ====================== AI 자동 추출 ======================
+// 실시간 요약 업데이트
+function updateSummary() {
+  const plaintiff = getEl('plaintiff')?.value || '-';
+  const defendant = getEl('defendant')?.value || '-';
+  const caseType = getEl('caseType')?.options[getEl('caseType').selectedIndex]?.text || '-';
+  const claimAmount = getEl('claimAmount')?.value || '-';
+  const facts = getEl('facts')?.value || '-';
+  const plaintiffClaim = getEl('plaintiffClaim')?.value || '-';
+  const defendantClaim = getEl('defendantClaim')?.value || '-';
+  const undisputed = getEl('undisputedFacts')?.value || '-';
+
+  if (getEl('summaryPlaintiff')) getEl('summaryPlaintiff').innerText = plaintiff;
+  if (getEl('summaryDefendant')) getEl('summaryDefendant').innerText = defendant;
+  if (getEl('summaryCaseType')) getEl('summaryCaseType').innerText = caseType;
+  if (getEl('summaryClaimAmount')) getEl('summaryClaimAmount').innerText = claimAmount;
+  if (getEl('summaryFacts')) getEl('summaryFacts').innerText = facts;
+  if (getEl('summaryPlaintiffClaim')) getEl('summaryPlaintiffClaim').innerText = plaintiffClaim;
+  if (getEl('summaryDefendantClaim')) getEl('summaryDefendantClaim').innerText = defendantClaim;
+  if (getEl('summaryUndisputed')) getEl('summaryUndisputed').innerText = undisputed;
+}
+
+// 입력 필드 변경 시 요약 업데이트
+function bindEvents() {
+  const fields = ['facts', 'caseType', 'claimAmount', 'plaintiff', 'defendant', 'plaintiffClaim', 'defendantClaim', 'undisputedFacts'];
+  fields.forEach(id => {
+    const el = getEl(id);
+    if (el) el.addEventListener('input', updateSummary);
+  });
+}
+
+// AI 자동 추출
 async function extractFromFacts() {
   const factsEl = getEl('facts');
-  if (!factsEl) {
-    alert('사건 개요 입력창을 찾을 수 없습니다.');
-    return;
-  }
+  if (!factsEl) { alert('사건 개요 입력창 없음'); return; }
   const facts = factsEl.value.trim();
-  if (facts.length < 20) {
-    alert('사건 개요를 20자 이상 입력해주세요.');
-    return;
-  }
-
+  if (facts.length < 20) { alert('사건 개요 20자 이상'); return; }
   const btn = getEl('btnExtract');
   const statusDiv = getEl('extractStatus');
   if (btn) btn.disabled = true;
@@ -93,9 +133,7 @@ async function extractFromFacts() {
     statusDiv.textContent = '🔍 AI 분석 중...';
     statusDiv.style.background = '#E8F0FA';
     statusDiv.style.color = '#003E8A';
-    statusDiv.style.padding = '8px';
   }
-
   const systemPrompt = `당신은 법률 문서 분석 전문가입니다. 사건 개요에서 다음 7가지 정보를 추출하여 JSON만 출력하세요:
 {
   "caseType": "코드",
@@ -107,17 +145,11 @@ async function extractFromFacts() {
   "undisputedFacts": "다툼 없는 사실 요약"
 }
 caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, criminal_fraud 등. 모르면 civil_contract로 하세요.`;
-
   try {
     const response = await fetch('https://api.deepseek.com/chat/completions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
-      body: JSON.stringify({
-        model: 'deepseek-chat',
-        messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: facts }],
-        temperature: 0.1,
-        max_tokens: 800
-      })
+      body: JSON.stringify({ model: 'deepseek-chat', messages: [{ role: 'system', content: systemPrompt }, { role: 'user', content: facts }], temperature: 0.1, max_tokens: 800 })
     });
     if (!response.ok) throw new Error(`API 오류: ${response.status}`);
     const data = await response.json();
@@ -125,8 +157,6 @@ caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, cr
     const jsonMatch = content.match(/\{[\s\S]*\}/);
     if (!jsonMatch) throw new Error('JSON 파싱 실패');
     const ex = JSON.parse(jsonMatch[0]);
-
-    // 필드 채우기
     if (ex.caseType) getEl('caseType').value = ex.caseType;
     if (ex.claimAmount) getEl('claimAmount').value = ex.claimAmount;
     if (ex.plaintiff) getEl('plaintiff').value = ex.plaintiff;
@@ -134,27 +164,16 @@ caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, cr
     if (ex.plaintiffClaim) getEl('plaintiffClaim').value = ex.plaintiffClaim;
     if (ex.defendantClaim) getEl('defendantClaim').value = ex.defendantClaim;
     if (ex.undisputedFacts) getEl('undisputedFacts').value = ex.undisputedFacts;
-
-    if (statusDiv) {
-      statusDiv.textContent = '✅ 추출 완료! 필요 시 직접 수정할 수 있습니다.';
-      statusDiv.style.background = '#F0FDF4';
-      statusDiv.style.color = '#166534';
-    }
+    updateSummary();
+    if (statusDiv) { statusDiv.textContent = '✅ 추출 완료! 필요 시 직접 수정 가능합니다.'; statusDiv.style.background = '#F0FDF4'; statusDiv.style.color = '#166534'; }
   } catch (err) {
     console.error(err);
-    if (statusDiv) {
-      statusDiv.textContent = `❌ 오류: ${err.message}`;
-      statusDiv.style.background = '#FEF2F2';
-      statusDiv.style.color = '#B91C1C';
-    }
-  } finally {
-    if (btn) btn.disabled = false;
-  }
+    if (statusDiv) { statusDiv.textContent = `❌ 오류: ${err.message}`; statusDiv.style.background = '#FEF2F2'; statusDiv.style.color = '#B91C1C'; }
+  } finally { if (btn) btn.disabled = false; }
 }
 
-// ====================== 가상 판결 페이지로 이동 ======================
+// 판결 페이지로 이동
 function goToVerdict() {
-  // 모든 입력값 수집
   const caseData = {
     facts: getEl('facts')?.value || '',
     caseType: getEl('caseType')?.value || '',
@@ -165,36 +184,21 @@ function goToVerdict() {
     defendantClaim: getEl('defendantClaim')?.value || '',
     undisputedFacts: getEl('undisputedFacts')?.value || ''
   };
-
-  // 필수 항목 검증
   if (!caseData.facts || !caseData.plaintiff || !caseData.defendant) {
-    alert('사건 개요, 원고, 피고는 반드시 입력해야 합니다.\nAI 자동 추출을 먼저 사용하거나 직접 입력해주세요.');
+    alert('사건 개요, 원고, 피고는 필수입니다.');
     return;
   }
-
-  // localStorage에 저장
   localStorage.setItem('kLawCaseData', JSON.stringify(caseData));
-  // verdict.html로 이동
   window.location.href = 'verdict.html';
 }
 
-// ====================== 이벤트 등록 ======================
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
   const extractBtn = getEl('btnExtract');
-  if (extractBtn) {
-    extractBtn.onclick = extractFromFacts;
-    console.log('추출 버튼 연결 성공');
-  } else {
-    console.error('추출 버튼 없음');
-  }
-
+  if (extractBtn) extractBtn.onclick = extractFromFacts;
   const verdictBtn = getEl('btnVerdict');
-  if (verdictBtn) {
-    verdictBtn.onclick = goToVerdict;
-    console.log('판결 생성 버튼 연결 성공');
-  } else {
-    console.error('판결 버튼 없음');
-  }
+  if (verdictBtn) verdictBtn.onclick = goToVerdict;
+  bindEvents();
+  updateSummary();
 });
 </script>
 </body>
