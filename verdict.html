@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Law AI 가상 판결 생성기</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    background: #EEF2F7;
+    color: #1A1D21;
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  h1 {
+    color: #003E8A;
+    border-bottom: 3px solid #003E8A;
+    padding-bottom: 12px;
+    margin-bottom: 24px;
+  }
+  .section {
+    background: #F8FAFC;
+    border-left: 4px solid #003E8A;
+    padding: 16px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+  }
+  .section h3 {
+    margin-bottom: 12px;
+    color: #003E8A;
+  }
+  pre {
+    background: #1E1E1E;
+    color: #D4D4D4;
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 13px;
+    font-family: monospace;
+    white-space: pre-wrap;
+  }
+  button {
+    background: #003E8A;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 16px;
+  }
+  button:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+  }
+  .progress {
+    margin: 20px 0;
+    background: #E2E8F0;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 8px;
+  }
+  .progress-bar {
+    width: 0%;
+    height: 100%;
+    background: #003E8A;
+    transition: width 0.3s;
+  }
+  .result-box {
+    background: #F0FDF4;
+    border-left: 4px solid #166534;
+    padding: 20px;
+    border-radius: 12px;
+    margin-top: 24px;
+    display: none;
+  }
+  .error-box {
+    background: #FEF2F2;
+    border-left: 4px solid #B91C1C;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+    display: none;
+  }
+  .verdict-text {
+    font-family: 'Noto Serif KR', serif;
+    line-height: 1.8;
+    white-space: pre-line;
+  }
+  footer {
+    text-align: center;
+    margin-top: 32px;
+    font-size: 12px;
+    color: #5A6169;
+  }
+  .btn-back {
+    background: #5A6169;
+    margin-right: 12px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>⚖️ K-Law AI 가상 판결 생성기 (v6.4)</h1>
+  <div id="caseSummary" class="section">
+    <h3>📋 사건 요약</h3>
+    <div id="summaryContent">로딩 중...</div>
+  </div>
+
+  <div>
+    <button id="generateBtn" class="btn-back">🔮 AI 판결 생성</button>
+    <button id="backBtn" class="btn-back">← 돌아가기</button>
+  </div>
+
+  <div id="progressArea" style="display:none;">
+    <div class="progress"><div class="progress-bar" id="progressBar"></div></div>
+    <div id="thinking" style="background:#F1F5F9; padding:12px; border-radius:8px; font-size:13px; white-space:pre-wrap; max-height:200px; overflow:auto;"></div>
+  </div>
+
+  <div id="resultArea" class="result-box"></div>
+  <div id="errorArea" class="error-box"></div>
+</div>
+<footer>K-Law 방법론 v6.4 | 가상 판결은 법적 효력이 없습니다.</footer>
+
+<script>
+  // DeepSeek API 키 (테스트용)
+  const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
+
+  // DOM 요소
+  const generateBtn = document.getElementById('generateBtn');
+  const backBtn = document.getElementById('backBtn');
+  const summaryDiv = document.getElementById('summaryContent');
+  const progressArea = document.getElementById('progressArea');
+  const progressBar = document.getElementById('progressBar');
+  const thinkingDiv = document.getElementById('thinking');
+  const resultArea = document.getElementById('resultArea');
+  const errorArea = document.getElementById('errorArea');
+
+  // 저장된 사건 데이터 불러오기
+  let caseData = null;
+  try {
+    const stored = localStorage.getItem('kLawCaseData');
+    if (stored) {
+      caseData = JSON.parse(stored);
+    } else {
+      summaryDiv.innerHTML = '<span style="color:red;">⚠️ 저장된 사건 정보가 없습니다. 먼저 index.html에서 사건을 입력하고 "가상 판결 생성" 버튼을 눌러주세요.</span>';
+      generateBtn.disabled = true;
+    }
+  } catch(e) {
+    summaryDiv.innerHTML = '<span style="color:red;">데이터 오류</span>';
+    generateBtn.disabled = true;
+  }
+
+  // 사건 요약 표시
+  if (caseData) {
+    summaryDiv.innerHTML = `
+      <p><strong>원고:</strong> ${escapeHtml(caseData.plaintiff || '미입력')}</p>
+      <p><strong>피고:</strong> ${escapeHtml(caseData.defendant || '미입력')}</p>
+      <p><strong>사건 분류:</strong> ${escapeHtml(caseData.caseType || '미선택')}</p>
+      <p><strong>청구 금액:</strong> ${escapeHtml(caseData.claimAmount || '미기재')}</p>
+      <p><strong>사건 개요:</strong><br>${escapeHtml(caseData.facts || '')}</p>
+      <p><strong>원고 주장:</strong><br>${escapeHtml(caseData.plaintiffClaim || '')}</p>
+      <p><strong>피고 주장:</strong><br>${escapeHtml(caseData.defendantClaim || '')}</p>
+      <p><strong>다툼 없는 사실:</strong><br>${escapeHtml(caseData.undisputedFacts || '없음')}</p>
+    `;
+  }
+
+  // XSS 방지
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    }).replace(/[\uD800-\uDBFF][\uDC00-\uDFFF]/g, function(c) {
+      return c;
+    });
+  }
+
+  // K-Law 방법론 프롬프트 (v6.4 강제 실행 프레임워크)
+  function buildSystemPrompt() {
+    return `당신은 K-Law 방법론 v6.4를 따르는 AI 법률 분석관입니다. 반드시 아래 절차를 따라 가상 판결을 생성하세요.
+
+[STEP A: 피고 승소 논거 (역방향 추론)]
+- 피고 입장에서 가장 강력한 법리적 논거를 300자 이상 작성하세요.
+- 최소 1개 이상의 판례(또는 일반 법원칙)를 인용하고 출처를 명시하세요.
+- 마지막 줄에 [STEP-A-COMPLETE] 를 출력하세요.
+
+[STEP B: 판결문 (6단계 사고 순서)]
+1. 법률관계 확정 및 특별법 확인
+2. 쟁점 계층적 분해 (예/아니오 질문)
+3. 원고와 피고의 삼단논법 구성
+4. 인과관계 분석 및 가치 형량 (원리 4,5 및 제3부 적용)
+5. 손해액 산정 및 책임 제한 (과실상계, 공평의 원칙)
+6. 메타인지 자가 점검 (6개 질문에 답변)
+
+이 단계가 끝나면 반드시 다음 JSON 형식으로 판결 결과를 출력하세요:
+{
+  "ruling": "원고 승소|원고 일부 승소|피고 승소|유죄|무죄",
+  "key_legal_theory": "핵심 법리 2~3문장",
+  "reasoning": "세부 논증 5~10문장",
+  "legal_basis": ["적용 법조문1", "법조문2"],
+  "ruling_text": "주문 내용",
+  "verdict_summary": "판결 요지 3문장"
+}
+마지막 줄에 [STEP-B-COMPLETE] 를 출력하세요.
+
+[STEP C: 정합성 검증]
+다음 질문에 답변하세요:
+Q1: 판결문의 논리가 STEP A의 판례/원칙과 일관되는가? (true/false, 불일치 시 사유 설명)
+Q2: 판결문이 STEP A의 피고 승소 논거를 법리적으로 완전히 반박하였는가? (설명)
+Q3: 유사 사건과 현저히 차이가 나는가? (차이 있다면 이유)
+마지막 줄에 [STEP-C-COMPLETE] 를 출력하세요.`;
+  }
+
+  // 사용자 메시지 구성
+  function buildUserMessage() {
+    if (!caseData) return '';
+    return `아래 사건을 K-Law 방법론 v6.4에 따라 분석하고 가상 판결을 생성하세요.
+
+[사건 분류] ${caseData.caseType || '미분류'}
+[원고] ${caseData.plaintiff}
+[피고] ${caseData.defendant}
+[청구 금액] ${caseData.claimAmount || '명시되지 않음'}
+
+[사건 개요]
+${caseData.facts}
+
+[원고 주장]
+${caseData.plaintiffClaim || '없음'}
+
+[피고 주장]
+${caseData.defendantClaim || '없음'}
+
+[다툼 없는 사실]
+${caseData.undisputedFacts || '없음'}
+
+위 정보를 바탕으로 STEP A, B, C를 순서대로 수행하고 최종 판결 JSON을 포함시켜 주세요.`;
+  }
+
+  // API 호출 (스트리밍)
+  async function generateVerdict() {
+    if (!caseData) return;
+    generateBtn.disabled = true;
+    progressArea.style.display = 'block';
+    resultArea.style.display = 'none';
+    errorArea.style.display = 'none';
+    thinkingDiv.innerHTML = '';
+    progressBar.style.width = '0%';
+
+    const systemPrompt = buildSystemPrompt();
+    const userMessage = buildUserMessage();
+
+    try {
+      const response = await fetch('https://api.deepseek.com/chat/completions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
+        body: JSON.stringify({
+          model: 'deepseek-reasoner',  // 추론 모델 사용
+          messages: [
+            { role: 'system', content: systemPrompt },
+            { role: 'user', content: userMessage }
+          ],
+          stream: true,
+          temperature: 0.2,
+          max_tokens: 8000
+        })
+      });
+      if (!response.ok) throw new Error(`API 오류: ${response.status}`);
+
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder();
+      let fullText = '';
+      let progress = 20;
+
+      while (true) {
+        const { done, value } = await reader.read();
+        if (done) break;
+        const chunk = decoder.decode(value);
+        const lines = chunk.split('\n').filter(l => l.startsWith('data: '));
+        for (const line of lines) {
+          const data = line.slice(6).trim();
+          if (data === '[DONE]') continue;
+          try {
+            const parsed = JSON.parse(data);
+            const delta = parsed.choices?.[0]?.delta;
+            if (delta?.reasoning_content) {
+              thinkingDiv.innerHTML += delta.reasoning_content;
+              thinkingDiv.scrollTop = thinkingDiv.scrollHeight;
+            } else if (delta?.content) {
+              fullText += delta.content;
+              if (progress < 90) {
+                progress += 1;
+                progressBar.style.width = progress + '%';
+              }
+              // 실시간으로 생각창에 표시 (선택)
+              thinkingDiv.innerHTML = fullText.slice(-800);
+            }
+          } catch (e) {}
+        }
+      }
+      progressBar.style.width = '100%';
+      thinkingDiv.innerHTML += '\n\n✅ 분석 완료. 결과를 정리 중...';
+
+      // JSON 추출
+      const jsonMatch = fullText.match(/\{[\s\S]*"ruling"[\s\S]*\}/);
+      let verdict = null;
+      if (jsonMatch) {
+        try {
+          verdict = JSON.parse(jsonMatch[0]);
+        } catch(e) { console.warn('JSON 파싱 실패', e); }
+      }
+      if (!verdict) {
+        throw new Error('AI 응답에서 판결 JSON을 추출하지 못했습니다.');
+      }
+
+      // 결과 표시
+      resultArea.style.display = 'block';
+      resultArea.innerHTML = `
+        <h3>📜 가상 판결 결과</h3>
+        <div style="background:#fff; padding:16px; border-radius:12px;">
+          <p><strong>판결 방향:</strong> ${escapeHtml(verdict.ruling)}</p>
+          <p><strong>핵심 법리:</strong><br>${escapeHtml(verdict.key_legal_theory)}</p>
+          <p><strong>세부 논증:</strong><br>${escapeHtml(verdict.reasoning)}</p>
+          <p><strong>적용 법조문:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : escapeHtml(verdict.legal_basis)}</p>
+          <p><strong>주문:</strong><br>${escapeHtml(verdict.ruling_text)}</p>
+          <p><strong>판결 요지:</strong><br>${escapeHtml(verdict.verdict_summary)}</p>
+        </div>
+        <div style="margin-top:20px; font-size:12px; color:#5A6169; border-top:1px solid #ccc; padding-top:12px;">
+          ⚖️ 본 판결은 AI가 K-Law 방법론 v6.4에 따라 생성한 가상 판결이며 법적 효력이 없습니다.
+        </div>
+      `;
+    } catch (err) {
+      errorArea.style.display = 'block';
+      errorArea.innerHTML = `<strong>오류 발생:</strong> ${err.message}<br>잠시 후 다시 시도해주세요.`;
+      console.error(err);
+    } finally {
+      generateBtn.disabled = false;
+    }
+  }
+
+  // 버튼 이벤트
+  generateBtn.addEventListener('click', generateVerdict);
+  backBtn.addEventListener('click', () => {
+    window.location.href = 'index.html';
+  });
+</script>
+</body>
+</html>
