@@ -9,382 +9,75 @@
 </head>
 <body>
 
-<!-- 정부 배너 -->
 <div class="gov-banner">
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
   <span>이 서비스는 <strong>케이로주식회사(K-Law Inc.)</strong>가 운영하는 AI 법률 중재 보조 서비스입니다. 법적 구속력이 없으며 실제 법률 상담을 대체하지 않습니다.</span>
 </div>
 
-<!-- 헤더 -->
 <header>
   <a href="#" class="brand">
-    <div class="brand-emblem">
-      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M12 3v18M5 3h14M5 21h14"/>
-        <path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/>
-        <line x1="5" y1="13" x2="19" y2="13"/>
-      </svg>
-    </div>
-    <div>
-      <div class="brand-name">K-Law AI 가상 법원</div>
-      <div class="brand-sub">케이로주식회사 · K-Law v6.4</div>
-    </div>
+    <div class="brand-emblem"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 3v18M5 3h14M5 21h14"/><path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/><line x1="5" y1="13" x2="19" y2="13"/></svg></div>
+    <div><div class="brand-name">K-Law AI 가상 법원</div><div class="brand-sub">케이로주식회사 · K-Law v6.4</div></div>
   </a>
   <div class="header-right">
-    <div class="status-badge">
-      <div class="status-dot"></div>
-      시스템 정상
-    </div>
+    <div class="status-badge"><div class="status-dot"></div> 시스템 정상</div>
     <div class="case-id-chip" id="caseChip"></div>
   </div>
 </header>
 
 <main>
-  <!-- 히어로 -->
   <div class="page-hero">
-    <div class="service-tag">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 3h14M5 21h14"/><path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/><line x1="5" y1="13" x2="19" y2="13"/></svg>
-      AI 법률 중재 보조
-    </div>
+    <div class="service-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 3v18M5 3h14M5 21h14"/><path d="M5 9l-2 4h4L5 9zM19 9l-2 4h4L19 9z"/><line x1="5" y1="13" x2="19" y2="13"/></svg> AI 법률 중재 보조</div>
     <h1>AI가 분석하는<br><em>공정한 법리 판단</em></h1>
     <p>사건 정보를 입력하면 K-Law 방법론 v6.4에 따라 AI가 법리를 분석합니다.</p>
   </div>
 
-  <!-- 단계 표시 -->
-  <nav class="step-indicator" id="stepIndicator">
-    <div class="step-list" id="stepList"></div>
-  </nav>
+  <nav class="step-indicator" id="stepIndicator"><div class="step-list" id="stepList"></div></nav>
 
-  <!-- 설정 바 -->
   <div class="config-bar" id="configBar" style="display:none;"></div>
 
   <!-- SECTION 0: 모드 선택 -->
   <section id="sec0" class="card visible">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>분석 모드 선택</h2>
-        <p>AI 모델과 분석 방식을 선택하십시오.</p>
-      </div>
-    </div>
-
+    <div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div><div class="card-header-text"><h2>분석 모드 선택</h2><p>AI 모델과 분석 방식을 선택하십시오.</p></div></div>
     <div class="mode-grid">
-      <div class="mode-option selected" id="card-single" onclick="selectMode('single')">
-        <div class="mode-radio"></div>
-        <div class="mode-chip">★ 기본값</div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg>
-        <h3>단일 LLM 모드</h3>
-        <p>하나의 AI가 K-Law 방법론으로 분석</p>
-      </div>
-      <div class="mode-option disabled" id="card-multi">
-        <div class="mode-radio"></div>
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="9" height="7" rx="1"/><rect x="13" y="3" width="9" height="7" rx="1"/><rect x="7" y="14" width="10" height="7" rx="1"/><path d="M6.5 10v2h11v-2"/><path d="M12 12v2"/></svg>
-        <h3>복수 LLM 합의 모드</h3>
-        <p>준비 중</p>
-      </div>
+      <div class="mode-option selected" id="card-single" onclick="selectMode('single')"><div class="mode-radio"></div><div class="mode-chip">★ 기본값</div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="1.8"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="3"/></svg><h3>단일 LLM 모드</h3><p>하나의 AI가 K-Law 방법론으로 분석</p></div>
+      <div class="mode-option disabled" id="card-multi"><div class="mode-radio"></div><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="1.8"><rect x="2" y="3" width="9" height="7" rx="1"/><rect x="13" y="3" width="9" height="7" rx="1"/><rect x="7" y="14" width="10" height="7" rx="1"/><path d="M6.5 10v2h11v-2"/><path d="M12 12v2"/></svg><h3>복수 LLM 합의 모드</h3><p>준비 중</p></div>
     </div>
-
-    <div class="llm-section">
-      <div class="llm-section-header">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        AI 모델 선택
-      </div>
-      <div class="llm-grid" id="llmGrid"></div>
-    </div>
-
-    <div class="api-key-section" id="apiKeySection">
-      <div class="api-key-label">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
-        <span id="apiKeyLlmName"></span>은 API Key 필요
-      </div>
-      <input type="password" id="userApiKey" class="field" placeholder="API Key를 입력하십시오" style="margin-top:4px;">
-      <div id="keyStatus" style="font-size:12px; margin-top:6px;"></div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-filled" onclick="confirmMode()">
-        선택 완료 — 사건 접수 시작
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
+    <div class="llm-section"><div class="llm-section-header"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> AI 모델 선택</div><div class="llm-grid" id="llmGrid"></div></div>
+    <div class="api-key-section" id="apiKeySection"><div class="api-key-label"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg><span id="apiKeyLlmName"></span>은 API Key 필요</div><input type="password" id="userApiKey" class="field" placeholder="API Key를 입력하십시오"><div id="keyStatus" style="font-size:12px; margin-top:6px;"></div></div>
+    <div class="btn-row"><button class="btn btn-filled" onclick="confirmMode()">선택 완료 — 사건 접수 시작 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
   </section>
 
   <!-- SECTION 1: 사건 정보 입력 -->
   <section id="sec1" class="card">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>사건 정보 입력</h2>
-        <p>판결을 암시하지 않고 사실관계와 양측 주장을 기술하십시오.</p>
-      </div>
-      <span class="step-badge">1단계 / 6</span>
-    </div>
-
-    <div class="info-banner">
-      <div class="info-banner-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="2.5"/></svg>
-      </div>
-      <div>
-        <h4>AI 자동 입력 지원</h4>
-        <p>사건 개요 입력 후 「AI 자동 추출」 버튼을 누르면 사건 분류·청구 금액·원고·피고·주장·다툼 없는 사실을 자동 추출합니다.</p>
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">사건 개요 <span class="required-mark">*</span></label>
-      <textarea class="field" id="facts" rows="6" placeholder="분쟁의 배경, 경위, 사실관계를 구체적으로 기재하세요. 원고와 피고의 이름, 청구 금액을 포함하면 더 정확하게 추출됩니다."></textarea>
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:8px;">
-        <span class="char-count"><span id="factsCount">0</span>/2000자</span>
-        <button class="btn btn-filled" id="btnExtract" onclick="extractFromFacts()" style="height:36px; padding:0 14px; font-size:13px;">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-          AI 자동 추출
-        </button>
-      </div>
-      <div id="extractStatus"></div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">사건 분류 <span class="required-mark">*</span><span id="caseTypeAiBadge" class="ai-badge">AI 추출</span></label>
-        <select class="field" id="caseType" required>
-          <option value="">선택</option>
-          <optgroup label="민사">
-            <option value="civil_damage">손해배상(불법행위)</option>
-            <option value="civil_traffic">손해배상(교통사고)</option>
-            <option value="civil_medical">손해배상(의료)</option>
-            <option value="civil_contract">계약위반</option>
-            <option value="civil_lease">임대차</option>
-            <option value="civil_insurance">보험</option>
-          </optgroup>
-          <optgroup label="가사">
-            <option value="family_divorce">이혼·위자료</option>
-            <option value="family_custody">친권·양육권</option>
-            <option value="family_inherit">상속</option>
-          </optgroup>
-          <optgroup label="형사">
-            <option value="criminal_fraud">사기</option>
-            <option value="criminal_embezzle">횡령·배임</option>
-            <option value="criminal_assault">폭행·상해</option>
-          </optgroup>
-          <optgroup label="행정">
-            <option value="admin_cancel">행정처분 취소</option>
-            <option value="admin_compensation">국가배상</option>
-          </optgroup>
-        </select>
-      </div>
-      <div class="form-group">
-        <label class="form-label">청구 금액<span id="claimAmountAiBadge" class="ai-badge">AI 추출</span></label>
-        <input class="field" id="claimAmount" placeholder="예: 50,000,000원">
-      </div>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">원고 <span class="required-mark">*</span><span id="plaintiffAiBadge" class="ai-badge">AI 추출</span></label>
-        <input class="field" id="plaintiff" required placeholder="원고 성명 또는 법인명">
-      </div>
-      <div class="form-group">
-        <label class="form-label">피고 <span class="required-mark">*</span><span id="defendantAiBadge" class="ai-badge">AI 추출</span></label>
-        <input class="field" id="defendant" required placeholder="피고 성명 또는 법인명">
-      </div>
-    </div>
-
-    <div class="form-group">
-      <label class="form-label">다툼 없는 사실<span id="undisputedAiBadge" class="ai-badge">AI 추출</span></label>
-      <textarea class="field" id="undisputedFacts" rows="3" placeholder="양측이 동의하는 핵심 사실을 기재하세요. (AI 자동 추출 가능)"></textarea>
-    </div>
-
-    <div class="form-row">
-      <div class="form-group">
-        <label class="form-label">원고의 주장 <span class="required-mark">*</span><span id="plaintiffClaimAiBadge" class="ai-badge">AI 추출</span></label>
-        <textarea class="field" id="plaintiffClaim" required rows="4" placeholder="원고가 주장하는 사실관계와 법적 근거"></textarea>
-      </div>
-      <div class="form-group">
-        <label class="form-label">피고의 주장 <span class="required-mark">*</span><span id="defendantClaimAiBadge" class="ai-badge">AI 추출</span></label>
-        <textarea class="field" id="defendantClaim" required rows="4" placeholder="피고가 주장하는 사실관계와 법적 근거"></textarea>
-      </div>
-    </div>
-
-    <div class="btn-row">
-      <button class="btn btn-outlined" onclick="goSec(0)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        이전
-      </button>
-      <button class="btn btn-filled" onclick="toSec2()">
-        다음: 문서 생성
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
+    <div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div><div class="card-header-text"><h2>사건 정보 입력</h2><p>판결을 암시하지 않고 사실관계와 양측 주장을 기술하십시오.</p></div><span class="step-badge">1단계 / 6</span></div>
+    <div class="info-banner"><div class="info-banner-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="12" cy="10" r="2.5"/></svg></div><div><h4>AI 자동 입력 지원</h4><p>사건 개요 입력 후 「AI 자동 추출」 버튼을 누르면 사건 분류·청구 금액·원고·피고·주장·다툼 없는 사실을 자동 추출합니다.</p></div></div>
+    <div class="form-group"><label class="form-label">사건 개요 <span class="required-mark">*</span></label><textarea class="field" id="facts" rows="6" placeholder="분쟁의 배경, 경위, 사실관계를 구체적으로 기재하세요. 원고와 피고의 이름, 청구 금액을 포함하면 더 정확하게 추출됩니다."></textarea><div style="display:flex; justify-content:space-between; margin-top:8px;"><span class="char-count"><span id="factsCount">0</span>/2000자</span><button class="btn btn-filled" id="btnExtract" onclick="extractFromFacts()" style="height:36px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> AI 자동 추출</button></div><div id="extractStatus"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">사건 분류 <span class="required-mark">*</span><span id="caseTypeAiBadge" class="ai-badge">AI 추출</span></label><select class="field" id="caseType" required><option value="">선택</option><optgroup label="민사"><option value="civil_damage">손해배상(불법행위)</option><option value="civil_traffic">손해배상(교통사고)</option><option value="civil_medical">손해배상(의료)</option><option value="civil_contract">계약위반</option><option value="civil_lease">임대차</option><option value="civil_insurance">보험</option></optgroup><optgroup label="가사"><option value="family_divorce">이혼·위자료</option><option value="family_custody">친권·양육권</option><option value="family_inherit">상속</option></optgroup><optgroup label="형사"><option value="criminal_fraud">사기</option><option value="criminal_embezzle">횡령·배임</option><option value="criminal_assault">폭행·상해</option></optgroup><optgroup label="행정"><option value="admin_cancel">행정처분 취소</option><option value="admin_compensation">국가배상</option></optgroup></select></div><div class="form-group"><label class="form-label">청구 금액<span id="claimAmountAiBadge" class="ai-badge">AI 추출</span></label><input class="field" id="claimAmount" placeholder="예: 50,000,000원"></div></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">원고 <span class="required-mark">*</span><span id="plaintiffAiBadge" class="ai-badge">AI 추출</span></label><input class="field" id="plaintiff" required placeholder="원고 성명 또는 법인명"></div><div class="form-group"><label class="form-label">피고 <span class="required-mark">*</span><span id="defendantAiBadge" class="ai-badge">AI 추출</span></label><input class="field" id="defendant" required placeholder="피고 성명 또는 법인명"></div></div>
+    <div class="form-group"><label class="form-label">다툼 없는 사실<span id="undisputedAiBadge" class="ai-badge">AI 추출</span></label><textarea class="field" id="undisputedFacts" rows="3" placeholder="양측이 동의하는 핵심 사실을 기재하세요. (AI 자동 추출 가능)"></textarea></div>
+    <div class="form-row"><div class="form-group"><label class="form-label">원고의 주장 <span class="required-mark">*</span><span id="plaintiffClaimAiBadge" class="ai-badge">AI 추출</span></label><textarea class="field" id="plaintiffClaim" required rows="4" placeholder="원고가 주장하는 사실관계와 법적 근거"></textarea></div><div class="form-group"><label class="form-label">피고의 주장 <span class="required-mark">*</span><span id="defendantClaimAiBadge" class="ai-badge">AI 추출</span></label><textarea class="field" id="defendantClaim" required rows="4" placeholder="피고가 주장하는 사실관계와 법적 근거"></textarea></div></div>
+    <div class="btn-row"><button class="btn btn-outlined" onclick="goSec(0)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 이전</button><button class="btn btn-filled" onclick="toSec2()">다음: 문서 생성 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div>
   </section>
 
-  <!-- SECTION 2: Mandatory Execute 문서 -->
-  <section id="sec2" class="card">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>Mandatory Execute 문서</h2>
-        <p>사건 정보를 K-Law 실행 문서로 변환합니다.</p>
-      </div>
-      <span class="step-badge">2단계 / 6</span>
-    </div>
-    <pre class="code-doc" id="mandatoryDoc"></pre>
-    <div class="btn-row">
-      <button class="btn btn-outlined" onclick="goSec(1)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        이전
-      </button>
-      <button class="btn btn-filled" id="btnToSec25" onclick="toSec25()">
-        AI 추가 정보 요청
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
+  <!-- SECTION 2: Mandatory Execute -->
+  <section id="sec2" class="card"><div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div><div class="card-header-text"><h2>Mandatory Execute 문서</h2><p>사건 정보를 K-Law 실행 문서로 변환합니다.</p></div><span class="step-badge">2단계 / 6</span></div><pre class="code-doc" id="mandatoryDoc"></pre><div class="btn-row"><button class="btn btn-outlined" onclick="goSec(1)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 이전</button><button class="btn btn-filled" id="btnToSec25" onclick="toSec25()">AI 추가 정보 요청 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div></section>
 
   <!-- SECTION 2.5: 추가 정보 -->
-  <section id="sec25" class="card">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>AI 추가 정보 요청</h2>
-        <p id="sec25Sub">AI가 정확한 판결을 위해 추가 정보를 요청합니다.</p>
-      </div>
-      <span class="step-badge">3단계 / 6</span>
-    </div>
-
-    <div class="info-banner" id="dynamicInfoBanner" style="display:none;">
-      <div class="info-banner-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </div>
-      <div>
-        <h4>추가 정보 필요</h4>
-        <p>정확한 법리 분석을 위해 <strong id="qTotal">-</strong>개 항목에 대한 답변을 요청합니다.</p>
-      </div>
-    </div>
-
-    <div class="stat-grid">
-      <div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div class="stat-label">필수</div></div>
-      <div class="stat-card"><div class="stat-num" id="impCnt">-</div><div class="stat-label">중요</div></div>
-      <div class="stat-card"><div class="stat-num" id="optCnt">-</div><div class="stat-label">선택</div></div>
-    </div>
-
-    <div class="question-panel" id="questionList"></div>
-
-    <div class="btn-row">
-      <button class="btn btn-outlined" onclick="goSec(2)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        이전
-      </button>
-      <button class="btn btn-text" onclick="skipQ()">생략</button>
-      <button class="btn btn-filled" onclick="submitQ()">
-        답변 제출 후 AI 분석
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
+  <section id="sec25" class="card"><div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div class="card-header-text"><h2>AI 추가 정보 요청</h2><p id="sec25Sub">AI가 정확한 판결을 위해 추가 정보를 요청합니다.</p></div><span class="step-badge">3단계 / 6</span></div><div class="info-banner" id="dynamicInfoBanner" style="display:none;"><div class="info-banner-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></div><div><h4>추가 정보 필요</h4><p>정확한 법리 분석을 위해 <strong id="qTotal">-</strong>개 항목에 대한 답변을 요청합니다.</p></div></div><div class="stat-grid"><div class="stat-card"><div class="stat-num" id="reqCnt">-</div><div class="stat-label">필수</div></div><div class="stat-card"><div class="stat-num" id="impCnt">-</div><div class="stat-label">중요</div></div><div class="stat-card"><div class="stat-num" id="optCnt">-</div><div class="stat-label">선택</div></div></div><div class="question-panel" id="questionList"></div><div class="btn-row"><button class="btn btn-outlined" onclick="goSec(2)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 이전</button><button class="btn btn-text" onclick="skipQ()">생략</button><button class="btn btn-filled" onclick="submitQ()">답변 제출 후 AI 분석 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div></section>
 
   <!-- SECTION 3: AI 분석 -->
-  <section id="sec3" class="card">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2 id="sec3-title">AI 법리 분석</h2>
-        <p>K-Law 방법론 v6.4 적용</p>
-      </div>
-      <span class="step-badge">4단계 / 6</span>
-    </div>
-
-    <div class="analysis-card">
-      <div class="analysis-logo" id="aLogo">D</div>
-      <div class="analysis-title" id="aTitle">DeepSeek R1</div>
-      <div class="analysis-status" id="aStatus">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        준비 중
-      </div>
-      <div class="progress-track"><div class="progress-fill" id="aProg"></div></div>
-      <div class="thinking-box" id="aThinking"></div>
-      <div class="result-summary" id="aResult"></div>
-    </div>
-
-    <div class="error-banner" id="errBanner">
-      <h4>오류가 발생했습니다</h4>
-      <p id="errMsg"></p>
-    </div>
-
-    <div class="btn-row" id="sec3Btn" style="display:none;">
-      <button class="btn btn-filled" onclick="goSec(4)">
-        판결 내용 확인
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
+  <section id="sec3" class="card"><div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="card-header-text"><h2 id="sec3-title">AI 법리 분석</h2><p>K-Law 방법론 v6.4 적용</p></div><span class="step-badge">4단계 / 6</span></div><div class="analysis-card"><div class="analysis-logo" id="aLogo">D</div><div class="analysis-title" id="aTitle">DeepSeek R1</div><div class="analysis-status" id="aStatus"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> 준비 중</div><div class="progress-track"><div class="progress-fill" id="aProg"></div></div><div class="thinking-box" id="aThinking"></div><div class="result-summary" id="aResult"></div></div><div class="error-banner" id="errBanner"><h4>오류가 발생했습니다</h4><p id="errMsg"></p></div><div class="btn-row" id="sec3Btn" style="display:none;"><button class="btn btn-filled" onclick="goSec(4)">판결 내용 확인 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div></section>
 
   <!-- SECTION 4: 판결 확인 -->
-  <section id="sec4" class="card">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>판결 내용 확인</h2>
-        <p>AI가 도출한 가상 판결을 검토하십시오.</p>
-      </div>
-      <span class="step-badge">5단계 / 6</span>
-    </div>
-    <div id="sec4Content"></div>
-    <div class="btn-row">
-      <button class="btn btn-outlined" onclick="goSec(3)">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        재분석
-      </button>
-      <button class="btn btn-filled" onclick="goSec(5)">
-        최종 판결 제출
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
+  <section id="sec4" class="card"><div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><div class="card-header-text"><h2>판결 내용 확인</h2><p>AI가 도출한 가상 판결을 검토하십시오.</p></div><span class="step-badge">5단계 / 6</span></div><div id="sec4Content"></div><div class="btn-row"><button class="btn btn-outlined" onclick="goSec(3)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg> 재분석</button><button class="btn btn-filled" onclick="goSec(5)">최종 판결 제출 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></button></div></section>
 
   <!-- SECTION 5: 최종 판결 -->
-  <section id="sec5" class="card">
-    <div class="card-header">
-      <div class="card-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg>
-      </div>
-      <div class="card-header-text">
-        <h2>K-Law AI 가상 판결</h2>
-        <p>연구 목적, 법적 구속력 없음</p>
-      </div>
-      <span class="step-badge">6단계 / 6</span>
-    </div>
-    <div id="verdictDoc"></div>
-    <div class="btn-row">
-      <button class="btn btn-outlined" onclick="resetAll()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.87"/></svg>
-        새 사건 접수
-      </button>
-      <button class="btn btn-filled" onclick="dlVerdict()">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-        판결문 내려받기
-      </button>
-    </div>
-  </section>
+  <section id="sec5" class="card"><div class="card-header"><div class="card-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><path d="M12 18v-6M9 15l3 3 3-3"/></svg></div><div class="card-header-text"><h2>K-Law AI 가상 판결</h2><p>연구 목적, 법적 구속력 없음</p></div><span class="step-badge">6단계 / 6</span></div><div id="verdictDoc"></div><div class="btn-row"><button class="btn btn-outlined" onclick="resetAll()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.87"/></svg> 새 사건 접수</button><button class="btn btn-filled" onclick="dlVerdict()"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 판결문 내려받기</button></div></section>
 </main>
 
-<footer>
-  <p>케이로주식회사 · <a href="https://github.com/jejuro/k-law" target="_blank">GitHub</a> · GPL-3.0</p>
-</footer>
-
+<footer><p>케이로주식회사 · <a href="https://github.com/jejuro/k-law" target="_blank">GitHub</a> · GPL-3.0</p></footer>
 <div id="snackbar"></div>
-
 <script src="js/script.js"></script>
 </body>
 </html>
