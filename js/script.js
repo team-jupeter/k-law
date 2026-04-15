@@ -76,26 +76,44 @@ function selectLLM(id) {
   panel.style.display = llm.needKey ? 'block' : 'none';
   if (!llm.needKey) userKey = null;
 }
+
 function confirmMode() {
+  console.log("confirmMode 실행됨");
   const llm = LLMS[sel];
+  if (!llm) { toast("LLM 선택 오류"); return; }
   if (llm.needKey) {
-    const v = $('#userApiKey').value.trim();
+    const keyInput = $('#userApiKey');
+    if (!keyInput) { toast("API Key 입력 필드 없음"); return; }
+    const v = keyInput.value.trim();
     if (!v) { toast('API Key를 입력하세요'); return; }
     userKey = v;
   }
 
+  // 안전하게 요소 확인
   const configBar = $('#configBar');
-  configBar.style.display = 'flex';
-  configBar.innerHTML = `
-    <div class="config-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg> 모드: <strong>단일 LLM</strong></div>
-    <div class="config-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> 모델: <strong>${llm.name}</strong></div>
-    <div class="config-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg> 방법론: <strong>K-Law v6.4</strong></div>
-  `;
+  if (configBar) {
+    configBar.style.display = 'flex';
+    configBar.innerHTML = `
+      <div class="config-item">모드: 단일 LLM</div>
+      <div class="config-item">모델: ${llm.name}</div>
+      <div class="config-item">방법론: K-Law v6.4</div>
+    `;
+  } else {
+    console.warn("configBar 요소 없음");
+  }
 
-  $('#stepIndicator').style.display = 'block';
-  $('#aLogo').innerText = llm.logo;
-  $('#aTitle').innerText = llm.name;
-  $('#sec3-title').innerText = `${llm.name} 법리 분석 (K-Law v6.4)`;
+  const stepIndicator = $('#stepIndicator');
+  if (stepIndicator) stepIndicator.style.display = 'block';
+  
+  const aLogo = $('#aLogo');
+  if (aLogo) aLogo.innerText = llm.logo;
+  
+  const aTitle = $('#aTitle');
+  if (aTitle) aTitle.innerText = llm.name;
+  
+  const sec3Title = $('#sec3-title');
+  if (sec3Title) sec3Title.innerText = `${llm.name} 법리 분석 (K-Law v6.4)`;
+  
   goSec(1);
 }
 
