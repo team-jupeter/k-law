@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* ── Variables ──────────────────────────────────────── */
+/* ── Variables (기존과 동일) ───────────────────────── */
 :root {
   --navy:    #003366;
   --navy-dk: #002244;
@@ -28,7 +28,7 @@
   --sh-md:   0 4px 16px rgba(0,0,0,.10);
 }
 
-/* ── Reset ──────────────────────────────────────────── */
+/* ── Reset (기존과 동일) ─────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 html { scroll-behavior:smooth; }
 body {
@@ -40,7 +40,7 @@ body {
   min-height:100vh;
 }
 
-/* ── GNB ─────────────────────────────────────────────── */
+/* ── GNB (기존과 동일) ─────────────────────────────── */
 .gnb {
   background:var(--navy);
   color:#fff;
@@ -72,11 +72,11 @@ body {
   letter-spacing:.5px;
 }
 
-/* ── Layout ──────────────────────────────────────────── */
+/* ── Layout (기존과 동일) ──────────────────────────── */
 .outer { padding:0 24px; }
 .inner { max-width:860px; margin:0 auto; }
 
-/* ── Breadcrumb ──────────────────────────────────────── */
+/* ── Breadcrumb (기존과 동일) ──────────────────────── */
 .breadcrumb {
   padding:14px 0 0;
   font-size:12px;
@@ -90,11 +90,11 @@ body {
 .breadcrumb .bc-sep  { color:var(--line); }
 .breadcrumb .bc-curr { color:var(--text-2); font-weight:500; }
 
-/* ── Page ────────────────────────────────────────────── */
+/* ── Page (기존과 동일) ────────────────────────────── */
 .page { display:none; padding:20px 0 64px; }
 .page.active { display:block; }
 
-/* ── Step bar ────────────────────────────────────────── */
+/* ── Step bar (기존과 동일) ────────────────────────── */
 .steps {
   display:flex;
   align-items:center;
@@ -116,7 +116,7 @@ body {
 .step-lbl.done   { color:var(--navy); }
 .step-lbl.active { color:var(--accent); font-weight:600; }
 
-/* ── Page header ─────────────────────────────────────── */
+/* ── Page header (기존과 동일) ─────────────────────── */
 .page-hd {
   margin-bottom:20px;
   padding-bottom:14px;
@@ -131,7 +131,7 @@ body {
 }
 .page-hd p { font-size:13px; color:var(--text-2); }
 
-/* ── Card ────────────────────────────────────────────── */
+/* ── Card (기존과 동일) ────────────────────────────── */
 .card {
   background:var(--card);
   border:1px solid var(--line);
@@ -150,7 +150,7 @@ body {
   letter-spacing:.2px;
 }
 
-/* ── Form ────────────────────────────────────────────── */
+/* ── Form (기존과 동일) ────────────────────────────── */
 .form-row { margin-bottom:16px; }
 .form-row:last-child { margin-bottom:0; }
 label {
@@ -185,7 +185,7 @@ textarea { resize:vertical; line-height:1.6; }
 }
 @media (max-width:600px) { .form-grid { grid-template-columns:1fr; } }
 
-/* ── Buttons ─────────────────────────────────────────── */
+/* ── Buttons (기존과 동일) ─────────────────────────── */
 .btn {
   display:inline-flex;
   align-items:center;
@@ -213,7 +213,7 @@ textarea { resize:vertical; line-height:1.6; }
   flex-wrap:wrap;
 }
 
-/* ── Trial type cards ────────────────────────────────── */
+/* ── Trial type cards (기존과 동일) ────────────────── */
 .trial-cards {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -261,7 +261,7 @@ textarea { resize:vertical; line-height:1.6; }
   border-radius:2px;
 }
 
-/* ── Notice ──────────────────────────────────────────── */
+/* ── Notice (기존과 동일) ──────────────────────────── */
 .notice {
   font-size:12px;
   padding:10px 14px;
@@ -274,7 +274,7 @@ textarea { resize:vertical; line-height:1.6; }
 .notice-err  { background:var(--red-bg);   border-color:var(--red);   color:var(--red);  }
 .notice-warn { background:#fff7ed; border-color:#d97706; color:#7c4a00; }
 
-/* ── Verdict dual panels ─────────────────────────────── */
+/* ── Verdict dual panels (기존과 동일) ─────────────── */
 .dual-panels {
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -314,7 +314,7 @@ textarea { resize:vertical; line-height:1.6; }
 }
 .dp-body.out { color:#c9d1d9; }
 
-/* ── Progress ────────────────────────────────────────── */
+/* ── Progress (기존과 동일) ────────────────────────── */
 .prog-wrap { margin-top:12px; }
 .prog-track {
   width:100%; height:4px;
@@ -326,7 +326,7 @@ textarea { resize:vertical; line-height:1.6; }
 .prog-fill { height:100%; width:0; background:var(--navy); transition:width .3s; }
 .prog-lbl  { font-size:12px; color:var(--text-3); text-align:right; }
 
-/* ── Verdict result ──────────────────────────────────── */
+/* ── Verdict result (기존과 동일) ──────────────────── */
 .vr-card {
   background:var(--card);
   border:1px solid var(--line);
@@ -366,7 +366,7 @@ textarea { resize:vertical; line-height:1.6; }
   color:#fff;
 }
 
-/* ── Case summary ────────────────────────────────────── */
+/* ── Case summary (기존과 동일) ────────────────────── */
 .cs-row {
   display:flex;
   gap:12px;
@@ -378,7 +378,72 @@ textarea { resize:vertical; line-height:1.6; }
 .cs-key { min-width:90px; font-weight:600; color:var(--navy); flex-shrink:0; }
 .cs-val { color:var(--text-2); }
 
-/* ── Footer ──────────────────────────────────────────── */
+/* ── NEW: 판결 설명 섹션 스타일 ────────────────────── */
+.explanation-card {
+  background: #f8fafc;
+  border-left: 4px solid var(--accent);
+  margin-top: 24px;
+  padding: 20px;
+  border-radius: 12px;
+}
+.explanation-title {
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--navy);
+}
+.explanation-text {
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--text-2);
+  margin-bottom: 16px;
+}
+.analogy-box {
+  background: #fff7ed;
+  border-left: 3px solid #d97706;
+  padding: 14px;
+  margin: 16px 0;
+  border-radius: 8px;
+}
+.analogy-box strong {
+  color: #b45309;
+}
+.question-area {
+  margin-top: 20px;
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+}
+.question-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  font-family: inherit;
+  resize: vertical;
+}
+.question-submit {
+  margin-top: 8px;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+.question-submit:hover {
+  background: #004a99;
+}
+.question-answer {
+  margin-top: 12px;
+  background: #eef2ff;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  display: none;
+}
+/* ── Footer (기존과 동일) ──────────────────────────── */
 .footer {
   text-align:center;
   padding:24px 0 16px;
@@ -677,12 +742,42 @@ async function extractFromFacts() {
   const facts = g('facts').value.trim();
   if (facts.length < 20) { alert('사건 개요를 20자 이상 입력해주세요.'); return; }
   const btn = g('btnExtract');
-  const sd  = g('extractStatus');
+  const sd = g('extractStatus');
+  
+  // 진행률 표시를 위한 임시 영역 (없으면 생성)
+  let progDiv = g('extractProgress');
+  if (!progDiv) {
+    progDiv = document.createElement('div');
+    progDiv.id = 'extractProgress';
+    progDiv.innerHTML = '<div class="prog-track"><div class="prog-fill" style="width:0%"></div></div><div class="prog-lbl" style="text-align:left;">준비 중...</div>';
+    sd.parentNode.insertBefore(progDiv, sd.nextSibling);
+  }
+  const fill = progDiv.querySelector('.prog-fill');
+  const lbl = progDiv.querySelector('.prog-lbl');
+  
   btn.disabled = true; btn.textContent = '분석 중...';
   sd.style.display = 'block';
   sd.className = 'notice notice-info';
-  sd.textContent = 'AI가 사건 정보를 분석하고 있습니다...';
-
+  
+  const steps = [
+    { msg: '사건 개요를 읽고 있습니다...', progress: 10 },
+    { msg: '원고와 피고를 특정합니다...', progress: 30 },
+    { msg: '청구 금액을 파악합니다...', progress: 50 },
+    { msg: '사건 분류를 분석합니다...', progress: 70 },
+    { msg: '주장과 다툼 없는 사실을 추출합니다...', progress: 90 }
+  ];
+  
+  let stepIndex = 0;
+  const interval = setInterval(() => {
+    if (stepIndex < steps.length) {
+      lbl.textContent = steps[stepIndex].msg;
+      fill.style.width = steps[stepIndex].progress + '%';
+      stepIndex++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 800);
+  
   const sys = `당신은 법률 문서 분석 전문가입니다. 사건 개요에서 아래 7개 항목을 추출하여 순수 JSON만 출력하세요(코드블록 없이):
 {"caseType":"코드","claimAmount":"금액","plaintiff":"원고명","defendant":"피고명","plaintiffClaim":"원고 주장","defendantClaim":"피고 주장","undisputedFacts":"다툼없는 사실"}
 caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, criminal_fraud. 불명확하면 civil_contract.`;
@@ -693,9 +788,13 @@ caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, cr
       headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+DS_KEY },
       body: JSON.stringify({ model:'deepseek-chat', messages:[{role:'system',content:sys},{role:'user',content:facts}], temperature:0.1, max_tokens:800 })
     });
+    clearInterval(interval);
+    fill.style.width = '100%';
+    lbl.textContent = '추출 완료! 결과 적용 중...';
+    
     if (!res.ok) throw new Error('API 오류: ' + res.status);
     const data = await res.json();
-    const txt  = data.choices[0].message.content;
+    const txt = data.choices[0].message.content;
     const m = txt.match(/\{[\s\S]*\}/);
     if (!m) throw new Error('JSON 파싱 실패');
     const ex = JSON.parse(m[0]);
@@ -708,7 +807,9 @@ caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, cr
     if (ex.undisputedFacts) g('undisputedFacts').value = ex.undisputedFacts;
     sd.className = 'notice notice-ok';
     sd.textContent = '자동 추출이 완료되었습니다. 필요 시 직접 수정하세요.';
+    setTimeout(() => { if(progDiv) progDiv.style.display = 'none'; }, 2000);
   } catch(e) {
+    clearInterval(interval);
     sd.className = 'notice notice-err';
     sd.textContent = '오류: ' + e.message;
   } finally {
@@ -730,14 +831,20 @@ function goToVerdict() {
     csRow('피고',     defendant) +
     csRow('청구 금액', g('claimAmount').value || '명시되지 않음');
 
+  // 초기화
   g('thinkingPanel').textContent  = '판결 생성 버튼을 클릭하면 분석이 시작됩니다.';
   g('rawOutputPanel').textContent = '—';
   g('verdictCard').style.display  = 'none';
+  g('explanationSection').style.display = 'none';  // 설명 섹션 숨김
   g('errorArea').style.display    = 'none';
-  g('progWrap').style.display     = 'none';
-  g('btnGenerate').style.display  = '';
+  g('progWrap').style.display     = 'block';
+  g('btnGenerate').style.display  = 'none';       // 기존 생성 버튼 숨김
   g('btnReGen').style.display     = 'none';
+  
   showPage('verdict');
+  
+  // 바로 판결 생성 시작
+  runGenerate();
 }
 
 function csRow(k, v) {
@@ -826,6 +933,28 @@ function extractJSON(str) {
 }
 
 async function runGenerate() {
+  // 단계별 메시지 정의
+  const steps = [
+    { msg: 'STEP A: 피고 승소 논거 구성 중... (역방향 추론)', progress: 10 },
+    { msg: 'STEP B-1: 법률관계 확정 및 특별법 확인 중...', progress: 25 },
+    { msg: 'STEP B-2: 쟁점 계층적 분해 중...', progress: 35 },
+    { msg: 'STEP B-3: 삼단논법 구성 중...', progress: 45 },
+    { msg: 'STEP B-4: 인과관계 분석 및 가치 형량 중...', progress: 60 },
+    { msg: 'STEP B-5: 손해액 산정 및 책임 제한 중...', progress: 75 },
+    { msg: 'STEP B-6: 메타인지 자가 점검 중...', progress: 85 },
+    { msg: 'STEP C: 정합성 검증 중...', progress: 95 }
+  ];
+  let stepIndex = 0;
+  const interval = setInterval(() => {
+    if (stepIndex < steps.length) {
+      g('progLbl').textContent = steps[stepIndex].msg;
+      g('progFill').style.width = steps[stepIndex].progress + '%';
+      stepIndex++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 2000);
+  
   g('btnGenerate').disabled = true;
   g('btnReGen').style.display = 'none';
   g('progWrap').style.display = 'block';
@@ -849,7 +978,7 @@ async function runGenerate() {
     });
     if (!res.ok) throw new Error('API 오류: ' + res.status);
 
-    const reader  = res.body.getReader();
+    const reader = res.body.getReader();
     const decoder = new TextDecoder();
 
     while (true) {
@@ -871,27 +1000,30 @@ async function runGenerate() {
             g('rawOutputPanel').textContent = fullOut;
             g('rawOutputPanel').scrollTop = 99999;
           }
-          if (prog < 90) { prog += .4; setProgress(prog, '분석 진행 중... ' + Math.floor(prog) + '%'); }
         } catch(_) {}
       }
     }
-
-    setProgress(100, '분석 완료. 판결 정리 중...');
-
-    // 향상된 JSON 추출 사용
+    clearInterval(interval);
+    g('progFill').style.width = '100%';
+    g('progLbl').textContent = '분석 완료! 결과 정리 중...';
+    
     const jsonObj = extractJSON(fullOut);
     if (jsonObj && jsonObj.ruling) {
       renderVerdict(jsonObj);
+      // 설명 섹션 표시 및 내용 생성
+      showExplanation(jsonObj);
     } else {
       renderFallback(fullOut);
     }
   } catch(e) {
+    clearInterval(interval);
     g('errorArea').style.display = 'block';
     g('errorArea').textContent   = '오류: ' + e.message + ' — 잠시 후 다시 시도해주세요.';
   } finally {
     g('btnGenerate').disabled   = false;
     g('btnGenerate').style.display = 'none';
     g('btnReGen').style.display    = '';
+    g('progWrap').style.display = 'none';
   }
 }
 
@@ -928,6 +1060,69 @@ function g(id)  { return document.getElementById(id); }
 function esc(s) {
   return String(s||'').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
 }
+
+async function showExplanation(verdict) {
+  const explanationDiv = g('explanationSection');
+  if (!explanationDiv) return;
+  
+  explanationDiv.style.display = 'block';
+  const explainContent = g('explanationContent');
+  const analogyContent = g('analogyContent');
+  
+  // 간단한 비유 생성 (API 호출 없이 기본 텍스트)
+  const rulingKor = verdict.ruling;
+  let analogy = '';
+  if (rulingKor.includes('원고 승소')) {
+    analogy = '🏫 학교에서 친구가 내 장난감을 망가뜨렸을 때, 그 친구가 새 장난감을 사줘야 하는 것처럼, 법은 피해자(원고)를 보호해 줍니다. 이 판결은 원고의 주장이 타당하다고 본 거예요.';
+  } else if (rulingKor.includes('피고 승소')) {
+    analogy = '🏫 학교에서 내가 친구에게 장난감을 빌려줬는데, 친구가 실수로 잃어버렸어도 내가 책임을 지라고 하면 억울하겠죠? 법은 무조건 원고 편을 들지 않고, 사정을 따져서 피고의 입장도 보호해 줍니다. 이 판결은 피고에게 책임이 없다고 본 거예요.';
+  } else if (rulingKor.includes('일부 승소')) {
+    analogy = '🏫 운동회에서 달리기 경주를 했는데, 출발선에서 약간 반칙했지만 그래도 잘 달렸다면, 상금을 일부만 주는 것처럼, 법도 잘못의 정도에 따라 책임을 나누어 줍니다.';
+  } else {
+    analogy = '⚖️ 법은 마치 축구 경기의 심판과 같아서, 양측의 주장과 규칙을 보고 가장 공정한 결정을 내리려고 해요. 이 판결은 법과 원칙에 따라 내려진 결정입니다.';
+  }
+  
+  explainContent.innerHTML = `
+    <p><strong>📌 판결 요약:</strong> ${verdict.verdict_summary || '판결 요지가 없습니다.'}</p>
+    <p><strong>🔍 핵심 법리:</strong> ${verdict.key_legal_theory || '설명 없음'}</p>
+    <p><strong>⚖️ 법적 근거:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : (verdict.legal_basis || '명시되지 않음')}</p>
+  `;
+  analogyContent.innerHTML = `<strong>🧸 초등학생도 이해하는 비유:</strong><br>${analogy}`;
+  
+  // 추가 질문 입력 필드 초기화
+  const questionInput = g('questionInput');
+  const answerDiv = g('questionAnswer');
+  if (questionInput) questionInput.value = '';
+  if (answerDiv) answerDiv.style.display = 'none';
+}
+
+// 추가 질문 처리 함수
+window.askAdditionalQuestion = async function() {
+  const input = g('questionInput');
+  const answerDiv = g('questionAnswer');
+  const question = input.value.trim();
+  if (!question) return;
+  answerDiv.style.display = 'block';
+  answerDiv.innerHTML = '🤖 AI가 답변을 생성하는 중입니다...';
+  
+  try {
+    const res = await fetch('https://api.deepseek.com/chat/completions', {
+      method: 'POST',
+      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+DS_KEY },
+      body: JSON.stringify({
+        model: 'deepseek-chat',
+        messages: [{ role: 'system', content: '당신은 법률 AI 어시스턴트입니다. 사용자의 질문에 대해 쉽고 친절하게 답변하세요.' }, { role: 'user', content: question }],
+        temperature: 0.5,
+        max_tokens: 500
+      })
+    });
+    const data = await res.json();
+    const reply = data.choices[0].message.content;
+    answerDiv.innerHTML = `<strong>💬 AI 답변:</strong><br>${reply.replace(/\n/g, '<br>')}`;
+  } catch(e) {
+    answerDiv.innerHTML = '⚠️ 답변 생성 중 오류가 발생했습니다.';
+  }
+};
 </script>
 </body>
 </html>
