@@ -444,3 +444,15 @@ $('#facts').addEventListener('input', function () {
   $('#factsCount').innerText = len;
   if (len > 2000) this.value = this.value.slice(0, 2000);
 });
+
+window.confirmMode = confirmMode;
+window.selectMode = selectMode;
+window.selectLLM = selectLLM;
+window.toSec2 = toSec2;
+window.goSec = goSec;
+window.extractFromFacts = extractFromFacts;
+window.toSec25 = toSec25;
+window.skipQ = skipQ;
+window.submitQ = submitQ;
+window.dlVerdict = dlVerdict;
+window.resetAll = resetAll;
