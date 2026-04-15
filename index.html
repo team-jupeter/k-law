@@ -1022,6 +1022,7 @@ async function runGenerate() {
     const jsonObj = extractJSON(fullOut);
     if (jsonObj && jsonObj.ruling) {
       renderVerdict(jsonObj);
+      showExplanation(jsonObj);
       // 설명 섹션 표시 및 내용 생성
       showExplanation(jsonObj);
     } else {
@@ -1073,6 +1074,7 @@ function esc(s) {
   return String(s||'').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
 }
 
+// 판결 정당성 설명 및 비유 생성 (DeepSeek API 호출)
 async function showExplanation(verdict) {
   const explanationDiv = g('explanationSection');
   if (!explanationDiv) return;
@@ -1081,60 +1083,83 @@ async function showExplanation(verdict) {
   const explainContent = g('explanationContent');
   const analogyContent = g('analogyContent');
   
-  // 간단한 비유 생성 (API 호출 없이 기본 텍스트)
-  const rulingKor = verdict.ruling;
-  let analogy = '';
-  if (rulingKor.includes('원고 승소')) {
-    analogy = '🏫 학교에서 친구가 내 장난감을 망가뜨렸을 때, 그 친구가 새 장난감을 사줘야 하는 것처럼, 법은 피해자(원고)를 보호해 줍니다. 이 판결은 원고의 주장이 타당하다고 본 거예요.';
-  } else if (rulingKor.includes('피고 승소')) {
-    analogy = '🏫 학교에서 내가 친구에게 장난감을 빌려줬는데, 친구가 실수로 잃어버렸어도 내가 책임을 지라고 하면 억울하겠죠? 법은 무조건 원고 편을 들지 않고, 사정을 따져서 피고의 입장도 보호해 줍니다. 이 판결은 피고에게 책임이 없다고 본 거예요.';
-  } else if (rulingKor.includes('일부 승소')) {
-    analogy = '🏫 운동회에서 달리기 경주를 했는데, 출발선에서 약간 반칙했지만 그래도 잘 달렸다면, 상금을 일부만 주는 것처럼, 법도 잘못의 정도에 따라 책임을 나누어 줍니다.';
-  } else {
-    analogy = '⚖️ 법은 마치 축구 경기의 심판과 같아서, 양측의 주장과 규칙을 보고 가장 공정한 결정을 내리려고 해요. 이 판결은 법과 원칙에 따라 내려진 결정입니다.';
-  }
+  // 로딩 표시
+  explainContent.innerHTML = '<p>📖 판결 근거를 분석하고 비유를 생성하는 중입니다...</p>';
+  analogyContent.innerHTML = '<p>🧸 초등학생도 이해할 수 있는 비유를 준비 중입니다...</p>';
   
-  explainContent.innerHTML = `
-    <p><strong>📌 판결 요약:</strong> ${verdict.verdict_summary || '판결 요지가 없습니다.'}</p>
-    <p><strong>🔍 핵심 법리:</strong> ${verdict.key_legal_theory || '설명 없음'}</p>
-    <p><strong>⚖️ 법적 근거:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : (verdict.legal_basis || '명시되지 않음')}</p>
-  `;
-  analogyContent.innerHTML = `<strong>🧸 초등학생도 이해하는 비유:</strong><br>${analogy}`;
+  // 사건 정보 수집
+  const caseData = {
+    caseType: g('caseType').options[g('caseType').selectedIndex]?.text || g('caseType').value,
+    plaintiff: g('plaintiff').value,
+    defendant: g('defendant').value,
+    facts: g('facts').value,
+    plaintiffClaim: g('plaintiffClaim').value,
+    defendantClaim: g('defendantClaim').value,
+    undisputedFacts: g('undisputedFacts').value
+  };
   
-  // 추가 질문 입력 필드 초기화
-  const questionInput = g('questionInput');
-  const answerDiv = g('questionAnswer');
-  if (questionInput) questionInput.value = '';
-  if (answerDiv) answerDiv.style.display = 'none';
-}
+  const systemPrompt = `당신은 법률 판결을 쉽게 설명하는 전문가입니다.  
+사용자가 제공한 사건 정보와 AI 판결 내용을 바탕으로,  
+1) 판결의 논리적 근거와 법적 정당성을 초등학생도 이해할 수 있는 친근한 비유로 설명하고,  
+2) 판결의 핵심 이유를 3~5문장으로 요약해 주세요.  
 
-// 추가 질문 처리 함수
-window.askAdditionalQuestion = async function() {
-  const input = g('questionInput');
-  const answerDiv = g('questionAnswer');
-  const question = input.value.trim();
-  if (!question) return;
-  answerDiv.style.display = 'block';
-  answerDiv.innerHTML = '🤖 AI가 답변을 생성하는 중입니다...';
-  
+응답은 다음 JSON 형식만 출력하세요 (추가 텍스트 없이):  
+{
+  "reasoning_summary": "판결의 핵심 논리 요약 (3~5문장)",
+  "analogy": "일상적인 비유 (100~150자)"
+}`;
+
+  const userMessage = `[사건 정보]  
+- 사건 분류: ${caseData.caseType}  
+- 원고: ${caseData.plaintiff}  
+- 피고: ${caseData.defendant}  
+- 사건 개요: ${caseData.facts.substring(0, 500)}  
+- 원고 주장: ${caseData.plaintiffClaim.substring(0, 300)}  
+- 피고 주장: ${caseData.defendantClaim.substring(0, 300)}  
+
+[AI 판결]  
+- 판결 방향: ${verdict.ruling}  
+- 핵심 법리: ${verdict.key_legal_theory}  
+- 세부 논증: ${verdict.reasoning}  
+- 적용 법조문: ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : verdict.legal_basis}  
+
+위 정보를 바탕으로 판결의 정당성과 비유를 생성해 주세요.`;
+
   try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
+    const response = await fetch('https://api.deepseek.com/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+DS_KEY },
+      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
       body: JSON.stringify({
         model: 'deepseek-chat',
-        messages: [{ role: 'system', content: '당신은 법률 AI 어시스턴트입니다. 사용자의 질문에 대해 쉽고 친절하게 답변하세요.' }, { role: 'user', content: question }],
+        messages: [
+          { role: 'system', content: systemPrompt },
+          { role: 'user', content: userMessage }
+        ],
         temperature: 0.5,
-        max_tokens: 500
+        max_tokens: 800
       })
     });
-    const data = await res.json();
-    const reply = data.choices[0].message.content;
-    answerDiv.innerHTML = `<strong>💬 AI 답변:</strong><br>${reply.replace(/\n/g, '<br>')}`;
-  } catch(e) {
-    answerDiv.innerHTML = '⚠️ 답변 생성 중 오류가 발생했습니다.';
+    if (!response.ok) throw new Error('설명 생성 API 오류');
+    
+    const data = await response.json();
+    const content = data.choices[0].message.content;
+    const jsonMatch = content.match(/\{[\s\S]*\}/);
+    if (!jsonMatch) throw new Error('JSON 파싱 실패');
+    const explanation = JSON.parse(jsonMatch[0]);
+    
+    explainContent.innerHTML = `<p><strong>📌 판결 요약:</strong> ${verdict.verdict_summary || '판결 요지가 없습니다.'}</p>
+                                <p><strong>🔍 핵심 법리:</strong> ${verdict.key_legal_theory || '설명 없음'}</p>
+                                <p><strong>⚖️ 법적 근거:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : (verdict.legal_basis || '명시되지 않음')}</p>
+                                <p><strong>💡 판결의 논리적 근거:</strong><br>${explanation.reasoning_summary}</p>`;
+    analogyContent.innerHTML = `<strong>🧸 초등학생도 이해하는 비유:</strong><br>${explanation.analogy}`;
+  } catch (err) {
+    console.error(err);
+    explainContent.innerHTML = `<p><strong>📌 판결 요약:</strong> ${verdict.verdict_summary || '판결 요지가 없습니다.'}</p>
+                                <p><strong>🔍 핵심 법리:</strong> ${verdict.key_legal_theory || '설명 없음'}</p>
+                                <p><strong>⚖️ 법적 근거:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : (verdict.legal_basis || '명시되지 않음')}</p>`;
+    analogyContent.innerHTML = `<strong>🧸 초등학생도 이해하는 비유:</strong><br>판결 내용을 바탕으로 한 비유를 생성하는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.`;
   }
-};
+}
 </script>
 </body>
 </html>
