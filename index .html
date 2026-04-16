@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>K-Law AI 가상 법원</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
+<!-- ① 전역 스타일 — styles.css만 수정하면 됩니다 -->
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     GNB  —  상단 네비게이션
+     브랜드명·버전 변경 시 이 블록만 수정하세요.
+══════════════════════════════════════════════════ -->
+<nav class="gnb">
+  <span class="gnb-logo" onclick="showPage('index')">K-Law AI 가상 법원</span>
+  <div class="gnb-sep"></div>
+  <span class="gnb-badge">K-Law v6.4</span>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════════
+     HERO + 차트 섹션
+     차트 이미지·설명·소개글 변경 시 이 블록만 수정하세요.
+══════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════
+     HERO + 차트 섹션
+     차트 이미지·설명·소개글 변경 시 이 블록만 수정하세요.
+══════════════════════════════════════════════════ -->
+<section class="hero-section">
+  <h2>법적 위험을 미리 감지하고, 분쟁을 사전에 차단하며, 발생한 분쟁은 즉시 해결합니다.</h2>
+</section>
+
+<div class="chart-section">
+
+  <!-- K-Law 4단 카드 -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:20px;">
+
+    <!-- 카드 ① 핵심 기술 명칭 -->
+    <div class="ce-card" style="border-top:3px solid var(--navy); padding-top:16px;">
+      <div class="ce-label">핵심 기술</div>
+      <div class="ce-title" style="font-size:14px; margin-bottom:8px;">법적 위험 감지 엔진<br><span style="font-weight:400; font-size:12px; color:var(--text-3);">Legal Risk Detection Engine</span></div>
+      <div class="ce-desc">K-Law의 근간을 이루는 핵심 기술로, 시민의 일상과 업무 전반에 걸쳐 잠재된 법적 위험을 지속적으로 모니터링합니다.</div>
+    </div>
+
+    <!-- 카드 ② 실시간 탐지 + 개인정보 -->
+    <div class="ce-card" style="border-top:3px solid var(--accent); padding-top:16px;">
+      <div class="ce-label">작동 방식</div>
+      <div class="ce-title" style="font-size:14px; margin-bottom:8px;">실시간 탐지 · 경보 · 대응</div>
+      <div class="ce-desc">일상적 대화와 업무 문서 속 불법·탈법·편법적 요소를 실시간으로 식별하여 경보를 발령하고 구체적인 대응 방안을 제시함으로써, 분쟁과 소송의 발생 가능성을 원천에서 차단합니다.</div>
+      <div style="margin-top:10px; padding:8px 10px; background:var(--green-bg); border-radius:var(--r); font-size:11px; color:var(--green);">
+        🔒 수집된 정보는 분석 즉시 파기되며, 어떠한 개인 식별 정보도 저장·공유되지 않습니다.
+      </div>
+    </div>
+
+    <!-- 카드 ③ 주된 쓰임새 -->
+    <div class="ce-card" style="border-top:3px solid #0059B3; padding-top:16px;">
+      <div class="ce-label">주된 쓰임새</div>
+      <div class="ce-title" style="font-size:14px; margin-bottom:8px;">예방법학 (Preventive Law)</div>
+      <div class="ce-desc">분쟁이 소송으로 비화되기 전, 당사자가 사안의 법적 윤곽을 명확히 파악하도록 돕습니다. 민·형사 분쟁의 <strong>90% 이상</strong>을 사전 예방하거나 조기에 해소하는 것을 목표로 합니다.</div>
+    </div>
+
+    <!-- 카드 ④ 부차적 쓰임새 -->
+    <div class="ce-card" style="border-top:3px solid #d97706; padding-top:16px;">
+      <div class="ce-label">부차적 쓰임새</div>
+      <div class="ce-title" style="font-size:14px; margin-bottom:8px;">분쟁 해소의 효율화</div>
+      <div class="ce-desc">이미 발생한 분쟁을 기존 소송 절차 대비 <strong>수백 분의 1의 비용</strong>과 <strong>수천 분의 1의 시간</strong>으로 해소합니다. 수개월~수년의 재판 대신, 분쟁의 법적 방향을 즉시 확인하고 합리적 협의로 나아갈 수 있습니다.</div>
+    </div>
+
+  </div>
+
+
+  <!-- 성능 입증 소개 -->
+  <div class="card" style="margin-bottom:20px; border-left:4px solid var(--accent); border-radius:0 var(--r-lg) var(--r-lg) 0;">
+    <div class="card-title">이 페이지가 증명하는 것</div>
+    <p style="font-size:13px; color:var(--text-2); line-height:1.8; margin-bottom:10px;">
+      이 페이지는 K-Law의 <strong>부차적 쓰임새</strong>, 즉 기존 법원 판결 대비 K-Law의 판단 정확도를 과학적으로 입증합니다.
+      대법원(3심) 판결을 최종 기준(100점)으로 삼았을 때, K-Law는 80건의 판례 학습 이후 <strong>80점의 일치도</strong>를 기록하여
+      1심(47점)과 2심(44점)을 현격히 상회합니다.
+    </p>
+    <p style="font-size:13px; color:var(--text-2); line-height:1.8; margin-bottom:10px;">
+      K-Law는 <strong>2026년 5월까지 누적 학습 판례 1,000건, 대법원 판결 일치도 95% 수준</strong> 달성을 목표로 합니다.
+    </p>
+    <div class="conclusion-bar" style="margin-top:4px;">
+      <p>이는 AI가 인간 판사를 대신한다는 의미가 아닙니다. K-Law는 법관의 고유한 사법 권한을 존중하며,
+         반복적·정형화된 분쟁을 흡수함으로써 <strong>사법부가 더 중요한 사건에 집중할 수 있는 환경</strong>을 만드는 데 기여합니다.</p>
+    </div>
+  </div>
+
+  <!-- 차트 이미지 -->
+  <img src="research/charts/chart_trend_smoothed.png"
+       alt="K-Law 방법론 대법원 판결 일치도 추이 (2026년 4월 13일 기준)">
+  <p class="chart-caption">📊 K-Law 방법론 v6.4 대법원 판결 일치도 추이 (2026.04.13 기준)</p>
+
+  <!-- 차트 설명 카드 -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">차트 개요</div>
+    <p style="font-size:13px; color:var(--text-2); line-height:1.7;">
+      이 차트는 <strong>K-Law AI 모델</strong>이 판례를 더 많이 학습할수록
+      <strong>대법원(3심) 판결</strong>과 얼마나 가까워지는지를 보여줍니다.
+      대법원 판결을 기준(100)으로 삼고, K-Law · 1심 · 2심의 일치도를 구간별로 비교합니다.
+    </p>
+  </div>
+
+  <!-- X/Y축 설명 -->
+  <div class="chart-explain">
+    <div class="ce-card">
+      <div class="ce-label">X축</div>
+      <div class="ce-title">학습 판례 수 (누적 건수 구간)</div>
+      <div class="ce-desc">1~10건부터 71~80건까지, AI가 학습한 판례의 누적 범위를 8개 구간으로 나눕니다.</div>
+    </div>
+    <div class="ce-card">
+      <div class="ce-label">Y축</div>
+      <div class="ce-title">대법원 판결 대비 일치도</div>
+      <div class="ce-desc">대법원 3심 판결을 100으로 정규화한 상대 점수. 높을수록 대법원과 유사한 결론입니다.</div>
+    </div>
+  </div>
+
+  <!-- 비교 대상 -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">비교 대상</div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="legend-dot" style="background:#2563eb;"></span>
+        <span style="font-size:13px;"><strong>K-Law</strong> — 본 AI 법률 모델의 예측 판결</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="legend-dot" style="background:#dc2626;"></span>
+        <span style="font-size:13px;"><strong>1심</strong> — 지방법원 1심 판결 (인간 판사)</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span class="legend-dot" style="background:#d97706;"></span>
+        <span style="font-size:13px;"><strong>2심</strong> — 고등법원 2심 판결 (인간 판사)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 구간별 흐름 -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">구간별 핵심 흐름</div>
+    <div class="flow-row">
+      <span class="flow-key">1~20건</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law(40점)가 1심·2심(~55점)에 비해 낮은 일치도로 출발합니다.</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-key">21~30건</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law가 빠르게 성장하여 1심·2심 수준(53점)에 도달합니다.</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-key">31건~</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law가 68~69점으로 역전, 1심·2심을 일관되게 앞서기 시작합니다.</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-key">71~80건</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law 80점으로 상승. 1심(47점)·2심(44점)과의 격차가 더욱 벌어집니다.</span>
+    </div>
+    <div class="conclusion-bar">
+      <p>판례 학습량이 늘어날수록 K-Law는 1심·2심 인간 판사보다 대법원 판결에 더 가깝게 수렴하며,
+         약 <strong>30건 이상</strong> 학습 후에는 기존 법원 심급을 능가하는 일치도를 보입니다.</p>
+    </div>
+  </div>
+
+  <!-- 체험 유도 배너 -->
+  <div class="invite-banner">
+    <div>
+      <h3>K-Law의 성능을 직접 확인해 보십시오.</h3>
+      <p>실제 사건 내용을 입력하면 K-Law가 즉시 가상 판결을 생성합니다.</p>
+    </div>
+    <button class="invite-btn" onclick="document.querySelector('.outer').scrollIntoView({behavior:'smooth'})">
+      지금 체험하기 &darr;
+    </button>
+  </div>
+</div><!-- /chart-section -->
+
+
+<!-- ══════════════════════════════════════════════════
+     MAIN APP  —  3단계 판결 생성 플로우
+══════════════════════════════════════════════════ -->
+<div class="outer">
+<div class="inner">
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" id="breadcrumb">
+    <span class="bc-link" onclick="showPage('index')">홈</span>
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 1 · INDEX · 재판부 선택
+       재판부 카드·모델 목록 변경 시 이 블록 수정.
+  ══════════════════════════════════════════════ -->
+  <div class="page active" id="page-index">
+
+    <!-- 스텝바 CTA -->
+    <p class="steps-cta" style="margin-top:24px;">K-Law의 성능을 직접 확인해 보십시오.</p>
+
+    <!-- 스텝바 -->
+    <div class="steps">
+      <div class="step-item">
+        <div class="step-dot active">1</div>
+        <span class="step-lbl active">재판부 선택</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item">
+        <div class="step-dot">2</div>
+        <span class="step-lbl">사건 입력</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item">
+        <div class="step-dot">3</div>
+        <span class="step-lbl">판결 생성</span>
+      </div>
+    </div>
+
+    <div class="page-hd">
+      <h1>재판부 구성 선택</h1>
+      <p>AI 법률 중재 보조 시스템 · 분석 유형과 AI 모델을 선택하세요.</p>
+    </div>
+
+    <!-- 재판 유형 카드 (3열) -->
+    <div class="trial-cards">
+
+      <!-- 단독재판 -->
+      <div class="trial-card selected" id="card-single" onclick="selectTrial('single')">
+        <div class="trial-badge">단독재판</div>
+        <h3>단독재판부 (Bench)</h3>
+        <p>하나의 AI 모델이 사건을 분석하고 가상 판결을 내립니다.<br>
+           1심 구조에 해당하며 신속한 분석에 적합합니다.</p>
+      </div>
+
+      <!-- 합의부재판 -->
+      <div class="trial-card disabled" id="card-panel">
+        <span class="coming-tag">준비 중</span>
+        <div class="trial-badge" style="background:#a0aec0;">합의부재판</div>
+        <h3>합의부 (Collegiate)</h3>
+        <p>3개의 AI 모델이 독립적으로 분석하고 다수결로 판결을 도출합니다.<br>
+           2심 구조에 해당합니다.</p>
+      </div>
+
+      <!-- 대법원 전원합의체 -->
+      <div class="trial-card disabled" id="card-supreme">
+        <span class="coming-tag">준비 중</span>
+        <div class="trial-badge-gold">대법원</div>
+        <h3>전원합의체 (En Banc)</h3>
+        <p>대법원장 1인 + 대법관 12인 역할을 수행하는 14개 AI 에이전트가
+           독립 심리·교차 토론·최종 표결을 거쳐 전원합의체 판결문을 생성합니다.</p>
+      </div>
+
+    </div><!-- /trial-cards -->
+
+    <!-- AI 모델 선택 -->
+    <div class="card">
+      <div class="card-title">AI 모델 선택</div>
+      <div class="form-row">
+        <label for="singleLLM">사용할 AI 모델</label>
+        <select id="singleLLM" onchange="onModelChange()">
+          <option value="deepseek" selected>DeepSeek R1 (기본, API Key 불필요)</option>
+          <option value="gpt">GPT-4o (OpenAI)</option>
+          <option value="claude">Claude Opus (Anthropic)</option>
+          <option value="gemini">Gemini 1.5 Pro (Google)</option>
+          <option value="grok">Grok 3 (xAI)</option>
+          <option value="llama">Llama 3.1 (Groq)</option>
+        </select>
+      </div>
+      <!-- 외부 LLM 선택 시 API Key 입력란 동적 표시 -->
+      <div class="apikey-row" id="apiKeyRow">
+        <label id="apiKeyLabel" for="apiKeyInput">API Key</label>
+        <input type="password" id="apiKeyInput" placeholder="API Key를 입력하세요"
+               autocomplete="off" style="margin-top:6px;">
+        <p style="font-size:11px; color:var(--text-3); margin-top:6px;">
+          입력한 키는 브라우저 내에서만 사용되며 서버에 저장되지 않습니다.
+        </p>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="goToBench()">다음 단계: 사건 입력 &rarr;</button>
+    </div>
+
+    <div class="notice notice-info">
+      본 시스템은 K-Law 방법론 v6.4에 따라 AI가 생성하는 가상 판결입니다.
+      실제 법적 효력이 없으며 법률 전문가 자문을 대체하지 않습니다.
+    </div>
+  </div><!-- /page-index -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 2 · BENCH · 사건 입력
+       입력 필드 추가/변경 시 이 블록 수정.
+  ══════════════════════════════════════════════ -->
+  <div class="page" id="page-bench">
+
+    <div class="steps" style="margin-top:20px;">
+      <div class="step-item">
+        <div class="step-dot done">1</div>
+        <span class="step-lbl done">재판부 선택</span>
+      </div>
+      <div class="step-connector done"></div>
+      <div class="step-item">
+        <div class="step-dot active">2</div>
+        <span class="step-lbl active">사건 입력</span>
+      </div>
+      <div class="step-connector"></div>
+      <div class="step-item">
+        <div class="step-dot">3</div>
+        <span class="step-lbl">판결 생성</span>
+      </div>
+    </div>
+
+    <div class="page-hd">
+      <h1>사건 정보 입력</h1>
+      <p>사건 개요를 입력하면 AI가 당사자 정보 및 주요 쟁점을 자동으로 추출합니다.</p>
+    </div>
+
+    <!-- 사건 개요 -->
+    <div class="card">
+      <div class="card-title">사건 개요 <span style="font-weight:400;color:var(--text-3);">(필수)</span></div>
+      <div class="form-row">
+        <label for="facts">사건 내용 요약<span class="req">*</span></label>
+        <textarea id="facts" rows="6"
+          placeholder="예: 원고 홍길동은 피고 김철수에게 2024년 1월 1일 5,000만 원을 대여하였으나 피고가 변제하지 않아 대여금 반환을 청구합니다."></textarea>
+      </div>
+      <div style="display:flex; justify-content:flex-end;">
+        <button class="btn btn-secondary btn-sm" id="btnExtract" onclick="extractFromFacts()">AI 자동 추출</button>
+      </div>
+      <div id="extractStatus" style="display:none; margin-top:10px;"></div>
+    </div>
+
+    <!-- 당사자 -->
+    <div class="card">
+      <div class="card-title">당사자 및 사건 정보</div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="plaintiff">원고 (신청인)<span class="req">*</span></label>
+          <input type="text" id="plaintiff" placeholder="성명 또는 법인명">
+        </div>
+        <div class="form-row">
+          <label for="defendant">피고 (상대방)<span class="req">*</span></label>
+          <input type="text" id="defendant" placeholder="성명 또는 법인명">
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-row">
+          <label for="caseType">사건 분류</label>
+          <select id="caseType">
+            <option value="">-- 선택 --</option>
+            <option value="civil_contract">계약위반</option>
+            <option value="civil_damage">손해배상</option>
+            <option value="civil_traffic">교통사고</option>
+            <option value="family_divorce">이혼·위자료</option>
+            <option value="criminal_fraud">사기</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="claimAmount">청구 금액</label>
+          <input type="text" id="claimAmount" placeholder="예: 50,000,000원">
+        </div>
+      </div>
+    </div>
+
+    <!-- 주장 -->
+    <div class="card">
+      <div class="card-title">양측 주장 및 다툼 없는 사실</div>
+      <div class="form-row">
+        <label for="plaintiffClaim">원고의 주장</label>
+        <textarea id="plaintiffClaim" rows="6" placeholder="원고가 주장하는 사실과 법적 근거"></textarea>
+      </div>
+      <div class="form-row">
+        <label for="defendantClaim">피고의 주장</label>
+        <textarea id="defendantClaim" rows="6" placeholder="피고가 주장하는 사실과 법적 근거"></textarea>
+      </div>
+      <div class="form-row">
+        <label for="undisputedFacts">다툼 없는 사실 <span style="font-weight:400;color:var(--text-3);">(선택)</span></label>
+        <textarea id="undisputedFacts" rows="3" placeholder="양측이 동의하는 핵심 사실"></textarea>
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="showPage('index')">&larr; 이전</button>
+      <button class="btn btn-primary"   onclick="goToVerdict()">판결 생성 &rarr;</button>
+    </div>
+  </div><!-- /page-bench -->
+
+
+  <!-- ══════════════════════════════════════════════
+       PAGE 3 · VERDICT · 판결 생성
+       판결 레이아웃 변경 시 이 블록 수정.
+  ══════════════════════════════════════════════ -->
+  <div class="page" id="page-verdict">
+
+    <div class="steps" style="margin-top:20px;">
+      <div class="step-item">
+        <div class="step-dot done">1</div>
+        <span class="step-lbl done">재판부 선택</span>
+      </div>
+      <div class="step-connector done"></div>
+      <div class="step-item">
+        <div class="step-dot done">2</div>
+        <span class="step-lbl done">사건 입력</span>
+      </div>
+      <div class="step-connector done"></div>
+      <div class="step-item">
+        <div class="step-dot active">3</div>
+        <span class="step-lbl active">판결 생성</span>
+      </div>
+    </div>
+
+    <div class="page-hd">
+      <h1>가상 판결 생성</h1>
+      <p>K-Law 방법론 v6.4 · STEP A(역방향 추론) → STEP B(판결문) → STEP C(정합성 검증)</p>
+    </div>
+
+    <!-- 사건 요약 -->
+    <div class="card">
+      <div class="card-title">사건 요약</div>
+      <div id="caseSummaryBody"></div>
+    </div>
+
+    <!-- 분석 패널 -->
+    <div class="dual-panels">
+      <div class="dp">
+        <div class="dp-head">AI 추론 과정 · Thinking</div>
+        <div class="dp-body" id="thinkingPanel">판결 생성 버튼을 클릭하면 분석이 시작됩니다.</div>
+      </div>
+      <div class="dp">
+        <div class="dp-head">원문 출력 · Raw Output</div>
+        <div class="dp-body out" id="rawOutputPanel">—</div>
+      </div>
+    </div>
+
+    <!-- 진행률 -->
+    <div class="prog-wrap" id="progWrap" style="display:none;">
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-lbl"  id="progLbl">분석 진행 중...</div>
+    </div>
+
+    <!-- 오류 -->
+    <div class="notice notice-err" id="errorArea" style="display:none;"></div>
+
+    <!-- 최종 판결 -->
+    <div class="vr-card" id="verdictCard" style="display:none;">
+      <div class="vr-head">최종 판결 · K-Law v6.4</div>
+      <div class="vr-body" id="verdictBody"></div>
+    </div>
+
+    <!-- 판결 설명 · 비유 · 추가 질문 -->
+    <div id="explanationSection" class="explanation-card" style="display:none;">
+      <div class="explanation-title">📖 판결의 논리적 근거와 정당성</div>
+      <div id="explanationContent" class="explanation-text"></div>
+      <div id="analogyContent"    class="analogy-box"></div>
+      <div class="question-area">
+        <div class="explanation-title">💬 판결에 대해 궁금한 점을 물어보세요</div>
+        <textarea id="questionInput" class="question-input" rows="2"
+          placeholder="예: 왜 피고가 승소했나요? 어떤 법이 적용되었나요?"></textarea>
+        <button class="question-submit" onclick="askAdditionalQuestion()">질문하기</button>
+        <div id="questionAnswer" class="question-answer"></div>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:20px;">
+      <button class="btn btn-secondary" onclick="showPage('bench')">&larr; 사건 수정</button>
+      <button class="btn btn-secondary" id="btnReGen"    onclick="runGenerate()" style="display:none;">다시 생성</button>
+      <button class="btn btn-primary"   id="btnGenerate" onclick="runGenerate()">판결 생성 시작</button>
+    </div>
+  </div><!-- /page-verdict -->
+
+
+  <!-- Footer -->
+  <div class="footer">
+    케이로주식회사 &nbsp;·&nbsp; K-Law 방법론 v6.4 &nbsp;·&nbsp; 가상 판결은 법적 효력이 없습니다.
+  </div>
+
+</div><!-- /inner -->
+</div><!-- /outer -->
+
+<!-- ② JS 파일 로드 순서: routing → verdict(DS_KEY 정의) → extract → explanation -->
+<script src="app-routing.js"></script>
+<script src="app-verdict.js"></script>
+<script src="app-extract.js"></script>
+<script src="app-explanation.js"></script>
+
+</body>
+</html>
