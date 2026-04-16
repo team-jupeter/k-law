@@ -980,17 +980,20 @@ async function runGenerate() {
 
   try {
     const res = await fetch('https://api.deepseek.com/chat/completions', {
-  method: 'POST',
-  headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+DS_KEY },
-  body: JSON.stringify({
-    model: 'deepseek-reasoner',   // 또는 'deepseek-chat' (추론 과정 미표시)
-    messages: [...],
-    stream: true,
-    temperature: 0,               // 결정적 출력
-    // seed: 42,                  // 가능하다면 추가
-    max_tokens: 8000
-  })
-});
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + DS_KEY },
+      body: JSON.stringify({
+        model: 'deepseek-reasoner',
+        messages: [
+          { role: 'system', content: buildSys() },
+          { role: 'user', content: buildUser() }
+        ],
+        stream: true,
+        temperature: 0,               // 결정적 출력
+        max_tokens: 8000
+        // seed: 42                  // DeepSeek 지원 시 주석 해제
+      })
+    });
     if (!res.ok) throw new Error('API 오류: ' + res.status);
 
     const reader = res.body.getReader();
@@ -1025,8 +1028,6 @@ async function runGenerate() {
     const jsonObj = extractJSON(fullOut);
     if (jsonObj && jsonObj.ruling) {
       renderVerdict(jsonObj);
-      showExplanation(jsonObj);
-      // 설명 섹션 표시 및 내용 생성
       showExplanation(jsonObj);
     } else {
       renderFallback(fullOut);
