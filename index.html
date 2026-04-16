@@ -6,546 +6,122 @@
 <title>K-Law AI 가상 법원</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;600;700&family=Noto+Sans+KR:wght@400;500;600&display=swap" rel="stylesheet">
-<style>
-/* ── Variables (기존과 동일) ───────────────────────── */
-:root {
-  --navy:    #003366;
-  --navy-dk: #002244;
-  --accent:  #0059B3;
-  --line:    #d4d9e0;
-  --bg:      #f4f6f9;
-  --card:    #ffffff;
-  --text:    #1a1d22;
-  --text-2:  #4a5568;
-  --text-3:  #718096;
-  --green:   #155a30;
-  --green-bg:#edf7f1;
-  --red:     #b91c1c;
-  --red-bg:  #fef2f2;
-  --r:       4px;
-  --r-lg:    8px;
-  --sh:      0 1px 4px rgba(0,0,0,.10);
-  --sh-md:   0 4px 16px rgba(0,0,0,.10);
-}
-
-/* ── Reset (기존과 동일) ─────────────────────────── */
-*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; }
-body {
-  font-family:'Noto Sans KR', sans-serif;
-  background:var(--bg);
-  color:var(--text);
-  font-size:14px;
-  line-height:1.65;
-  min-height:100vh;
-}
-
-/* ── GNB (기존과 동일) ─────────────────────────────── */
-.gnb {
-  background:var(--navy);
-  color:#fff;
-  padding:0 24px;
-  height:52px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  position:sticky;
-  top:0;
-  z-index:100;
-  box-shadow:0 2px 6px rgba(0,0,0,.20);
-}
-.gnb-logo {
-  font-family:'Noto Serif KR', serif;
-  font-weight:700;
-  font-size:17px;
-  letter-spacing:-.2px;
-  color:#fff;
-  text-decoration:none;
-  cursor:pointer;
-}
-.gnb-sep { flex:1; }
-.gnb-badge {
-  font-size:11px;
-  background:rgba(255,255,255,.15);
-  padding:3px 10px;
-  border-radius:2px;
-  letter-spacing:.5px;
-}
-
-/* ── Layout (기존과 동일) ──────────────────────────── */
-.outer { padding:0 24px; }
-.inner { max-width:860px; margin:0 auto; }
-
-/* ── Breadcrumb (기존과 동일) ──────────────────────── */
-.breadcrumb {
-  padding:14px 0 0;
-  font-size:12px;
-  color:var(--text-3);
-  display:flex;
-  align-items:center;
-  gap:6px;
-}
-.breadcrumb .bc-link { cursor:pointer; }
-.breadcrumb .bc-link:hover { color:var(--accent); text-decoration:underline; }
-.breadcrumb .bc-sep  { color:var(--line); }
-.breadcrumb .bc-curr { color:var(--text-2); font-weight:500; }
-
-/* ── Page (기존과 동일) ────────────────────────────── */
-.page { display:none; padding:20px 0 64px; }
-.page.active { display:block; }
-
-/* ── Step bar (기존과 동일) ────────────────────────── */
-.steps {
-  display:flex;
-  align-items:center;
-  margin-bottom:24px;
-}
-.step-item { display:flex; align-items:center; gap:8px; }
-.step-connector { flex:1; height:1px; background:var(--line); margin:0 8px; }
-.step-connector.done { background:var(--navy); }
-.step-dot {
-  width:28px; height:28px; border-radius:50%;
-  background:var(--line); color:var(--text-3);
-  font-size:12px; font-weight:700;
-  display:flex; align-items:center; justify-content:center;
-  flex-shrink:0;
-}
-.step-dot.done   { background:var(--navy);   color:#fff; }
-.step-dot.active { background:var(--accent);  color:#fff; }
-.step-lbl { font-size:12px; color:var(--text-3); white-space:nowrap; }
-.step-lbl.done   { color:var(--navy); }
-.step-lbl.active { color:var(--accent); font-weight:600; }
-
-/* ── Page header (기존과 동일) ─────────────────────── */
-.page-hd {
-  margin-bottom:20px;
-  padding-bottom:14px;
-  border-bottom:2px solid var(--navy);
-}
-.page-hd h1 {
-  font-family:'Noto Serif KR', serif;
-  font-size:21px;
-  font-weight:700;
-  color:var(--navy);
-  margin-bottom:4px;
-}
-.page-hd p { font-size:13px; color:var(--text-2); }
-
-/* ── Card (기존과 동일) ────────────────────────────── */
-.card {
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  padding:24px;
-  margin-bottom:16px;
-  box-shadow:var(--sh);
-}
-.card-title {
-  font-weight:600;
-  font-size:13px;
-  color:var(--navy);
-  margin-bottom:16px;
-  padding-bottom:10px;
-  border-bottom:1px solid var(--line);
-  letter-spacing:.2px;
-}
-
-/* ── Form (기존과 동일) ────────────────────────────── */
-.form-row { margin-bottom:16px; }
-.form-row:last-child { margin-bottom:0; }
-label {
-  display:block;
-  font-weight:600;
-  font-size:13px;
-  margin-bottom:6px;
-  color:var(--text);
-}
-.req { color:var(--red); margin-left:2px; }
-input[type="text"], select, textarea {
-  width:100%;
-  padding:9px 12px;
-  border:1px solid #c8ced6;
-  border-radius:var(--r);
-  font-size:14px;
-  font-family:inherit;
-  color:var(--text);
-  background:#fff;
-  transition:border-color .15s, box-shadow .15s;
-}
-input[type="text"]:focus, select:focus, textarea:focus {
-  outline:none;
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(0,89,179,.12);
-}
-textarea { resize:vertical; line-height:1.6; }
-.form-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-}
-@media (max-width:600px) { .form-grid { grid-template-columns:1fr; } }
-
-/* ── Buttons (기존과 동일) ─────────────────────────── */
-.btn {
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  padding:9px 20px;
-  font-size:14px;
-  font-weight:600;
-  font-family:inherit;
-  border:none;
-  border-radius:var(--r);
-  cursor:pointer;
-  transition:background .15s;
-}
-.btn-primary   { background:var(--navy);  color:#fff; }
-.btn-primary:hover:not(:disabled)   { background:var(--navy-dk); }
-.btn-secondary { background:#fff; color:var(--navy); border:1px solid var(--navy); }
-.btn-secondary:hover:not(:disabled) { background:#f0f4fa; }
-.btn-sm { padding:7px 14px; font-size:13px; }
-.btn:disabled { opacity:.5; cursor:not-allowed; }
-.btn-row {
-  display:flex;
-  gap:10px;
-  justify-content:flex-end;
-  margin-top:20px;
-  flex-wrap:wrap;
-}
-
-/* ── Trial type cards (기존과 동일) ────────────────── */
-.trial-cards {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-bottom:16px;
-}
-@media (max-width:560px) { .trial-cards { grid-template-columns:1fr; } }
-.trial-card {
-  border:2px solid var(--line);
-  border-radius:var(--r-lg);
-  padding:22px;
-  background:var(--card);
-  cursor:pointer;
-  transition:border-color .15s, box-shadow .15s;
-  position:relative;
-}
-.trial-card.selected { border-color:var(--navy); box-shadow:var(--sh-md); }
-.trial-card:not(.disabled):hover { border-color:var(--accent); }
-.trial-card.disabled { opacity:.55; cursor:not-allowed; pointer-events:none; }
-.trial-card h3 {
-  font-family:'Noto Serif KR', serif;
-  font-size:15px;
-  color:var(--navy);
-  margin-bottom:6px;
-}
-.trial-card p { font-size:13px; color:var(--text-2); line-height:1.5; }
-.trial-badge {
-  display:inline-block;
-  font-size:11px;
-  font-weight:600;
-  background:var(--navy);
-  color:#fff;
-  padding:2px 8px;
-  border-radius:2px;
-  margin-bottom:8px;
-  letter-spacing:.5px;
-}
-.coming-tag {
-  position:absolute;
-  top:12px; right:12px;
-  font-size:11px;
-  background:#e2e8f0;
-  color:var(--text-2);
-  padding:2px 8px;
-  border-radius:2px;
-}
-
-/* ── Notice (기존과 동일) ──────────────────────────── */
-.notice {
-  font-size:12px;
-  padding:10px 14px;
-  border-radius:var(--r);
-  border-left:3px solid;
-  margin-top:12px;
-}
-.notice-info { background:#eff6ff; border-color:var(--accent); color:#1e3a5f; }
-.notice-ok   { background:var(--green-bg); border-color:var(--green); color:var(--green); }
-.notice-err  { background:var(--red-bg);   border-color:var(--red);   color:var(--red);  }
-.notice-warn { background:#fff7ed; border-color:#d97706; color:#7c4a00; }
-
-/* ── Verdict dual panels (기존과 동일) ─────────────── */
-.dual-panels {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-bottom:16px;
-}
-@media (max-width:680px) { .dual-panels { grid-template-columns:1fr; } }
-.dp {
-  background:#0d1117;
-  border-radius:var(--r-lg);
-  overflow:hidden;
-  display:flex;
-  flex-direction:column;
-  min-height:360px;
-  box-shadow:var(--sh-md);
-}
-.dp-head {
-  background:#161b22;
-  padding:10px 16px;
-  font-size:12px;
-  font-weight:600;
-  color:#8b949e;
-  border-bottom:1px solid #21262d;
-  letter-spacing:.4px;
-  text-transform:uppercase;
-}
-.dp-body {
-  padding:14px 16px;
-  flex:1;
-  overflow-y:auto;
-  max-height:50vh;
-  font-size:12px;
-  line-height:1.75;
-  white-space:pre-wrap;
-  font-family:'D2Coding','Consolas',monospace;
-  color:#8b949e;
-}
-.dp-body.out { color:#c9d1d9; }
-
-/* ── Progress (기존과 동일) ────────────────────────── */
-.prog-wrap { margin-top:12px; }
-.prog-track {
-  width:100%; height:4px;
-  background:var(--line);
-  border-radius:2px;
-  overflow:hidden;
-  margin-bottom:6px;
-}
-.prog-fill { height:100%; width:0; background:var(--navy); transition:width .3s; }
-.prog-lbl  { font-size:12px; color:var(--text-3); text-align:right; }
-
-/* ── Verdict result (기존과 동일) ──────────────────── */
-.vr-card {
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--r-lg);
-  margin-top:16px;
-  overflow:hidden;
-  box-shadow:var(--sh);
-}
-.vr-head {
-  background:var(--navy);
-  color:#fff;
-  padding:14px 20px;
-  font-family:'Noto Serif KR', serif;
-  font-size:15px;
-  font-weight:700;
-  letter-spacing:.3px;
-}
-.vr-body { padding:0 20px; }
-.vr-row {
-  display:grid;
-  grid-template-columns:130px 1fr;
-  gap:12px;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-  font-size:13px;
-}
-.vr-row:last-child { border-bottom:none; }
-.vr-key { font-weight:600; color:var(--navy); font-size:13px; padding-top:2px; }
-.vr-val { color:var(--text); line-height:1.7; }
-.ruling-chip {
-  display:inline-block;
-  padding:4px 14px;
-  border-radius:var(--r);
-  font-weight:700;
-  font-size:14px;
-  background:var(--navy);
-  color:#fff;
-}
-
-/* ── Case summary (기존과 동일) ────────────────────── */
-.cs-row {
-  display:flex;
-  gap:12px;
-  padding:6px 0;
-  border-bottom:1px solid var(--line);
-  font-size:13px;
-}
-.cs-row:last-child { border-bottom:none; }
-.cs-key { min-width:90px; font-weight:600; color:var(--navy); flex-shrink:0; }
-.cs-val { color:var(--text-2); }
-
-/* ── NEW: 판결 설명 섹션 스타일 ────────────────────── */
-.explanation-card {
-  background: #f8fafc;
-  border-left: 4px solid var(--accent);
-  margin-top: 24px;
-  padding: 20px;
-  border-radius: 12px;
-}
-.explanation-title {
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 12px;
-  color: var(--navy);
-}
-.explanation-text {
-  font-size: 14px;
-  line-height: 1.7;
-  color: var(--text-2);
-  margin-bottom: 16px;
-}
-.analogy-box {
-  background: #fff7ed;
-  border-left: 3px solid #d97706;
-  padding: 14px;
-  margin: 16px 0;
-  border-radius: 8px;
-}
-.analogy-box strong {
-  color: #b45309;
-}
-.question-area {
-  margin-top: 20px;
-  border-top: 1px solid var(--line);
-  padding-top: 16px;
-}
-.question-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  font-size: 13px;
-  font-family: inherit;
-  resize: vertical;
-}
-.question-submit {
-  margin-top: 8px;
-  background: var(--accent);
-  color: white;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 12px;
-}
-.question-submit:hover {
-  background: #004a99;
-}
-.question-answer {
-  margin-top: 12px;
-  background: #eef2ff;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 13px;
-  display: none;
-}
-/* ── Footer (기존과 동일) ──────────────────────────── */
-.footer {
-  text-align:center;
-  padding:24px 0 16px;
-  font-size:11px;
-  color:var(--text-3);
-  border-top:1px solid var(--line);
-  max-width:860px;
-  margin:0 auto;
-}
-</style>
+<!-- ① 전역 스타일 — styles.css만 수정하면 됩니다 -->
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- GNB -->
+<!-- ══════════════════════════════════════════════════
+     GNB  —  상단 네비게이션
+     브랜드명·버전 변경 시 이 블록만 수정하세요.
+══════════════════════════════════════════════════ -->
 <nav class="gnb">
   <span class="gnb-logo" onclick="showPage('index')">K-Law AI 가상 법원</span>
   <div class="gnb-sep"></div>
   <span class="gnb-badge">K-Law v6.4</span>
 </nav>
 
-  <!-- K-Law 방법론 대법원 일치도 차트 -->
-<div style="margin-bottom: 24px; text-align: center;">
-  <img src="research/charts/chart_trend_smoothed.png" 
-       alt="K-Law 방법론 대법원 판결 일치도 추이 (2026년 4월 13일 기준)"
-       style="width: 50%; height: auto; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-  <p style="font-size: 12px; color: #4a5568; margin-top: 8px;">
-    📊 K-Law 방법론 v6.4 대법원 판결 일치도 추이 (2026.04.13 기준)
-  </p>
-  <div style="max-width: 860px; margin: 0 auto 32px; padding: 0 24px; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; line-height: 1.65; color: #1a1d22;">
 
-  <!-- 개요 -->
-  <div style="background:#fff; border:1px solid #d4d9e0; border-radius:8px; padding:1.25rem; margin-bottom:12px;">
-    <p style="font-size:12px; font-weight:600; color:#718096; margin:0 0 8px; text-transform:uppercase; letter-spacing:.05em;">차트 개요</p>
-    <p style="font-size:14px; color:#1a1d22; line-height:1.7; margin:0;">
-      이 차트는 <strong>K-Law AI 모델</strong>이 판례를 더 많이 학습할수록 <strong>대법원(3심) 판결</strong>과 얼마나 가까워지는지를 보여줍니다. 대법원 판결을 기준(100)으로 삼고, K-Law · 1심 · 2심의 일치도를 구간별로 비교합니다.
+<!-- ══════════════════════════════════════════════════
+     HERO + 차트 섹션
+     차트 이미지·설명 변경 시 이 블록만 수정하세요.
+══════════════════════════════════════════════════ -->
+<section class="hero-section">
+  <h2>AI가 대법원 판결에 얼마나 가까워졌을까요?</h2>
+  <p>K-Law v6.4는 80건의 판례를 학습한 후 대법원(3심) 판결과 <strong>80점</strong>의 일치도를 기록합니다.<br>
+     1심(47점)과 2심(44점)을 현격히 능가하는 수준입니다.</p>
+</section>
+
+<div class="chart-section">
+  <!-- 차트 이미지 -->
+  <img src="research/charts/chart_trend_smoothed.png"
+       alt="K-Law 방법론 대법원 판결 일치도 추이 (2026년 4월 13일 기준)">
+  <p class="chart-caption">📊 K-Law 방법론 v6.4 대법원 판결 일치도 추이 (2026.04.13 기준)</p>
+
+  <!-- 차트 설명 카드 -->
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">차트 개요</div>
+    <p style="font-size:13px; color:var(--text-2); line-height:1.7;">
+      이 차트는 <strong>K-Law AI 모델</strong>이 판례를 더 많이 학습할수록
+      <strong>대법원(3심) 판결</strong>과 얼마나 가까워지는지를 보여줍니다.
+      대법원 판결을 기준(100)으로 삼고, K-Law · 1심 · 2심의 일치도를 구간별로 비교합니다.
     </p>
   </div>
 
-  <!-- X/Y 축 설명 -->
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
-    <div style="background:#f4f6f9; border-radius:8px; padding:1rem;">
-      <p style="font-size:11px; color:#718096; margin:0 0 4px;">X축</p>
-      <p style="font-size:13px; font-weight:600; color:#003366; margin:0 0 4px;">학습 판례 수 (누적 건수 구간)</p>
-      <p style="font-size:12px; color:#4a5568; margin:0; line-height:1.6;">1~10건부터 71~80건까지, AI가 학습한 판례의 누적 범위를 8개 구간으로 나눕니다.</p>
+  <!-- X/Y축 설명 -->
+  <div class="chart-explain">
+    <div class="ce-card">
+      <div class="ce-label">X축</div>
+      <div class="ce-title">학습 판례 수 (누적 건수 구간)</div>
+      <div class="ce-desc">1~10건부터 71~80건까지, AI가 학습한 판례의 누적 범위를 8개 구간으로 나눕니다.</div>
     </div>
-    <div style="background:#f4f6f9; border-radius:8px; padding:1rem;">
-      <p style="font-size:11px; color:#718096; margin:0 0 4px;">Y축</p>
-      <p style="font-size:13px; font-weight:600; color:#003366; margin:0 0 4px;">대법원 판결 대비 일치도</p>
-      <p style="font-size:12px; color:#4a5568; margin:0; line-height:1.6;">대법원 3심 판결을 100으로 정규화한 상대 점수. 높을수록 대법원과 유사한 결론입니다.</p>
+    <div class="ce-card">
+      <div class="ce-label">Y축</div>
+      <div class="ce-title">대법원 판결 대비 일치도</div>
+      <div class="ce-desc">대법원 3심 판결을 100으로 정규화한 상대 점수. 높을수록 대법원과 유사한 결론입니다.</div>
     </div>
   </div>
 
   <!-- 비교 대상 -->
-  <div style="background:#fff; border:1px solid #d4d9e0; border-radius:8px; padding:1.25rem; margin-bottom:12px;">
-    <p style="font-size:12px; font-weight:600; color:#718096; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">비교 대상</p>
-    <div style="display:flex; flex-direction:column; gap:8px;">
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">비교 대상</div>
+    <div style="display:flex; flex-direction:column; gap:10px;">
       <div style="display:flex; align-items:center; gap:10px;">
-        <span style="width:12px; height:12px; border-radius:50%; background:#2563eb; flex-shrink:0;"></span>
-        <span style="font-size:13px; color:#1a1d22;"><strong>K-Law</strong> — 본 AI 법률 모델의 예측 판결</span>
+        <span class="legend-dot" style="background:#2563eb;"></span>
+        <span style="font-size:13px;"><strong>K-Law</strong> — 본 AI 법률 모델의 예측 판결</span>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
-        <span style="width:12px; height:12px; border-radius:50%; background:#dc2626; flex-shrink:0;"></span>
-        <span style="font-size:13px; color:#1a1d22;"><strong>1심</strong> — 지방법원 1심 판결 (인간 판사)</span>
+        <span class="legend-dot" style="background:#dc2626;"></span>
+        <span style="font-size:13px;"><strong>1심</strong> — 지방법원 1심 판결 (인간 판사)</span>
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
-        <span style="width:12px; height:12px; border-radius:50%; background:#d97706; flex-shrink:0;"></span>
-        <span style="font-size:13px; color:#1a1d22;"><strong>2심</strong> — 고등법원 2심 판결 (인간 판사)</span>
+        <span class="legend-dot" style="background:#d97706;"></span>
+        <span style="font-size:13px;"><strong>2심</strong> — 고등법원 2심 판결 (인간 판사)</span>
       </div>
     </div>
   </div>
 
   <!-- 구간별 흐름 -->
-  <div style="background:#fff; border:1px solid #d4d9e0; border-radius:8px; padding:1.25rem; margin-bottom:12px;">
-    <p style="font-size:12px; font-weight:600; color:#718096; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">구간별 핵심 흐름</p>
-    <div style="font-size:13px; color:#1a1d22;">
-      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid #d4d9e0;">
-        <span style="font-weight:600; color:#4a5568;">1~20건</span>
-        <span style="line-height:1.6;">K-Law(40점)가 1심·2심(~55점)에 비해 낮은 일치도로 출발합니다.</span>
-      </div>
-      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid #d4d9e0;">
-        <span style="font-weight:600; color:#4a5568;">21~30건</span>
-        <span style="line-height:1.6;">K-Law가 빠르게 성장하여 1심·2심 수준(53점)에 도달합니다.</span>
-      </div>
-      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid #d4d9e0;">
-        <span style="font-weight:600; color:#4a5568;">31건~</span>
-        <span style="line-height:1.6;">K-Law가 68~69점으로 역전, 1심·2심을 일관되게 앞서기 시작합니다.</span>
-      </div>
-      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0;">
-        <span style="font-weight:600; color:#4a5568;">71~80건</span>
-        <span style="line-height:1.6;">K-Law 80점으로 상승. 1심(47점)·2심(44점)과의 격차가 더욱 벌어집니다.</span>
-      </div>
+  <div class="card" style="margin-bottom:12px;">
+    <div class="card-title">구간별 핵심 흐름</div>
+    <div class="flow-row">
+      <span class="flow-key">1~20건</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law(40점)가 1심·2심(~55점)에 비해 낮은 일치도로 출발합니다.</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-key">21~30건</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law가 빠르게 성장하여 1심·2심 수준(53점)에 도달합니다.</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-key">31건~</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law가 68~69점으로 역전, 1심·2심을 일관되게 앞서기 시작합니다.</span>
+    </div>
+    <div class="flow-row">
+      <span class="flow-key">71~80건</span>
+      <span style="font-size:13px; color:var(--text); line-height:1.6;">K-Law 80점으로 상승. 1심(47점)·2심(44점)과의 격차가 더욱 벌어집니다.</span>
+    </div>
+    <div class="conclusion-bar">
+      <p>판례 학습량이 늘어날수록 K-Law는 1심·2심 인간 판사보다 대법원 판결에 더 가깝게 수렴하며,
+         약 <strong>30건 이상</strong> 학습 후에는 기존 법원 심급을 능가하는 일치도를 보입니다.</p>
     </div>
   </div>
 
-  <!-- 결론 -->
-  <div style="background:#eff6ff; border-left:3px solid #0059B3; padding:1rem 1.25rem;">
-    <p style="font-size:12px; font-weight:600; color:#1e3a5f; margin:0 0 4px;">결론</p>
-    <p style="font-size:13px; color:#1e3a5f; margin:0; line-height:1.7;">판례 학습량이 늘어날수록 K-Law는 1심·2심 인간 판사보다 대법원 판결에 더 가깝게 수렴하며, 약 30건 이상 학습 후에는 기존 법원 심급을 능가하는 일치도를 보입니다.</p>
+  <!-- 체험 유도 배너 -->
+  <div class="invite-banner">
+    <div>
+      <h3>K-Law의 성능을 직접 확인해 보십시오.</h3>
+      <p>실제 사건 내용을 입력하면 K-Law가 즉시 가상 판결을 생성합니다.</p>
+    </div>
+    <button class="invite-btn" onclick="document.querySelector('.outer').scrollIntoView({behavior:'smooth'})">
+      지금 체험하기 &darr;
+    </button>
   </div>
+</div><!-- /chart-section -->
 
-</div>
-</div>
+
+<!-- ══════════════════════════════════════════════════
+     MAIN APP  —  3단계 판결 생성 플로우
+══════════════════════════════════════════════════ -->
 <div class="outer">
 <div class="inner">
 
@@ -554,12 +130,18 @@ textarea { resize:vertical; line-height:1.6; }
     <span class="bc-link" onclick="showPage('index')">홈</span>
   </div>
 
-  <!-- ════════════════════════════════════════════════════
+
+  <!-- ══════════════════════════════════════════════
        PAGE 1 · INDEX · 재판부 선택
-  ════════════════════════════════════════════════════ -->
+       재판부 카드·모델 목록 변경 시 이 블록 수정.
+  ══════════════════════════════════════════════ -->
   <div class="page active" id="page-index">
 
-    <div class="steps" style="margin-top:20px;">
+    <!-- 스텝바 CTA -->
+    <p class="steps-cta" style="margin-top:24px;">K-Law의 성능을 직접 확인해 보십시오.</p>
+
+    <!-- 스텝바 -->
+    <div class="steps">
       <div class="step-item">
         <div class="step-dot active">1</div>
         <span class="step-lbl active">재판부 선택</span>
@@ -581,27 +163,43 @@ textarea { resize:vertical; line-height:1.6; }
       <p>AI 법률 중재 보조 시스템 · 분석 유형과 AI 모델을 선택하세요.</p>
     </div>
 
-    <!-- 재판 유형 -->
+    <!-- 재판 유형 카드 (3열) -->
     <div class="trial-cards">
+
+      <!-- 단독재판 -->
       <div class="trial-card selected" id="card-single" onclick="selectTrial('single')">
         <div class="trial-badge">단독재판</div>
         <h3>단독재판부 (Bench)</h3>
-        <p>하나의 AI 모델이 사건을 분석하고 가상 판결을 내립니다.</p>
+        <p>하나의 AI 모델이 사건을 분석하고 가상 판결을 내립니다.<br>
+           1심 구조에 해당하며 신속한 분석에 적합합니다.</p>
       </div>
+
+      <!-- 합의부재판 -->
       <div class="trial-card disabled" id="card-panel">
         <span class="coming-tag">준비 중</span>
         <div class="trial-badge" style="background:#a0aec0;">합의부재판</div>
         <h3>합의부 (Collegiate)</h3>
-        <p>세 개의 AI 모델이 독립적으로 분석하고 다수결로 판결을 도출합니다.</p>
+        <p>3개의 AI 모델이 독립적으로 분석하고 다수결로 판결을 도출합니다.<br>
+           2심 구조에 해당합니다.</p>
       </div>
-    </div>
 
-    <!-- 모델 선택 -->
+      <!-- 대법원 전원합의체 -->
+      <div class="trial-card disabled" id="card-supreme">
+        <span class="coming-tag">준비 중</span>
+        <div class="trial-badge-gold">대법원</div>
+        <h3>전원합의체 (En Banc)</h3>
+        <p>대법원장 1인 + 대법관 12인 역할을 수행하는 14개 AI 에이전트가
+           독립 심리·교차 토론·최종 표결을 거쳐 전원합의체 판결문을 생성합니다.</p>
+      </div>
+
+    </div><!-- /trial-cards -->
+
+    <!-- AI 모델 선택 -->
     <div class="card">
       <div class="card-title">AI 모델 선택</div>
       <div class="form-row">
         <label for="singleLLM">사용할 AI 모델</label>
-        <select id="singleLLM">
+        <select id="singleLLM" onchange="onModelChange()">
           <option value="deepseek" selected>DeepSeek R1 (기본, API Key 불필요)</option>
           <option value="gpt">GPT-4o (OpenAI)</option>
           <option value="claude">Claude Opus (Anthropic)</option>
@@ -610,6 +208,15 @@ textarea { resize:vertical; line-height:1.6; }
           <option value="llama">Llama 3.1 (Groq)</option>
         </select>
       </div>
+      <!-- 외부 LLM 선택 시 API Key 입력란 동적 표시 -->
+      <div class="apikey-row" id="apiKeyRow">
+        <label id="apiKeyLabel" for="apiKeyInput">API Key</label>
+        <input type="password" id="apiKeyInput" placeholder="API Key를 입력하세요"
+               autocomplete="off" style="margin-top:6px;">
+        <p style="font-size:11px; color:var(--text-3); margin-top:6px;">
+          입력한 키는 브라우저 내에서만 사용되며 서버에 저장되지 않습니다.
+        </p>
+      </div>
     </div>
 
     <div class="btn-row">
@@ -617,14 +224,16 @@ textarea { resize:vertical; line-height:1.6; }
     </div>
 
     <div class="notice notice-info">
-      본 시스템은 K-Law 방법론 v6.4에 따라 AI가 생성하는 가상 판결입니다. 실제 법적 효력이 없으며 법률 전문가 자문을 대체하지 않습니다.
+      본 시스템은 K-Law 방법론 v6.4에 따라 AI가 생성하는 가상 판결입니다.
+      실제 법적 효력이 없으며 법률 전문가 자문을 대체하지 않습니다.
     </div>
   </div><!-- /page-index -->
 
 
-  <!-- ════════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════
        PAGE 2 · BENCH · 사건 입력
-  ════════════════════════════════════════════════════ -->
+       입력 필드 추가/변경 시 이 블록 수정.
+  ══════════════════════════════════════════════ -->
   <div class="page" id="page-bench">
 
     <div class="steps" style="margin-top:20px;">
@@ -654,7 +263,8 @@ textarea { resize:vertical; line-height:1.6; }
       <div class="card-title">사건 개요 <span style="font-weight:400;color:var(--text-3);">(필수)</span></div>
       <div class="form-row">
         <label for="facts">사건 내용 요약<span class="req">*</span></label>
-        <textarea id="facts" rows="6" placeholder="예: 원고 홍길동은 피고 김철수에게 2024년 1월 1일 5,000만 원을 대여하였으나 피고가 변제하지 않아 대여금 반환을 청구합니다."></textarea>
+        <textarea id="facts" rows="6"
+          placeholder="예: 원고 홍길동은 피고 김철수에게 2024년 1월 1일 5,000만 원을 대여하였으나 피고가 변제하지 않아 대여금 반환을 청구합니다."></textarea>
       </div>
       <div style="display:flex; justify-content:flex-end;">
         <button class="btn btn-secondary btn-sm" id="btnExtract" onclick="extractFromFacts()">AI 자동 추출</button>
@@ -713,14 +323,15 @@ textarea { resize:vertical; line-height:1.6; }
 
     <div class="btn-row">
       <button class="btn btn-secondary" onclick="showPage('index')">&larr; 이전</button>
-      <button class="btn btn-primary" onclick="goToVerdict()">판결 생성 &rarr;</button>
+      <button class="btn btn-primary"   onclick="goToVerdict()">판결 생성 &rarr;</button>
     </div>
   </div><!-- /page-bench -->
 
 
-  <!-- ════════════════════════════════════════════════════
+  <!-- ══════════════════════════════════════════════
        PAGE 3 · VERDICT · 판결 생성
-  ════════════════════════════════════════════════════ -->
+       판결 레이아웃 변경 시 이 블록 수정.
+  ══════════════════════════════════════════════ -->
   <div class="page" id="page-verdict">
 
     <div class="steps" style="margin-top:20px;">
@@ -777,26 +388,30 @@ textarea { resize:vertical; line-height:1.6; }
       <div class="vr-head">최종 판결 · K-Law v6.4</div>
       <div class="vr-body" id="verdictBody"></div>
     </div>
-<!-- 판결 정당성 설명 및 추가 질문 섹션 -->
-<div id="explanationSection" class="explanation-card" style="display:none;">
-  <div class="explanation-title">📖 판결의 논리적 근거와 정당성</div>
-  <div id="explanationContent" class="explanation-text"></div>
-  <div id="analogyContent" class="analogy-box"></div>
-  
-  <div class="question-area">
-    <div class="explanation-title">💬 판결에 대해 궁금한 점을 물어보세요</div>
-    <textarea id="questionInput" class="question-input" rows="2" placeholder="예: 왜 피고가 승소했나요? 어떤 법이 적용되었나요?"></textarea>
-    <button class="question-submit" onclick="askAdditionalQuestion()">질문하기</button>
-    <div id="questionAnswer" class="question-answer"></div>
-  </div>
-</div>
+
+    <!-- 판결 설명 · 비유 · 추가 질문 -->
+    <div id="explanationSection" class="explanation-card" style="display:none;">
+      <div class="explanation-title">📖 판결의 논리적 근거와 정당성</div>
+      <div id="explanationContent" class="explanation-text"></div>
+      <div id="analogyContent"    class="analogy-box"></div>
+      <div class="question-area">
+        <div class="explanation-title">💬 판결에 대해 궁금한 점을 물어보세요</div>
+        <textarea id="questionInput" class="question-input" rows="2"
+          placeholder="예: 왜 피고가 승소했나요? 어떤 법이 적용되었나요?"></textarea>
+        <button class="question-submit" onclick="askAdditionalQuestion()">질문하기</button>
+        <div id="questionAnswer" class="question-answer"></div>
+      </div>
+    </div>
+
     <div class="btn-row" style="margin-top:20px;">
       <button class="btn btn-secondary" onclick="showPage('bench')">&larr; 사건 수정</button>
-      <button class="btn btn-secondary" id="btnReGen"  onclick="runGenerate()" style="display:none;">다시 생성</button>
+      <button class="btn btn-secondary" id="btnReGen"    onclick="runGenerate()" style="display:none;">다시 생성</button>
       <button class="btn btn-primary"   id="btnGenerate" onclick="runGenerate()">판결 생성 시작</button>
     </div>
   </div><!-- /page-verdict -->
 
+
+  <!-- Footer -->
   <div class="footer">
     케이로주식회사 &nbsp;·&nbsp; K-Law 방법론 v6.4 &nbsp;·&nbsp; 가상 판결은 법적 효력이 없습니다.
   </div>
@@ -804,448 +419,11 @@ textarea { resize:vertical; line-height:1.6; }
 </div><!-- /inner -->
 </div><!-- /outer -->
 
-<script>
-/* ═══════════════════════════════════════════════════
-   CONFIG
-═══════════════════════════════════════════════════ */
-const DS_KEY = 'sk-c2483c15cfc0410aa6865f1efde83730';
+<!-- ② JS 파일 로드 순서: routing → verdict(DS_KEY 정의) → extract → explanation -->
+<script src="app-routing.js"></script>
+<script src="app-verdict.js"></script>
+<script src="app-extract.js"></script>
+<script src="app-explanation.js"></script>
 
-/* ═══════════════════════════════════════════════════
-   ROUTING (기존과 동일)
-═══════════════════════════════════════════════════ */
-function showPage(id) {
-  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  g('page-' + id).classList.add('active');
-  const lbl = { index:'재판부 선택', bench:'사건 입력', verdict:'판결 생성' };
-  const bc = g('breadcrumb');
-  bc.innerHTML = id === 'index'
-    ? '<span class="bc-link" onclick="showPage(\'index\')">홈</span>'
-    : '<span class="bc-link" onclick="showPage(\'index\')">홈</span><span class="bc-sep">›</span><span class="bc-curr">' + lbl[id] + '</span>';
-  window.scrollTo({ top:0, behavior:'smooth' });
-}
-
-function selectTrial(type) {
-  g('card-single').classList.toggle('selected', type === 'single');
-}
-function goToBench() { showPage('bench'); }
-
-/* ═══════════════════════════════════════════════════
-   BENCH — 자동 추출 (기존과 동일)
-═══════════════════════════════════════════════════ */
-async function extractFromFacts() {
-  const facts = g('facts').value.trim();
-  if (facts.length < 20) { alert('사건 개요를 20자 이상 입력해주세요.'); return; }
-  const btn = g('btnExtract');
-  const sd = g('extractStatus');
-  
-  // 진행률 표시를 위한 임시 영역 (없으면 생성)
-  let progDiv = g('extractProgress');
-  if (!progDiv) {
-    progDiv = document.createElement('div');
-    progDiv.id = 'extractProgress';
-    progDiv.innerHTML = '<div class="prog-track"><div class="prog-fill" style="width:0%"></div></div><div class="prog-lbl" style="text-align:left;">준비 중...</div>';
-    sd.parentNode.insertBefore(progDiv, sd.nextSibling);
-  }
-  const fill = progDiv.querySelector('.prog-fill');
-  const lbl = progDiv.querySelector('.prog-lbl');
-  
-  btn.disabled = true; btn.textContent = '분석 중...';
-  sd.style.display = 'block';
-  sd.className = 'notice notice-info';
-  
-  const steps = [
-    { msg: '사건 개요를 읽고 있습니다...', progress: 10 },
-    { msg: '원고와 피고를 특정합니다...', progress: 30 },
-    { msg: '청구 금액을 파악합니다...', progress: 50 },
-    { msg: '사건 분류를 분석합니다...', progress: 70 },
-    { msg: '주장과 다툼 없는 사실을 추출합니다...', progress: 90 }
-  ];
-  
-  let stepIndex = 0;
-  const interval = setInterval(() => {
-    if (stepIndex < steps.length) {
-      lbl.textContent = steps[stepIndex].msg;
-      fill.style.width = steps[stepIndex].progress + '%';
-      stepIndex++;
-    } else {
-      clearInterval(interval);
-    }
-  }, 800);
-  
-  const sys = `당신은 법률 문서 분석 전문가입니다. 사건 개요에서 아래 7개 항목을 추출하여 순수 JSON만 출력하세요(코드블록 없이):
-{"caseType":"코드","claimAmount":"금액","plaintiff":"원고명","defendant":"피고명","plaintiffClaim":"원고 주장","defendantClaim":"피고 주장","undisputedFacts":"다툼없는 사실"}
-caseType 코드: civil_contract, civil_damage, civil_traffic, family_divorce, criminal_fraud. 불명확하면 civil_contract.`;
-
-  try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type':'application/json', 'Authorization':'Bearer '+DS_KEY },
-      body: JSON.stringify({ model:'deepseek-chat', messages:[{role:'system',content:sys},{role:'user',content:facts}], temperature:0.1, max_tokens:800 })
-    });
-    clearInterval(interval);
-    fill.style.width = '100%';
-    lbl.textContent = '추출 완료! 결과 적용 중...';
-    
-    if (!res.ok) throw new Error('API 오류: ' + res.status);
-    const data = await res.json();
-    const txt = data.choices[0].message.content;
-    const m = txt.match(/\{[\s\S]*\}/);
-    if (!m) throw new Error('JSON 파싱 실패');
-    const ex = JSON.parse(m[0]);
-    if (ex.caseType)        g('caseType').value        = ex.caseType;
-    if (ex.claimAmount)     g('claimAmount').value     = ex.claimAmount;
-    if (ex.plaintiff)       g('plaintiff').value       = ex.plaintiff;
-    if (ex.defendant)       g('defendant').value       = ex.defendant;
-    if (ex.plaintiffClaim)  g('plaintiffClaim').value  = ex.plaintiffClaim;
-    if (ex.defendantClaim)  g('defendantClaim').value  = ex.defendantClaim;
-    if (ex.undisputedFacts) g('undisputedFacts').value = ex.undisputedFacts;
-    sd.className = 'notice notice-ok';
-    sd.textContent = '자동 추출이 완료되었습니다. 필요 시 직접 수정하세요.';
-    setTimeout(() => { if(progDiv) progDiv.style.display = 'none'; }, 2000);
-  } catch(e) {
-    clearInterval(interval);
-    sd.className = 'notice notice-err';
-    sd.textContent = '오류: ' + e.message;
-  } finally {
-    btn.disabled = false; btn.textContent = 'AI 자동 추출';
-  }
-}
-
-function goToVerdict() {
-  const facts     = g('facts').value.trim();
-  const plaintiff = g('plaintiff').value.trim();
-  const defendant = g('defendant').value.trim();
-  if (!facts || !plaintiff || !defendant) { alert('사건 개요, 원고, 피고는 필수 입력 항목입니다.'); return; }
-
-  const ctMap = { civil_contract:'계약위반', civil_damage:'손해배상', civil_traffic:'교통사고', family_divorce:'이혼·위자료', criminal_fraud:'사기' };
-  const ct = g('caseType').value;
-  g('caseSummaryBody').innerHTML =
-    csRow('사건 분류', ctMap[ct] || '미분류') +
-    csRow('원고',     plaintiff) +
-    csRow('피고',     defendant) +
-    csRow('청구 금액', g('claimAmount').value || '명시되지 않음');
-
-  // 초기화
-  g('thinkingPanel').textContent  = '판결 생성 버튼을 클릭하면 분석이 시작됩니다.';
-  g('rawOutputPanel').textContent = '—';
-  g('verdictCard').style.display  = 'none';
-  g('explanationSection').style.display = 'none';  // 설명 섹션 숨김
-  g('errorArea').style.display    = 'none';
-  g('progWrap').style.display     = 'block';
-  g('btnGenerate').style.display  = 'none';       // 기존 생성 버튼 숨김
-  g('btnReGen').style.display     = 'none';
-  
-  showPage('verdict');
-  
-  // 바로 판결 생성 시작
-  runGenerate();
-}
-
-function csRow(k, v) {
-  return `<div class="cs-row"><span class="cs-key">${k}</span><span class="cs-val">${esc(v)}</span></div>`;
-}
-
-/* ═══════════════════════════════════════════════════
-   VERDICT — 판결 생성 (JSON 추출 함수 추가)
-═══════════════════════════════════════════════════ */
-function buildSys() {
-  return `당신은 K-Law 방법론 v6.4를 따르는 AI 법률 분석관입니다.
-
-[STEP A: 피고 승소 논거 (역방향 추론)]
-- 피고 입장에서 가장 강력한 법리적 논거를 300자 이상 작성하세요.
-- 최소 1개 이상의 판례(또는 일반 법원칙)를 인용하고 출처를 명시하세요.
-- 마지막 줄에 [STEP-A-COMPLETE] 를 출력하세요.
-
-[STEP B: 판결문 (6단계 사고 순서)]
-1. 법률관계 확정 및 특별법 확인
-2. 쟁점 계층적 분해 (예/아니오 질문)
-3. 원고와 피고의 삼단논법 구성
-4. 인과관계 분석 및 가치 형량
-5. 손해액 산정 및 책임 제한 (과실상계, 공평의 원칙)
-6. 메타인지 자가 점검
-
-이 단계가 끝나면 반드시 다음 JSON 형식으로 판결 결과를 출력하세요:
-{
-  "ruling": "원고 승소|원고 일부 승소|피고 승소|유죄|무죄",
-  "key_legal_theory": "핵심 법리 2~3문장",
-  "reasoning": "세부 논증 5~10문장",
-  "legal_basis": ["적용 법조문1", "법조문2"],
-  "ruling_text": "주문 내용",
-  "verdict_summary": "판결 요지 3문장"
-}
-마지막 줄에 [STEP-B-COMPLETE] 를 출력하세요.
-
-[STEP C: 정합성 검증]
-Q1: 판결문의 논리가 STEP A의 판례/원칙과 일관되는가? (true/false, 불일치 시 사유 설명)
-Q2: 판결문이 STEP A의 피고 승소 논거를 법리적으로 완전히 반박하였는가?
-Q3: 유사 사건과 현저히 차이가 나는가? (차이 있다면 이유)
-마지막 줄에 [STEP-C-COMPLETE] 를 출력하세요.`;
-}
-
-function buildUser() {
-  return `아래 사건을 K-Law 방법론 v6.4에 따라 분석하고 가상 판결을 생성하세요.
-
-[사건 분류] ${g('caseType').value || '미분류'}
-[원고] ${g('plaintiff').value}
-[피고] ${g('defendant').value}
-[청구 금액] ${g('claimAmount').value || '명시되지 않음'}
-
-[사건 개요]
-${g('facts').value}
-
-[원고 주장]
-${g('plaintiffClaim').value || '없음'}
-
-[피고 주장]
-${g('defendantClaim').value || '없음'}
-
-[다툼 없는 사실]
-${g('undisputedFacts').value || '없음'}
-
-STEP A, B, C를 순서대로 수행하고 최종 판결 JSON을 포함시켜 주세요.`;
-}
-
-// 강화된 JSON 추출 함수
-function extractJSON(str) {
-  // 1) 마크다운 코드 블록 제거
-  let cleaned = str.replace(/```json\s*|\s*```/g, '');
-  // 2) 가장 마지막에 있는 { ... } 찾기 (중첩 중괄호 고려)
-  let start = cleaned.lastIndexOf('{');
-  if (start === -1) return null;
-  let braceCount = 0, end = start;
-  for (let i = start; i < cleaned.length; i++) {
-    if (cleaned[i] === '{') braceCount++;
-    else if (cleaned[i] === '}') braceCount--;
-    if (braceCount === 0) { end = i; break; }
-  }
-  const candidate = cleaned.slice(start, end + 1);
-  try {
-    return JSON.parse(candidate);
-  } catch(e) {
-    return null;
-  }
-}
-
-async function runGenerate() {
-  // 단계별 메시지 정의
-  const steps = [
-    { msg: 'STEP A: 피고 승소 논거 구성 중... (역방향 추론)', progress: 10 },
-    { msg: 'STEP B-1: 법률관계 확정 및 특별법 확인 중...', progress: 25 },
-    { msg: 'STEP B-2: 쟁점 계층적 분해 중...', progress: 35 },
-    { msg: 'STEP B-3: 삼단논법 구성 중...', progress: 45 },
-    { msg: 'STEP B-4: 인과관계 분석 및 가치 형량 중...', progress: 60 },
-    { msg: 'STEP B-5: 손해액 산정 및 책임 제한 중...', progress: 75 },
-    { msg: 'STEP B-6: 메타인지 자가 점검 중...', progress: 85 },
-    { msg: 'STEP C: 정합성 검증 중...', progress: 95 }
-  ];
-  let stepIndex = 0;
-  const interval = setInterval(() => {
-    if (stepIndex < steps.length) {
-      g('progLbl').textContent = steps[stepIndex].msg;
-      g('progFill').style.width = steps[stepIndex].progress + '%';
-      stepIndex++;
-    } else {
-      clearInterval(interval);
-    }
-  }, 2000);
-  
-  g('btnGenerate').disabled = true;
-  g('btnReGen').style.display = 'none';
-  g('progWrap').style.display = 'block';
-  g('errorArea').style.display = 'none';
-  g('verdictCard').style.display = 'none';
-  g('thinkingPanel').textContent  = '';
-  g('rawOutputPanel').textContent = '';
-  setProgress(0, '연결 중...');
-
-  let fullThink = '', fullOut = '', prog = 0;
-
-  try {
-    const res = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + DS_KEY },
-      body: JSON.stringify({
-        model: 'deepseek-reasoner',
-        messages: [
-          { role: 'system', content: buildSys() },
-          { role: 'user', content: buildUser() }
-        ],
-        stream: true,
-        temperature: 0,               // 결정적 출력
-        max_tokens: 8000
-        // seed: 42                  // DeepSeek 지원 시 주석 해제
-      })
-    });
-    if (!res.ok) throw new Error('API 오류: ' + res.status);
-
-    const reader = res.body.getReader();
-    const decoder = new TextDecoder();
-
-    while (true) {
-      const { done, value } = await reader.read();
-      if (done) break;
-      for (const line of decoder.decode(value).split('\n')) {
-        if (!line.startsWith('data: ')) continue;
-        const raw = line.slice(6).trim();
-        if (raw === '[DONE]') continue;
-        try {
-          const delta = JSON.parse(raw).choices?.[0]?.delta;
-          if (delta?.reasoning_content) {
-            fullThink += delta.reasoning_content;
-            g('thinkingPanel').textContent = fullThink;
-            g('thinkingPanel').scrollTop = 99999;
-          }
-          if (delta?.content) {
-            fullOut += delta.content;
-            g('rawOutputPanel').textContent = fullOut;
-            g('rawOutputPanel').scrollTop = 99999;
-          }
-        } catch(_) {}
-      }
-    }
-    clearInterval(interval);
-    g('progFill').style.width = '100%';
-    g('progLbl').textContent = '분석 완료! 결과 정리 중...';
-    
-    const jsonObj = extractJSON(fullOut);
-    if (jsonObj && jsonObj.ruling) {
-      renderVerdict(jsonObj);
-      showExplanation(jsonObj);
-    } else {
-      renderFallback(fullOut);
-    }
-  } catch(e) {
-    clearInterval(interval);
-    g('errorArea').style.display = 'block';
-    g('errorArea').textContent   = '오류: ' + e.message + ' — 잠시 후 다시 시도해주세요.';
-  } finally {
-    g('btnGenerate').disabled   = false;
-    g('btnGenerate').style.display = 'none';
-    g('btnReGen').style.display    = '';
-    g('progWrap').style.display = 'none';
-  }
-}
-
-function renderVerdict(v) {
-  const basis = Array.isArray(v.legal_basis) ? v.legal_basis.join(', ') : (v.legal_basis || '—');
-  g('verdictBody').innerHTML =
-    vrRow('판결 방향',  `<span class="ruling-chip">${esc(v.ruling)}</span>`) +
-    vrRow('핵심 법리',  esc(v.key_legal_theory)) +
-    vrRow('세부 논증',  esc(v.reasoning)) +
-    vrRow('적용 법조문', esc(basis)) +
-    vrRow('주문',        esc(v.ruling_text)) +
-    vrRow('판결 요지',  esc(v.verdict_summary));
-  g('verdictCard').style.display = 'block';
-}
-
-function renderFallback(raw) {
-  g('verdictBody').innerHTML =
-    `<div class="notice notice-warn" style="margin:0 0 12px;">JSON 구조를 추출하지 못했습니다. 원문 출력 패널에서 전체 응답을 확인하세요.</div>` +
-    vrRow('원문 (마지막 1500자)', `<pre style="white-space:pre-wrap;font-size:12px;line-height:1.6;">${esc(raw.slice(-1500))}</pre>`);
-  g('verdictCard').style.display = 'block';
-}
-
-function vrRow(k, vHtml) {
-  return `<div class="vr-row"><div class="vr-key">${k}</div><div class="vr-val">${vHtml}</div></div>`;
-}
-
-function setProgress(val, lbl) {
-  g('progFill').style.width = val + '%';
-  g('progLbl').textContent  = lbl;
-}
-
-/* ── Utils ──────────────────────────────────────── */
-function g(id)  { return document.getElementById(id); }
-function esc(s) {
-  return String(s||'').replace(/[&<>]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[m]));
-}
-
-// 판결 정당성 설명 및 비유 생성 (DeepSeek API 호출)
-async function showExplanation(verdict) {
-  const explanationDiv = g('explanationSection');
-  if (!explanationDiv) return;
-  
-  explanationDiv.style.display = 'block';
-  const explainContent = g('explanationContent');
-  const analogyContent = g('analogyContent');
-  
-  // 로딩 표시
-  explainContent.innerHTML = '<p>📖 판결 근거를 분석하고 비유를 생성하는 중입니다...</p>';
-  analogyContent.innerHTML = '<p>🧸 초등학생도 이해할 수 있는 비유를 준비 중입니다...</p>';
-  
-  // 사건 정보 수집
-  const caseData = {
-    caseType: g('caseType').options[g('caseType').selectedIndex]?.text || g('caseType').value,
-    plaintiff: g('plaintiff').value,
-    defendant: g('defendant').value,
-    facts: g('facts').value,
-    plaintiffClaim: g('plaintiffClaim').value,
-    defendantClaim: g('defendantClaim').value,
-    undisputedFacts: g('undisputedFacts').value
-  };
-  
-  const systemPrompt = `당신은 법률 판결을 쉽게 설명하는 전문가입니다.  
-사용자가 제공한 사건 정보와 AI 판결 내용을 바탕으로,  
-1) 판결의 논리적 근거와 법적 정당성을 초등학생도 이해할 수 있는 친근한 비유로 설명하고,  
-2) 판결의 핵심 이유를 3~5문장으로 요약해 주세요.  
-
-응답은 다음 JSON 형식만 출력하세요 (추가 텍스트 없이):  
-{
-  "reasoning_summary": "판결의 핵심 논리 요약 (3~5문장)",
-  "analogy": "일상적인 비유 (100~150자)"
-}`;
-
-  const userMessage = `[사건 정보]  
-- 사건 분류: ${caseData.caseType}  
-- 원고: ${caseData.plaintiff}  
-- 피고: ${caseData.defendant}  
-- 사건 개요: ${caseData.facts.substring(0, 500)}  
-- 원고 주장: ${caseData.plaintiffClaim.substring(0, 300)}  
-- 피고 주장: ${caseData.defendantClaim.substring(0, 300)}  
-
-[AI 판결]  
-- 판결 방향: ${verdict.ruling}  
-- 핵심 법리: ${verdict.key_legal_theory}  
-- 세부 논증: ${verdict.reasoning}  
-- 적용 법조문: ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : verdict.legal_basis}  
-
-위 정보를 바탕으로 판결의 정당성과 비유를 생성해 주세요.`;
-
-  try {
-    const response = await fetch('https://api.deepseek.com/chat/completions', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${DS_KEY}` },
-      body: JSON.stringify({
-        model: 'deepseek-chat',
-        messages: [
-          { role: 'system', content: systemPrompt },
-          { role: 'user', content: userMessage }
-        ],
-        temperature: 0.5,
-        max_tokens: 800
-      })
-    });
-    if (!response.ok) throw new Error('설명 생성 API 오류');
-    
-    const data = await response.json();
-    const content = data.choices[0].message.content;
-    const jsonMatch = content.match(/\{[\s\S]*\}/);
-    if (!jsonMatch) throw new Error('JSON 파싱 실패');
-    const explanation = JSON.parse(jsonMatch[0]);
-    
-    explainContent.innerHTML = `<p><strong>📌 판결 요약:</strong> ${verdict.verdict_summary || '판결 요지가 없습니다.'}</p>
-                                <p><strong>🔍 핵심 법리:</strong> ${verdict.key_legal_theory || '설명 없음'}</p>
-                                <p><strong>⚖️ 법적 근거:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : (verdict.legal_basis || '명시되지 않음')}</p>
-                                <p><strong>💡 판결의 논리적 근거:</strong><br>${explanation.reasoning_summary}</p>`;
-    analogyContent.innerHTML = `<strong>🧸 초등학생도 이해하는 비유:</strong><br>${explanation.analogy}`;
-  } catch (err) {
-    console.error(err);
-    explainContent.innerHTML = `<p><strong>📌 판결 요약:</strong> ${verdict.verdict_summary || '판결 요지가 없습니다.'}</p>
-                                <p><strong>🔍 핵심 법리:</strong> ${verdict.key_legal_theory || '설명 없음'}</p>
-                                <p><strong>⚖️ 법적 근거:</strong> ${Array.isArray(verdict.legal_basis) ? verdict.legal_basis.join(', ') : (verdict.legal_basis || '명시되지 않음')}</p>`;
-    analogyContent.innerHTML = `<strong>🧸 초등학생도 이해하는 비유:</strong><br>판결 내용을 바탕으로 한 비유를 생성하는 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.`;
-  }
-}
-</script>
 </body>
 </html>
