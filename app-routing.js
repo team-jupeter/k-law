@@ -20,7 +20,12 @@ function showPage(id) {
     : '<span class="bc-link" onclick="showPage(\'index\')">홈</span>'
       + '<span class="bc-sep">›</span>'
       + '<span class="bc-curr">' + lbl[id] + '</span>';
-  window.scrollTo({ top:0, behavior:'smooth' });
+  if (id === 'index') {
+    window.scrollTo({ top:0, behavior:'smooth' });
+  } else {
+    const appTop = document.querySelector('.outer');
+    if (appTop) appTop.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
 }
 
 /* ── 재판부 선택 ─────────────────────────────────────── */
