@@ -472,6 +472,79 @@ textarea { resize:vertical; line-height:1.6; }
   <p style="font-size: 12px; color: #4a5568; margin-top: 8px;">
     📊 K-Law 방법론 v6.4 대법원 판결 일치도 추이 (2026.04.13 기준)
   </p>
+  <div style="max-width: 860px; margin: 0 auto 32px; padding: 0 24px; font-family: 'Noto Sans KR', sans-serif; font-size: 14px; line-height: 1.65; color: #1a1d22;">
+
+  <!-- 개요 -->
+  <div style="background:#fff; border:1px solid #d4d9e0; border-radius:8px; padding:1.25rem; margin-bottom:12px;">
+    <p style="font-size:12px; font-weight:600; color:#718096; margin:0 0 8px; text-transform:uppercase; letter-spacing:.05em;">차트 개요</p>
+    <p style="font-size:14px; color:#1a1d22; line-height:1.7; margin:0;">
+      이 차트는 <strong>K-Law AI 모델</strong>이 판례를 더 많이 학습할수록 <strong>대법원(3심) 판결</strong>과 얼마나 가까워지는지를 보여줍니다. 대법원 판결을 기준(100)으로 삼고, K-Law · 1심 · 2심의 일치도를 구간별로 비교합니다.
+    </p>
+  </div>
+
+  <!-- X/Y 축 설명 -->
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-bottom:12px;">
+    <div style="background:#f4f6f9; border-radius:8px; padding:1rem;">
+      <p style="font-size:11px; color:#718096; margin:0 0 4px;">X축</p>
+      <p style="font-size:13px; font-weight:600; color:#003366; margin:0 0 4px;">학습 판례 수 (누적 건수 구간)</p>
+      <p style="font-size:12px; color:#4a5568; margin:0; line-height:1.6;">1~10건부터 71~80건까지, AI가 학습한 판례의 누적 범위를 8개 구간으로 나눕니다.</p>
+    </div>
+    <div style="background:#f4f6f9; border-radius:8px; padding:1rem;">
+      <p style="font-size:11px; color:#718096; margin:0 0 4px;">Y축</p>
+      <p style="font-size:13px; font-weight:600; color:#003366; margin:0 0 4px;">대법원 판결 대비 일치도</p>
+      <p style="font-size:12px; color:#4a5568; margin:0; line-height:1.6;">대법원 3심 판결을 100으로 정규화한 상대 점수. 높을수록 대법원과 유사한 결론입니다.</p>
+    </div>
+  </div>
+
+  <!-- 비교 대상 -->
+  <div style="background:#fff; border:1px solid #d4d9e0; border-radius:8px; padding:1.25rem; margin-bottom:12px;">
+    <p style="font-size:12px; font-weight:600; color:#718096; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">비교 대상</p>
+    <div style="display:flex; flex-direction:column; gap:8px;">
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#2563eb; flex-shrink:0;"></span>
+        <span style="font-size:13px; color:#1a1d22;"><strong>K-Law</strong> — 본 AI 법률 모델의 예측 판결</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#dc2626; flex-shrink:0;"></span>
+        <span style="font-size:13px; color:#1a1d22;"><strong>1심</strong> — 지방법원 1심 판결 (인간 판사)</span>
+      </div>
+      <div style="display:flex; align-items:center; gap:10px;">
+        <span style="width:12px; height:12px; border-radius:50%; background:#d97706; flex-shrink:0;"></span>
+        <span style="font-size:13px; color:#1a1d22;"><strong>2심</strong> — 고등법원 2심 판결 (인간 판사)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 구간별 흐름 -->
+  <div style="background:#fff; border:1px solid #d4d9e0; border-radius:8px; padding:1.25rem; margin-bottom:12px;">
+    <p style="font-size:12px; font-weight:600; color:#718096; margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">구간별 핵심 흐름</p>
+    <div style="font-size:13px; color:#1a1d22;">
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid #d4d9e0;">
+        <span style="font-weight:600; color:#4a5568;">1~20건</span>
+        <span style="line-height:1.6;">K-Law(40점)가 1심·2심(~55점)에 비해 낮은 일치도로 출발합니다.</span>
+      </div>
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid #d4d9e0;">
+        <span style="font-weight:600; color:#4a5568;">21~30건</span>
+        <span style="line-height:1.6;">K-Law가 빠르게 성장하여 1심·2심 수준(53점)에 도달합니다.</span>
+      </div>
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0; border-bottom:1px solid #d4d9e0;">
+        <span style="font-weight:600; color:#4a5568;">31건~</span>
+        <span style="line-height:1.6;">K-Law가 68~69점으로 역전, 1심·2심을 일관되게 앞서기 시작합니다.</span>
+      </div>
+      <div style="display:grid; grid-template-columns:80px 1fr; gap:12px; padding:8px 0;">
+        <span style="font-weight:600; color:#4a5568;">71~80건</span>
+        <span style="line-height:1.6;">K-Law 80점으로 상승. 1심(47점)·2심(44점)과의 격차가 더욱 벌어집니다.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 결론 -->
+  <div style="background:#eff6ff; border-left:3px solid #0059B3; padding:1rem 1.25rem;">
+    <p style="font-size:12px; font-weight:600; color:#1e3a5f; margin:0 0 4px;">결론</p>
+    <p style="font-size:13px; color:#1e3a5f; margin:0; line-height:1.7;">판례 학습량이 늘어날수록 K-Law는 1심·2심 인간 판사보다 대법원 판결에 더 가깝게 수렴하며, 약 30건 이상 학습 후에는 기존 법원 심급을 능가하는 일치도를 보입니다.</p>
+  </div>
+
+</div>
 </div>
 <div class="outer">
 <div class="inner">
