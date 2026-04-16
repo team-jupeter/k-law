@@ -633,3 +633,10 @@ textarea { resize:vertical; line-height:1.6; }
   max-width:860px;
   margin:0 auto;
 }
+
+/* ── 쓰임새 3단 카드 반응형 ────────────────────────── */
+@media (max-width:700px) {
+  .chart-section > div[style*="grid-template-columns:1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
